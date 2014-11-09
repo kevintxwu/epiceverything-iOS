@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UBCreditsView.h"
 
-@interface UBCreditsViewController : UIViewController
+@interface UBCreditsViewController : UIViewController<UBCreditsViewDelegate>
 
 @end

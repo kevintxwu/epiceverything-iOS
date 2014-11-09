@@ -94,7 +94,7 @@
     
     [self.credits mas_updateConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX);
-        make.top.equalTo(self.title.mas_bottom).with.offset([[UIView ub_titlePadding] floatValue]);
+        make.top.equalTo(self.title.mas_bottom).with.offset(10);
         make.trailing.equalTo(self.mas_right).with.offset(-[[UIView ub_creditsParagraphPadding] floatValue]);
         make.leading.equalTo(self.mas_left).with.offset([[UIView ub_creditsParagraphPadding] floatValue]);
     }];

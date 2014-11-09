@@ -27,11 +27,11 @@
 }
 
 + (UIFont *)ub_creditsTitle {
-    return [UIFont fontWithName:@"Adventure" size:55.0f];
+    return [UIFont fontWithName:@"Adventure" size:50.0f];
 }
 
 + (UIFont *)ub_creditsParagraph {
-    return [UIFont fontWithName:@"Lato-Black" size:18.0f];
+    return [UIFont fontWithName:@"Lato-Black" size:16.0f];
 }
 
 @end

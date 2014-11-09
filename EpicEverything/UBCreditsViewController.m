@@ -20,6 +20,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view = [[UBCreditsView alloc] init];
+    self.view.delegate = self;
+}
+
+- (void)returnButtonPressed:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end
