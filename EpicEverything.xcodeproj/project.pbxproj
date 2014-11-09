@@ -16,43 +16,43 @@
 		133BCCB21A0F4F630026023D /* cards.plist in Resources */ = {isa = PBXBuildFile; fileRef = 133BCCB11A0F4F630026023D /* cards.plist */; };
 		133BCCB41A0F50600026023D /* statusEffects.plist in Resources */ = {isa = PBXBuildFile; fileRef = 133BCCB31A0F50600026023D /* statusEffects.plist */; };
 		1890E52F8B997666001E6434 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8439F5EC4DE85BEDAB0EC52 /* libPods.a */; };
-		233936A51A0FAC3700A46160 /* apprentice-card.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936961A0FAC3700A46160 /* apprentice-card.png */; };
-		233936A61A0FAC3700A46160 /* chickenbot-card.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936971A0FAC3700A46160 /* chickenbot-card.png */; };
-		233936A71A0FAC3700A46160 /* elvisbot-card.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936981A0FAC3700A46160 /* elvisbot-card.png */; };
-		233936A81A0FAC3700A46160 /* froggy-card.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936991A0FAC3700A46160 /* froggy-card.png */; };
-		233936A91A0FAC3700A46160 /* lavaling-card.png in Resources */ = {isa = PBXBuildFile; fileRef = 2339369A1A0FAC3700A46160 /* lavaling-card.png */; };
-		233936AA1A0FAC3700A46160 /* loggoraptor-card.png in Resources */ = {isa = PBXBuildFile; fileRef = 2339369B1A0FAC3700A46160 /* loggoraptor-card.png */; };
-		233936AB1A0FAC3700A46160 /* mothership-card.png in Resources */ = {isa = PBXBuildFile; fileRef = 2339369C1A0FAC3700A46160 /* mothership-card.png */; };
-		233936AC1A0FAC3700A46160 /* necromancer-card.png in Resources */ = {isa = PBXBuildFile; fileRef = 2339369D1A0FAC3700A46160 /* necromancer-card.png */; };
-		233936AD1A0FAC3700A46160 /* overlord-card.png in Resources */ = {isa = PBXBuildFile; fileRef = 2339369E1A0FAC3700A46160 /* overlord-card.png */; };
-		233936AE1A0FAC3700A46160 /* ranger-card.png in Resources */ = {isa = PBXBuildFile; fileRef = 2339369F1A0FAC3700A46160 /* ranger-card.png */; };
-		233936AF1A0FAC3700A46160 /* robowolf-card.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936A01A0FAC3700A46160 /* robowolf-card.png */; };
-		233936B01A0FAC3700A46160 /* rogue-card.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936A11A0FAC3700A46160 /* rogue-card.png */; };
-		233936B11A0FAC3700A46160 /* shroomsprite-card.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936A21A0FAC3700A46160 /* shroomsprite-card.png */; };
-		233936B21A0FAC3700A46160 /* tank-card.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936A31A0FAC3700A46160 /* tank-card.png */; };
-		233936B31A0FAC3700A46160 /* volcanohead-card.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936A41A0FAC3700A46160 /* volcanohead-card.png */; };
-		233936C41A0FAC4800A46160 /* apprentice.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936B51A0FAC4800A46160 /* apprentice.png */; };
-		233936C51A0FAC4800A46160 /* chickenbot.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936B61A0FAC4800A46160 /* chickenbot.png */; };
-		233936C61A0FAC4800A46160 /* Elvisbot.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936B71A0FAC4800A46160 /* Elvisbot.png */; };
-		233936C71A0FAC4800A46160 /* froggy.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936B81A0FAC4800A46160 /* froggy.png */; };
-		233936C81A0FAC4800A46160 /* lavaling.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936B91A0FAC4800A46160 /* lavaling.png */; };
-		233936C91A0FAC4800A46160 /* loggoraptor.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936BA1A0FAC4800A46160 /* loggoraptor.png */; };
-		233936CA1A0FAC4800A46160 /* mothership.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936BB1A0FAC4800A46160 /* mothership.png */; };
-		233936CB1A0FAC4800A46160 /* necromancer.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936BC1A0FAC4800A46160 /* necromancer.png */; };
-		233936CC1A0FAC4800A46160 /* overlord.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936BD1A0FAC4800A46160 /* overlord.png */; };
-		233936CD1A0FAC4800A46160 /* ranger.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936BE1A0FAC4800A46160 /* ranger.png */; };
-		233936CE1A0FAC4800A46160 /* robowolf.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936BF1A0FAC4800A46160 /* robowolf.png */; };
-		233936CF1A0FAC4800A46160 /* rogue.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936C01A0FAC4800A46160 /* rogue.png */; };
-		233936D01A0FAC4800A46160 /* shroomsprite.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936C11A0FAC4800A46160 /* shroomsprite.png */; };
-		233936D11A0FAC4800A46160 /* tank.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936C21A0FAC4800A46160 /* tank.png */; };
-		233936D21A0FAC4800A46160 /* volcanohead.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936C31A0FAC4800A46160 /* volcanohead.png */; };
-		233936D41A0FAC5800A46160 /* cards.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936D31A0FAC5800A46160 /* cards.png */; };
-		233936D61A0FAC6300A46160 /* hp.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936D51A0FAC6300A46160 /* hp.png */; };
-		233936D81A0FAC6B00A46160 /* mana.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936D71A0FAC6B00A46160 /* mana.png */; };
-		233936DA1A0FAC7000A46160 /* space.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936D91A0FAC7000A46160 /* space.png */; };
-		233936DC1A0FAC7500A46160 /* board-bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 233936DB1A0FAC7500A46160 /* board-bg.jpg */; };
-		233936DE1A0FAC8100A46160 /* card-back.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936DD1A0FAC8100A46160 /* card-back.png */; };
-		233936E01A0FAF3700A46160 /* loading-bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 233936DF1A0FAF3700A46160 /* loading-bg.jpg */; };
+		233937071A0FB7F600A46160 /* board-bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 233936E11A0FB7F600A46160 /* board-bg.jpg */; };
+		233937081A0FB7F600A46160 /* card-back.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936E21A0FB7F600A46160 /* card-back.png */; };
+		233937091A0FB7F600A46160 /* apprentice-card.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936E41A0FB7F600A46160 /* apprentice-card.png */; };
+		2339370A1A0FB7F600A46160 /* chickenbot-card.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936E51A0FB7F600A46160 /* chickenbot-card.png */; };
+		2339370B1A0FB7F600A46160 /* elvisbot-card.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936E61A0FB7F600A46160 /* elvisbot-card.png */; };
+		2339370C1A0FB7F600A46160 /* froggy-card.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936E71A0FB7F600A46160 /* froggy-card.png */; };
+		2339370D1A0FB7F600A46160 /* lavaling-card.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936E81A0FB7F600A46160 /* lavaling-card.png */; };
+		2339370E1A0FB7F600A46160 /* loggoraptor-card.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936E91A0FB7F600A46160 /* loggoraptor-card.png */; };
+		2339370F1A0FB7F600A46160 /* mothership-card.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936EA1A0FB7F600A46160 /* mothership-card.png */; };
+		233937101A0FB7F600A46160 /* necromancer-card.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936EB1A0FB7F600A46160 /* necromancer-card.png */; };
+		233937111A0FB7F600A46160 /* overlord-card.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936EC1A0FB7F600A46160 /* overlord-card.png */; };
+		233937121A0FB7F600A46160 /* ranger-card.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936ED1A0FB7F600A46160 /* ranger-card.png */; };
+		233937131A0FB7F600A46160 /* robowolf-card.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936EE1A0FB7F600A46160 /* robowolf-card.png */; };
+		233937141A0FB7F600A46160 /* rogue-card.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936EF1A0FB7F600A46160 /* rogue-card.png */; };
+		233937151A0FB7F600A46160 /* shroomsprite-card.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936F01A0FB7F600A46160 /* shroomsprite-card.png */; };
+		233937161A0FB7F600A46160 /* tank-card.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936F11A0FB7F600A46160 /* tank-card.png */; };
+		233937171A0FB7F600A46160 /* volcanohead-card.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936F21A0FB7F600A46160 /* volcanohead-card.png */; };
+		233937181A0FB7F600A46160 /* cards.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936F31A0FB7F600A46160 /* cards.png */; };
+		233937191A0FB7F600A46160 /* hp.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936F41A0FB7F600A46160 /* hp.png */; };
+		2339371A1A0FB7F600A46160 /* mana.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936F51A0FB7F600A46160 /* mana.png */; };
+		2339371B1A0FB7F600A46160 /* apprentice.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936F71A0FB7F600A46160 /* apprentice.png */; };
+		2339371C1A0FB7F600A46160 /* chickenbot.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936F81A0FB7F600A46160 /* chickenbot.png */; };
+		2339371D1A0FB7F600A46160 /* Elvisbot.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936F91A0FB7F600A46160 /* Elvisbot.png */; };
+		2339371E1A0FB7F600A46160 /* froggy.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936FA1A0FB7F600A46160 /* froggy.png */; };
+		2339371F1A0FB7F600A46160 /* lavaling.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936FB1A0FB7F600A46160 /* lavaling.png */; };
+		233937201A0FB7F600A46160 /* loggoraptor.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936FC1A0FB7F600A46160 /* loggoraptor.png */; };
+		233937211A0FB7F600A46160 /* mothership.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936FD1A0FB7F600A46160 /* mothership.png */; };
+		233937221A0FB7F600A46160 /* necromancer.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936FE1A0FB7F600A46160 /* necromancer.png */; };
+		233937231A0FB7F600A46160 /* overlord.png in Resources */ = {isa = PBXBuildFile; fileRef = 233936FF1A0FB7F600A46160 /* overlord.png */; };
+		233937241A0FB7F600A46160 /* ranger.png in Resources */ = {isa = PBXBuildFile; fileRef = 233937001A0FB7F600A46160 /* ranger.png */; };
+		233937251A0FB7F600A46160 /* robowolf.png in Resources */ = {isa = PBXBuildFile; fileRef = 233937011A0FB7F600A46160 /* robowolf.png */; };
+		233937261A0FB7F600A46160 /* rogue.png in Resources */ = {isa = PBXBuildFile; fileRef = 233937021A0FB7F600A46160 /* rogue.png */; };
+		233937271A0FB7F600A46160 /* shroomsprite.png in Resources */ = {isa = PBXBuildFile; fileRef = 233937031A0FB7F600A46160 /* shroomsprite.png */; };
+		233937281A0FB7F600A46160 /* tank.png in Resources */ = {isa = PBXBuildFile; fileRef = 233937041A0FB7F600A46160 /* tank.png */; };
+		233937291A0FB7F600A46160 /* volcanohead.png in Resources */ = {isa = PBXBuildFile; fileRef = 233937051A0FB7F600A46160 /* volcanohead.png */; };
+		2339372A1A0FB7F600A46160 /* space.png in Resources */ = {isa = PBXBuildFile; fileRef = 233937061A0FB7F600A46160 /* space.png */; };
+		2339372C1A0FB86900A46160 /* loading-bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2339372B1A0FB86900A46160 /* loading-bg.jpg */; };
 		8B8375B31A0F288700A2CF18 /* UBGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8375B21A0F288700A2CF18 /* UBGameViewController.m */; };
 		8B8375B61A0F312700A2CF18 /* UBMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8375B51A0F312700A2CF18 /* UBMenuView.m */; };
 		8B8375B91A0F313300A2CF18 /* UBGameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8375B81A0F313300A2CF18 /* UBGameView.m */; };
@@ -100,43 +100,43 @@
 		133BCCAF1A0F44660026023D /* UBSpace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBSpace.m; sourceTree = "<group>"; };
 		133BCCB11A0F4F630026023D /* cards.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cards.plist; sourceTree = "<group>"; };
 		133BCCB31A0F50600026023D /* statusEffects.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = statusEffects.plist; sourceTree = "<group>"; };
-		233936961A0FAC3700A46160 /* apprentice-card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "apprentice-card.png"; sourceTree = "<group>"; };
-		233936971A0FAC3700A46160 /* chickenbot-card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chickenbot-card.png"; sourceTree = "<group>"; };
-		233936981A0FAC3700A46160 /* elvisbot-card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "elvisbot-card.png"; sourceTree = "<group>"; };
-		233936991A0FAC3700A46160 /* froggy-card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "froggy-card.png"; sourceTree = "<group>"; };
-		2339369A1A0FAC3700A46160 /* lavaling-card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lavaling-card.png"; sourceTree = "<group>"; };
-		2339369B1A0FAC3700A46160 /* loggoraptor-card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loggoraptor-card.png"; sourceTree = "<group>"; };
-		2339369C1A0FAC3700A46160 /* mothership-card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mothership-card.png"; sourceTree = "<group>"; };
-		2339369D1A0FAC3700A46160 /* necromancer-card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "necromancer-card.png"; sourceTree = "<group>"; };
-		2339369E1A0FAC3700A46160 /* overlord-card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "overlord-card.png"; sourceTree = "<group>"; };
-		2339369F1A0FAC3700A46160 /* ranger-card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ranger-card.png"; sourceTree = "<group>"; };
-		233936A01A0FAC3700A46160 /* robowolf-card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "robowolf-card.png"; sourceTree = "<group>"; };
-		233936A11A0FAC3700A46160 /* rogue-card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rogue-card.png"; sourceTree = "<group>"; };
-		233936A21A0FAC3700A46160 /* shroomsprite-card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shroomsprite-card.png"; sourceTree = "<group>"; };
-		233936A31A0FAC3700A46160 /* tank-card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tank-card.png"; sourceTree = "<group>"; };
-		233936A41A0FAC3700A46160 /* volcanohead-card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "volcanohead-card.png"; sourceTree = "<group>"; };
-		233936B51A0FAC4800A46160 /* apprentice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = apprentice.png; sourceTree = "<group>"; };
-		233936B61A0FAC4800A46160 /* chickenbot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chickenbot.png; sourceTree = "<group>"; };
-		233936B71A0FAC4800A46160 /* Elvisbot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Elvisbot.png; sourceTree = "<group>"; };
-		233936B81A0FAC4800A46160 /* froggy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = froggy.png; sourceTree = "<group>"; };
-		233936B91A0FAC4800A46160 /* lavaling.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lavaling.png; sourceTree = "<group>"; };
-		233936BA1A0FAC4800A46160 /* loggoraptor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loggoraptor.png; sourceTree = "<group>"; };
-		233936BB1A0FAC4800A46160 /* mothership.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mothership.png; sourceTree = "<group>"; };
-		233936BC1A0FAC4800A46160 /* necromancer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = necromancer.png; sourceTree = "<group>"; };
-		233936BD1A0FAC4800A46160 /* overlord.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = overlord.png; sourceTree = "<group>"; };
-		233936BE1A0FAC4800A46160 /* ranger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ranger.png; sourceTree = "<group>"; };
-		233936BF1A0FAC4800A46160 /* robowolf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = robowolf.png; sourceTree = "<group>"; };
-		233936C01A0FAC4800A46160 /* rogue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rogue.png; sourceTree = "<group>"; };
-		233936C11A0FAC4800A46160 /* shroomsprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shroomsprite.png; sourceTree = "<group>"; };
-		233936C21A0FAC4800A46160 /* tank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tank.png; sourceTree = "<group>"; };
-		233936C31A0FAC4800A46160 /* volcanohead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = volcanohead.png; sourceTree = "<group>"; };
-		233936D31A0FAC5800A46160 /* cards.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cards.png; path = ../../../../Dropbox/epicevery/board/cards.png; sourceTree = "<group>"; };
-		233936D51A0FAC6300A46160 /* hp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hp.png; path = ../../../../Dropbox/epicevery/board/hp.png; sourceTree = "<group>"; };
-		233936D71A0FAC6B00A46160 /* mana.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mana.png; path = ../../../../Dropbox/epicevery/board/mana.png; sourceTree = "<group>"; };
-		233936D91A0FAC7000A46160 /* space.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = space.png; path = ../../../../Dropbox/epicevery/board/space.png; sourceTree = "<group>"; };
-		233936DB1A0FAC7500A46160 /* board-bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "board-bg.jpg"; path = "../../../../Dropbox/epicevery/board/board-bg.jpg"; sourceTree = "<group>"; };
-		233936DD1A0FAC8100A46160 /* card-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "card-back.png"; path = "../../../../Dropbox/epicevery/board/card-back.png"; sourceTree = "<group>"; };
-		233936DF1A0FAF3700A46160 /* loading-bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "loading-bg.jpg"; path = "../../../../Dropbox/epicevery/loading-bg.jpg"; sourceTree = "<group>"; };
+		233936E11A0FB7F600A46160 /* board-bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "board-bg.jpg"; sourceTree = "<group>"; };
+		233936E21A0FB7F600A46160 /* card-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "card-back.png"; sourceTree = "<group>"; };
+		233936E41A0FB7F600A46160 /* apprentice-card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "apprentice-card.png"; sourceTree = "<group>"; };
+		233936E51A0FB7F600A46160 /* chickenbot-card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chickenbot-card.png"; sourceTree = "<group>"; };
+		233936E61A0FB7F600A46160 /* elvisbot-card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "elvisbot-card.png"; sourceTree = "<group>"; };
+		233936E71A0FB7F600A46160 /* froggy-card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "froggy-card.png"; sourceTree = "<group>"; };
+		233936E81A0FB7F600A46160 /* lavaling-card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lavaling-card.png"; sourceTree = "<group>"; };
+		233936E91A0FB7F600A46160 /* loggoraptor-card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loggoraptor-card.png"; sourceTree = "<group>"; };
+		233936EA1A0FB7F600A46160 /* mothership-card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mothership-card.png"; sourceTree = "<group>"; };
+		233936EB1A0FB7F600A46160 /* necromancer-card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "necromancer-card.png"; sourceTree = "<group>"; };
+		233936EC1A0FB7F600A46160 /* overlord-card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "overlord-card.png"; sourceTree = "<group>"; };
+		233936ED1A0FB7F600A46160 /* ranger-card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ranger-card.png"; sourceTree = "<group>"; };
+		233936EE1A0FB7F600A46160 /* robowolf-card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "robowolf-card.png"; sourceTree = "<group>"; };
+		233936EF1A0FB7F600A46160 /* rogue-card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rogue-card.png"; sourceTree = "<group>"; };
+		233936F01A0FB7F600A46160 /* shroomsprite-card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shroomsprite-card.png"; sourceTree = "<group>"; };
+		233936F11A0FB7F600A46160 /* tank-card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tank-card.png"; sourceTree = "<group>"; };
+		233936F21A0FB7F600A46160 /* volcanohead-card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "volcanohead-card.png"; sourceTree = "<group>"; };
+		233936F31A0FB7F600A46160 /* cards.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cards.png; sourceTree = "<group>"; };
+		233936F41A0FB7F600A46160 /* hp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hp.png; sourceTree = "<group>"; };
+		233936F51A0FB7F600A46160 /* mana.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mana.png; sourceTree = "<group>"; };
+		233936F71A0FB7F600A46160 /* apprentice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = apprentice.png; sourceTree = "<group>"; };
+		233936F81A0FB7F600A46160 /* chickenbot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chickenbot.png; sourceTree = "<group>"; };
+		233936F91A0FB7F600A46160 /* Elvisbot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Elvisbot.png; sourceTree = "<group>"; };
+		233936FA1A0FB7F600A46160 /* froggy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = froggy.png; sourceTree = "<group>"; };
+		233936FB1A0FB7F600A46160 /* lavaling.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lavaling.png; sourceTree = "<group>"; };
+		233936FC1A0FB7F600A46160 /* loggoraptor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loggoraptor.png; sourceTree = "<group>"; };
+		233936FD1A0FB7F600A46160 /* mothership.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mothership.png; sourceTree = "<group>"; };
+		233936FE1A0FB7F600A46160 /* necromancer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = necromancer.png; sourceTree = "<group>"; };
+		233936FF1A0FB7F600A46160 /* overlord.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = overlord.png; sourceTree = "<group>"; };
+		233937001A0FB7F600A46160 /* ranger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ranger.png; sourceTree = "<group>"; };
+		233937011A0FB7F600A46160 /* robowolf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = robowolf.png; sourceTree = "<group>"; };
+		233937021A0FB7F600A46160 /* rogue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rogue.png; sourceTree = "<group>"; };
+		233937031A0FB7F600A46160 /* shroomsprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shroomsprite.png; sourceTree = "<group>"; };
+		233937041A0FB7F600A46160 /* tank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tank.png; sourceTree = "<group>"; };
+		233937051A0FB7F600A46160 /* volcanohead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = volcanohead.png; sourceTree = "<group>"; };
+		233937061A0FB7F600A46160 /* space.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = space.png; sourceTree = "<group>"; };
+		2339372B1A0FB86900A46160 /* loading-bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "loading-bg.jpg"; sourceTree = "<group>"; };
 		48A545825A3DE9B07ECCFDED /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		60008AE9945BE410E1F1B830 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		8B8375B11A0F288700A2CF18 /* UBGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBGameViewController.h; sourceTree = "<group>"; };
@@ -204,50 +204,48 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		233936951A0FAC3700A46160 /* cards */ = {
+		233936E31A0FB7F600A46160 /* cards */ = {
 			isa = PBXGroup;
 			children = (
-				233936961A0FAC3700A46160 /* apprentice-card.png */,
-				233936971A0FAC3700A46160 /* chickenbot-card.png */,
-				233936981A0FAC3700A46160 /* elvisbot-card.png */,
-				233936991A0FAC3700A46160 /* froggy-card.png */,
-				2339369A1A0FAC3700A46160 /* lavaling-card.png */,
-				2339369B1A0FAC3700A46160 /* loggoraptor-card.png */,
-				2339369C1A0FAC3700A46160 /* mothership-card.png */,
-				2339369D1A0FAC3700A46160 /* necromancer-card.png */,
-				2339369E1A0FAC3700A46160 /* overlord-card.png */,
-				2339369F1A0FAC3700A46160 /* ranger-card.png */,
-				233936A01A0FAC3700A46160 /* robowolf-card.png */,
-				233936A11A0FAC3700A46160 /* rogue-card.png */,
-				233936A21A0FAC3700A46160 /* shroomsprite-card.png */,
-				233936A31A0FAC3700A46160 /* tank-card.png */,
-				233936A41A0FAC3700A46160 /* volcanohead-card.png */,
+				233936E41A0FB7F600A46160 /* apprentice-card.png */,
+				233936E51A0FB7F600A46160 /* chickenbot-card.png */,
+				233936E61A0FB7F600A46160 /* elvisbot-card.png */,
+				233936E71A0FB7F600A46160 /* froggy-card.png */,
+				233936E81A0FB7F600A46160 /* lavaling-card.png */,
+				233936E91A0FB7F600A46160 /* loggoraptor-card.png */,
+				233936EA1A0FB7F600A46160 /* mothership-card.png */,
+				233936EB1A0FB7F600A46160 /* necromancer-card.png */,
+				233936EC1A0FB7F600A46160 /* overlord-card.png */,
+				233936ED1A0FB7F600A46160 /* ranger-card.png */,
+				233936EE1A0FB7F600A46160 /* robowolf-card.png */,
+				233936EF1A0FB7F600A46160 /* rogue-card.png */,
+				233936F01A0FB7F600A46160 /* shroomsprite-card.png */,
+				233936F11A0FB7F600A46160 /* tank-card.png */,
+				233936F21A0FB7F600A46160 /* volcanohead-card.png */,
 			);
-			name = cards;
-			path = ../../../../Dropbox/epicevery/board/cards;
+			path = cards;
 			sourceTree = "<group>";
 		};
-		233936B41A0FAC4800A46160 /* pieces */ = {
+		233936F61A0FB7F600A46160 /* pieces */ = {
 			isa = PBXGroup;
 			children = (
-				233936B51A0FAC4800A46160 /* apprentice.png */,
-				233936B61A0FAC4800A46160 /* chickenbot.png */,
-				233936B71A0FAC4800A46160 /* Elvisbot.png */,
-				233936B81A0FAC4800A46160 /* froggy.png */,
-				233936B91A0FAC4800A46160 /* lavaling.png */,
-				233936BA1A0FAC4800A46160 /* loggoraptor.png */,
-				233936BB1A0FAC4800A46160 /* mothership.png */,
-				233936BC1A0FAC4800A46160 /* necromancer.png */,
-				233936BD1A0FAC4800A46160 /* overlord.png */,
-				233936BE1A0FAC4800A46160 /* ranger.png */,
-				233936BF1A0FAC4800A46160 /* robowolf.png */,
-				233936C01A0FAC4800A46160 /* rogue.png */,
-				233936C11A0FAC4800A46160 /* shroomsprite.png */,
-				233936C21A0FAC4800A46160 /* tank.png */,
-				233936C31A0FAC4800A46160 /* volcanohead.png */,
+				233936F71A0FB7F600A46160 /* apprentice.png */,
+				233936F81A0FB7F600A46160 /* chickenbot.png */,
+				233936F91A0FB7F600A46160 /* Elvisbot.png */,
+				233936FA1A0FB7F600A46160 /* froggy.png */,
+				233936FB1A0FB7F600A46160 /* lavaling.png */,
+				233936FC1A0FB7F600A46160 /* loggoraptor.png */,
+				233936FD1A0FB7F600A46160 /* mothership.png */,
+				233936FE1A0FB7F600A46160 /* necromancer.png */,
+				233936FF1A0FB7F600A46160 /* overlord.png */,
+				233937001A0FB7F600A46160 /* ranger.png */,
+				233937011A0FB7F600A46160 /* robowolf.png */,
+				233937021A0FB7F600A46160 /* rogue.png */,
+				233937031A0FB7F600A46160 /* shroomsprite.png */,
+				233937041A0FB7F600A46160 /* tank.png */,
+				233937051A0FB7F600A46160 /* volcanohead.png */,
 			);
-			name = pieces;
-			path = ../../../../Dropbox/epicevery/board/pieces;
+			path = pieces;
 			sourceTree = "<group>";
 		};
 		87D3CDCC0D693451F2BAA6AB /* Pods */ = {
@@ -324,16 +322,16 @@
 		8B8375D21A0F44B700A2CF18 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				233936D71A0FAC6B00A46160 /* mana.png */,
-				233936D91A0FAC7000A46160 /* space.png */,
-				233936D51A0FAC6300A46160 /* hp.png */,
-				233936D31A0FAC5800A46160 /* cards.png */,
-				233936DD1A0FAC8100A46160 /* card-back.png */,
-				233936B41A0FAC4800A46160 /* pieces */,
-				233936951A0FAC3700A46160 /* cards */,
-				233936DF1A0FAF3700A46160 /* loading-bg.jpg */,
+				233936E21A0FB7F600A46160 /* card-back.png */,
+				233936F31A0FB7F600A46160 /* cards.png */,
+				233936F41A0FB7F600A46160 /* hp.png */,
+				233936F51A0FB7F600A46160 /* mana.png */,
+				233937061A0FB7F600A46160 /* space.png */,
+				233936E31A0FB7F600A46160 /* cards */,
+				233936F61A0FB7F600A46160 /* pieces */,
+				2339372B1A0FB86900A46160 /* loading-bg.jpg */,
 				8B8375D01A0F44B400A2CF18 /* menu-bg.jpg */,
-				233936DB1A0FAC7500A46160 /* board-bg.jpg */,
+				233936E11A0FB7F600A46160 /* board-bg.jpg */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -495,52 +493,52 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				233936C91A0FAC4800A46160 /* loggoraptor.png in Resources */,
-				233936D41A0FAC5800A46160 /* cards.png in Resources */,
-				233936AB1A0FAC3700A46160 /* mothership-card.png in Resources */,
-				233936AC1A0FAC3700A46160 /* necromancer-card.png in Resources */,
-				233936C81A0FAC4800A46160 /* lavaling.png in Resources */,
-				233936CC1A0FAC4800A46160 /* overlord.png in Resources */,
-				233936B31A0FAC3700A46160 /* volcanohead-card.png in Resources */,
-				233936D01A0FAC4800A46160 /* shroomsprite.png in Resources */,
-				233936CD1A0FAC4800A46160 /* ranger.png in Resources */,
-				233936B01A0FAC3700A46160 /* rogue-card.png in Resources */,
+				233937271A0FB7F600A46160 /* shroomsprite.png in Resources */,
 				8BB1A5471A0F218A00CD2FE9 /* Main.storyboard in Resources */,
-				233936CE1A0FAC4800A46160 /* robowolf.png in Resources */,
 				8B854E211A0F500A00E9BF5B /* uchiyama.ttf in Resources */,
 				8B854E201A0F500700E9BF5B /* Adventure.otf in Resources */,
-				233936D81A0FAC6B00A46160 /* mana.png in Resources */,
-				233936A71A0FAC3700A46160 /* elvisbot-card.png in Resources */,
-				233936AE1A0FAC3700A46160 /* ranger-card.png in Resources */,
-				233936A81A0FAC3700A46160 /* froggy-card.png in Resources */,
+				233937101A0FB7F600A46160 /* necromancer-card.png in Resources */,
+				2339371B1A0FB7F600A46160 /* apprentice.png in Resources */,
+				233937071A0FB7F600A46160 /* board-bg.jpg in Resources */,
+				233937091A0FB7F600A46160 /* apprentice-card.png in Resources */,
+				233937281A0FB7F600A46160 /* tank.png in Resources */,
+				2339371D1A0FB7F600A46160 /* Elvisbot.png in Resources */,
+				233937151A0FB7F600A46160 /* shroomsprite-card.png in Resources */,
+				233937251A0FB7F600A46160 /* robowolf.png in Resources */,
+				233937081A0FB7F600A46160 /* card-back.png in Resources */,
 				8B854E221A0F500D00E9BF5B /* BlackCastleMF.ttf in Resources */,
-				233936AF1A0FAC3700A46160 /* robowolf-card.png in Resources */,
-				233936AD1A0FAC3700A46160 /* overlord-card.png in Resources */,
-				233936DE1A0FAC8100A46160 /* card-back.png in Resources */,
-				233936CB1A0FAC4800A46160 /* necromancer.png in Resources */,
-				233936A61A0FAC3700A46160 /* chickenbot-card.png in Resources */,
-				233936B21A0FAC3700A46160 /* tank-card.png in Resources */,
-				233936A91A0FAC3700A46160 /* lavaling-card.png in Resources */,
 				8B8375D11A0F44B400A2CF18 /* menu-bg.jpg in Resources */,
+				233937231A0FB7F600A46160 /* overlord.png in Resources */,
+				233937261A0FB7F600A46160 /* rogue.png in Resources */,
+				233937131A0FB7F600A46160 /* robowolf-card.png in Resources */,
+				233937291A0FB7F600A46160 /* volcanohead.png in Resources */,
+				2339371F1A0FB7F600A46160 /* lavaling.png in Resources */,
 				8BB1A54C1A0F218A00CD2FE9 /* LaunchScreen.xib in Resources */,
-				233936D21A0FAC4800A46160 /* volcanohead.png in Resources */,
-				233936AA1A0FAC3700A46160 /* loggoraptor-card.png in Resources */,
+				2339371C1A0FB7F600A46160 /* chickenbot.png in Resources */,
+				233937141A0FB7F600A46160 /* rogue-card.png in Resources */,
+				233937191A0FB7F600A46160 /* hp.png in Resources */,
+				233937121A0FB7F600A46160 /* ranger-card.png in Resources */,
+				2339370D1A0FB7F600A46160 /* lavaling-card.png in Resources */,
+				233937211A0FB7F600A46160 /* mothership.png in Resources */,
+				233937201A0FB7F600A46160 /* loggoraptor.png in Resources */,
+				233937241A0FB7F600A46160 /* ranger.png in Resources */,
+				2339370F1A0FB7F600A46160 /* mothership-card.png in Resources */,
+				233937111A0FB7F600A46160 /* overlord-card.png in Resources */,
+				2339370A1A0FB7F600A46160 /* chickenbot-card.png in Resources */,
 				133BCCB21A0F4F630026023D /* cards.plist in Resources */,
-				233936CA1A0FAC4800A46160 /* mothership.png in Resources */,
+				2339371A1A0FB7F600A46160 /* mana.png in Resources */,
+				2339370E1A0FB7F600A46160 /* loggoraptor-card.png in Resources */,
+				233937171A0FB7F600A46160 /* volcanohead-card.png in Resources */,
 				8BB1A5491A0F218A00CD2FE9 /* Images.xcassets in Resources */,
-				233936DA1A0FAC7000A46160 /* space.png in Resources */,
-				233936D61A0FAC6300A46160 /* hp.png in Resources */,
-				233936C51A0FAC4800A46160 /* chickenbot.png in Resources */,
-				233936A51A0FAC3700A46160 /* apprentice-card.png in Resources */,
-				233936D11A0FAC4800A46160 /* tank.png in Resources */,
-				233936DC1A0FAC7500A46160 /* board-bg.jpg in Resources */,
-				233936CF1A0FAC4800A46160 /* rogue.png in Resources */,
-				233936C71A0FAC4800A46160 /* froggy.png in Resources */,
-				233936B11A0FAC3700A46160 /* shroomsprite-card.png in Resources */,
+				2339372A1A0FB7F600A46160 /* space.png in Resources */,
+				233937221A0FB7F600A46160 /* necromancer.png in Resources */,
 				133BCCB41A0F50600026023D /* statusEffects.plist in Resources */,
-				233936E01A0FAF3700A46160 /* loading-bg.jpg in Resources */,
-				233936C61A0FAC4800A46160 /* Elvisbot.png in Resources */,
-				233936C41A0FAC4800A46160 /* apprentice.png in Resources */,
+				233937161A0FB7F600A46160 /* tank-card.png in Resources */,
+				2339370B1A0FB7F600A46160 /* elvisbot-card.png in Resources */,
+				233937181A0FB7F600A46160 /* cards.png in Resources */,
+				2339372C1A0FB86900A46160 /* loading-bg.jpg in Resources */,
+				2339371E1A0FB7F600A46160 /* froggy.png in Resources */,
+				2339370C1A0FB7F600A46160 /* froggy-card.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
