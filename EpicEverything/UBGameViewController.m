@@ -9,6 +9,14 @@
 #import "UBGameViewController.h"
 #import "UBResultViewController.h"
 #import "UBGameView.h"
+#import "UBMenuView.h"
+#import "UBGame.h"
+#import "UBCard.h"
+#import "UBBoard.h"
+#import "UBCreature.h"
+#import "UBPlayer.h"
+#import "UBSpace.h"
+
 
 @interface UBGameViewController ()
 
