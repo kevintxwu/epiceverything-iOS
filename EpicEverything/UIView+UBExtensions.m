@@ -37,7 +37,7 @@
 }
 
 + (NSNumber *)ub_titlePadding {
-    return @30;
+    return @20;
 }
 
 + (CGFloat)ub_borderWidth {

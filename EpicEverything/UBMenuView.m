@@ -89,12 +89,12 @@
     [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.start.mas_top).with.offset([[UIView ub_titlePadding] floatValue]);
         make.centerX.equalTo(self.mas_centerX);
-        make.top.equalTo(self.mas_top).with.offset([[UIView ub_padding] floatValue]);
+        make.top.equalTo(self.mas_top).with.offset([[UIView ub_titlePadding] floatValue]);
     }];
     
     [self.start mas_updateConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX);
-        make.centerY.equalTo(self.mas_centerY).with.offset([[UIView ub_buttonHeight] floatValue]);
+        make.centerY.equalTo(self.mas_centerY).with.offset(20);
         make.width.equalTo([UIView ub_buttonWidth]);
     }];
     
