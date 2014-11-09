@@ -19,11 +19,11 @@
 }
 
 + (UIImage *)ub_cardBack {
-    return [UIImage imageNamed:@"card-back.jpg"];
+    return [UIImage imageNamed:@"card-back.png"];
 }
 
 + (UIImage *)ub_cards {
-    return [UIImage imageNamed:@"cards.jpg"];
+    return [UIImage imageNamed:@"cards.png"];
 }
 
 + (UIImage *)ub_hp {

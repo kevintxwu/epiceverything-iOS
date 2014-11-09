@@ -65,6 +65,108 @@
         start;
     }) ub_addToSuperview:self]; */
     
+    _playerMana = [({
+        UIImageView *mana = [[UIImageView alloc] init];
+        [mana setImage:[UIImage ub_mana]];
+        mana;
+    }) ub_addToSuperview:self];
+    
+    _playerCards = [({
+        UIImageView *cards = [[UIImageView alloc] init];
+        [cards setImage:[UIImage ub_cards]];
+        cards;
+    }) ub_addToSuperview:self];
+    
+    _opponentHealth = [({
+        UIImageView *health = [[UIImageView alloc] init];
+        [health setImage:[UIImage ub_hp]];
+        health;
+    }) ub_addToSuperview:self];
+    
+    _opponentMana = [({
+        UIImageView *mana = [[UIImageView alloc] init];
+        [mana setImage:[UIImage ub_mana]];
+        mana;
+    }) ub_addToSuperview:self];
+    
+    _opponentCards = [({
+        UIImageView *cards = [[UIImageView alloc] init];
+        [cards setImage:[UIImage ub_cards]];
+        cards;
+    }) ub_addToSuperview:self];
+    
+    _playerHealthLabel = [({
+        UILabel *title = [[UILabel alloc] init];
+        [title setFont:[UIFont ub_blackCastle]];
+        [title setText:@"20"];
+        [title setTextColor:[UIColor whiteColor]];
+        title.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+        title.layer.shadowColor = [UIColor blackColor].CGColor;
+        title.layer.shadowOpacity = 0.5;
+        title.textAlignment = NSTextAlignmentCenter;
+        title;
+    }) ub_addToSuperview:self];
+    
+    _playerManaLabel = [({
+        UILabel *title = [[UILabel alloc] init];
+        [title setFont:[UIFont ub_blackCastle]];
+        [title setText:@"1"];
+        [title setTextColor:[UIColor whiteColor]];
+        title.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+        title.layer.shadowColor = [UIColor blackColor].CGColor;
+        title.layer.shadowOpacity = 0.5;
+        title.textAlignment = NSTextAlignmentCenter;
+        title;
+    }) ub_addToSuperview:self];
+    
+    _playerCardsLabel = [({
+        UILabel *title = [[UILabel alloc] init];
+        [title setFont:[UIFont ub_blackCastle]];
+        [title setText:@"15"];
+        [title setTextColor:[UIColor whiteColor]];
+        title.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+        title.layer.shadowColor = [UIColor blackColor].CGColor;
+        title.layer.shadowOpacity = 0.5;
+        title.textAlignment = NSTextAlignmentCenter;
+        title;
+    }) ub_addToSuperview:self];
+    
+    _opponentHealthLabel = [({
+        UILabel *title = [[UILabel alloc] init];
+        [title setFont:[UIFont ub_blackCastle]];
+        [title setText:@"20"];
+        [title setTextColor:[UIColor whiteColor]];
+        title.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+        title.layer.shadowColor = [UIColor blackColor].CGColor;
+        title.layer.shadowOpacity = 0.5;
+        title.textAlignment = NSTextAlignmentCenter;
+        title;
+    }) ub_addToSuperview:self];
+    
+    _opponentManaLabel = [({
+        UILabel *title = [[UILabel alloc] init];
+        [title setFont:[UIFont ub_blackCastle]];
+        [title setText:@"1"];
+        [title setTextColor:[UIColor whiteColor]];
+        title.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+        title.layer.shadowColor = [UIColor blackColor].CGColor;
+        title.layer.shadowOpacity = 0.5;
+        title.textAlignment = NSTextAlignmentCenter;
+        title;
+    }) ub_addToSuperview:self];
+    
+    _opponentCardsLabel = [({
+        UILabel *title = [[UILabel alloc] init];
+        [title setFont:[UIFont ub_blackCastle]];
+        [title setText:@"15"];
+        [title setTextColor:[UIColor whiteColor]];
+        title.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+        title.layer.shadowColor = [UIColor blackColor].CGColor;
+        title.layer.shadowOpacity = 0.5;
+        title.textAlignment = NSTextAlignmentCenter;
+        title;
+    }) ub_addToSuperview:self];
+    
 }
 
 - (void)updateConstraints {
@@ -76,20 +178,13 @@
         make.right.equalTo(self.mas_right);
     }];
     
-    /* [self.next mas_updateConstraints:^(MASConstraintMaker *make) {
+    /*[self.next mas_updateConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX);
         make.centerY.equalTo(self.mas_centerY);
         make.width.equalTo([UIView ub_buttonWidth]);
         make.height.equalTo([UIView ub_buttonHeight]);
     }]; */
     
-    /* [self.playerHealth mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.mas_centerX).with.offset(20.0);
-        make.centerY.equalTo(self.mas_centerY);
-        make.width.equalTo([UIView ub_buttonWidth]);
-        make.height.equalTo([UIView ub_buttonHeight]);
-    }]; */
-     
 
     
     for (int i = 0; i < 8; i+=2){
@@ -124,6 +219,91 @@
             make.height.equalTo(@113);
         }];
     }
+    }];
+    
+    [self.playerHealth mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@20);
+        make.bottom.equalTo(@-15);
+        make.width.equalTo(@50);
+        make.height.equalTo(@50);
+    }];
+    
+    [self.playerHealthLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@20);
+        make.bottom.equalTo(@-14);
+        make.width.equalTo(@50);
+        make.height.equalTo(@50);
+    }];
+    
+    [self.playerMana mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@70);
+        make.bottom.equalTo(@-15);
+        make.width.equalTo(@50);
+        make.height.equalTo(@50);
+    }];
+    
+    [self.playerManaLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@70);
+        make.bottom.equalTo(@-14);
+        make.width.equalTo(@50);
+        make.height.equalTo(@50);
+    }];
+    
+    [self.playerCards mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@120);
+        make.bottom.equalTo(@-15);
+        make.width.equalTo(@50);
+        make.height.equalTo(@50);
+    }];
+    
+    [self.playerCardsLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@120);
+        make.bottom.equalTo(@-14);
+        make.width.equalTo(@50);
+        make.height.equalTo(@50);
+    }];
+    
+    [self.opponentHealth mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(@-115);
+        make.top.equalTo(@10);
+        make.width.equalTo(@50);
+        make.height.equalTo(@50);
+    }];
+    
+    [self.opponentHealthLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(@-115);
+        make.top.equalTo(@11);
+        make.width.equalTo(@50);
+        make.height.equalTo(@50);
+    }];
+    
+    [self.opponentMana mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(@-65);
+        make.top.equalTo(@10);
+        make.width.equalTo(@50);
+        make.height.equalTo(@50);
+    }];
+    
+    [self.opponentManaLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(@-65);
+        make.top.equalTo(@11);
+        make.width.equalTo(@50);
+        make.height.equalTo(@50);
+    }];
+    
+    [self.opponentCards mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(@-15);
+        make.top.equalTo(@10);
+        make.width.equalTo(@50);
+        make.height.equalTo(@50);
+    }];
+    
+    [self.opponentCardsLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(@-15);
+        make.top.equalTo(@11);
+        make.width.equalTo(@50);
+        make.height.equalTo(@50);
+    }];
     
     [super updateConstraints];
 }
