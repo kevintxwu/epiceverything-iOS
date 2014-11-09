@@ -43,6 +43,7 @@
         [title setFont:[UIFont ub_adventure]];
         [title setText:@"Epic Everything"];
         [title setTextColor:[UIColor whiteColor]];
+        title.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
         title.layer.shadowColor = [UIColor blackColor].CGColor;
         title.layer.shadowOpacity = 0.5;
         title;
@@ -50,12 +51,13 @@
     
     _start = [({
         UIButton *start = [[UIButton alloc] init];
-        [start setTitle:@"Start Game" forState:UIControlStateNormal];
+        [start setTitle:@"Play" forState:UIControlStateNormal];
         start.backgroundColor = [UIColor clearColor];
         [start.titleLabel setFont:[UIFont ub_uchiyama]];
         [start.layer setBorderColor:[UIColor whiteColor].CGColor];
         [start.layer setBorderWidth:[UIView ub_borderWidth]];
         [start.layer setCornerRadius:[UIView ub_borderRadius]];
+        start.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
         start.layer.shadowColor = [UIColor blackColor].CGColor;
         start.layer.shadowOpacity = 0.5;
         [start addTarget:_delegate action:@selector(startButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -70,6 +72,7 @@
         [instructions.layer setBorderColor:[UIColor whiteColor].CGColor];
         [instructions.layer setBorderWidth:[UIView ub_borderWidth]];
         [instructions.layer setCornerRadius:[UIView ub_borderRadius]];
+        instructions.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
         instructions.layer.shadowColor = [UIColor blackColor].CGColor;
         instructions.layer.shadowOpacity = 0.5;
         //[instructions addTarget:_delegate action:@selector(instructionsButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -89,12 +92,12 @@
     [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.start.mas_top).with.offset([[UIView ub_titlePadding] floatValue]);
         make.centerX.equalTo(self.mas_centerX);
-        make.top.equalTo(self.mas_top).with.offset([[UIView ub_padding] floatValue]);
+        make.top.equalTo(self.mas_top).with.offset([[UIView ub_titlePadding] floatValue]);
     }];
     
     [self.start mas_updateConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX);
-        make.centerY.equalTo(self.mas_centerY).with.offset([[UIView ub_buttonHeight] floatValue]);
+        make.centerY.equalTo(self.mas_centerY).with.offset(20);
         make.width.equalTo([UIView ub_buttonWidth]);
     }];
     
