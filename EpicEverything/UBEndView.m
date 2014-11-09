@@ -1,24 +1,25 @@
 //
-//  UBCreditsView.m
+//  UBEndView.m
 //  EpicEverything
 //
 //  Created by Varun Rau on 11/9/14.
 //  Copyright (c) 2014 Unboard. All rights reserved.
 //
 
-#import "UBCreditsView.h"
+#import "UBEndView.h"
 #import "UIView+UBExtensions.h"
 
-@interface UBCreditsView ()
+@interface UBEndView ()
 
 @property (nonatomic) UIImageView *background;
 @property (nonatomic) UILabel *title;
-@property (nonatomic) UILabel *credits;
+@property (nonatomic) UIButton *playAgainButton;
 @property (nonatomic) UIButton *returnButton;
 
 @end
 
-@implementation UBCreditsView
+
+@implementation UBEndView
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -40,8 +41,9 @@
     
     _title = [({
         UILabel *title = [[UILabel alloc] init];
-        [title setFont:[UIFont ub_creditsTitle]];
-        [title setText:@"Credits"];
+        [title setFont:[UIFont ub_adventure]];
+        [title setText:@"Victory!"];
+        //TODO: change the text depends on if you win
         [title setTextColor:[UIColor whiteColor]];
         title.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
         title.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -49,17 +51,19 @@
         title;
     }) ub_addToSuperview:self];
     
-    _credits = [({
-        UILabel *credits = [[UILabel alloc] init];
-        [credits setFont:[UIFont ub_creditsParagraph]];
-        [credits setText:[NSString ub_creditsString]];
-        [credits setTextColor:[UIColor whiteColor]];
-        [credits setTextAlignment:NSTextAlignmentCenter];
-        credits.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
-        credits.layer.shadowColor = [UIColor blackColor].CGColor;
-        credits.layer.shadowOpacity = 0.5;
-        [credits setNumberOfLines:0];
-        credits;
+    _playAgainButton = [({
+        UIButton *playAgainButton = [[UIButton alloc] init];
+        [playAgainButton setTitle:@"Play Again" forState:UIControlStateNormal];
+        playAgainButton.backgroundColor = [UIColor clearColor];
+        [playAgainButton.titleLabel setFont:[UIFont ub_uchiyama]];
+        [playAgainButton.layer setBorderColor:[UIColor whiteColor].CGColor];
+        [playAgainButton.layer setBorderWidth:[UIView ub_borderWidth]];
+        [playAgainButton.layer setCornerRadius:[UIView ub_borderRadius]];
+        playAgainButton.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+        playAgainButton.layer.shadowColor = [UIColor blackColor].CGColor;
+        playAgainButton.layer.shadowOpacity = 0.5;
+        [playAgainButton addTarget:_delegate action:@selector(playAgainButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        playAgainButton;
     }) ub_addToSuperview:self];
     
     _returnButton = [({
@@ -88,20 +92,20 @@
     }];
     
     [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.playAgainButton.mas_top).with.offset([[UIView ub_titlePadding] floatValue]);
         make.centerX.equalTo(self.mas_centerX);
         make.top.equalTo(self.mas_top).with.offset([[UIView ub_titlePadding] floatValue]);
     }];
     
-    [self.credits mas_updateConstraints:^(MASConstraintMaker *make) {
+    [self.playAgainButton mas_updateConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX);
-        make.top.equalTo(self.title.mas_bottom).with.offset(10);
-        make.trailing.equalTo(self.mas_right).with.offset(-[[UIView ub_creditsParagraphPadding] floatValue]);
-        make.leading.equalTo(self.mas_left).with.offset([[UIView ub_creditsParagraphPadding] floatValue]);
+        make.centerY.equalTo(self.mas_centerY).with.offset(20);
+        make.width.equalTo([UIView ub_buttonWidth]);
     }];
     
     [self.returnButton mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.mas_centerX);
-        make.bottom.equalTo(self.self.mas_bottom).with.offset(-[[UIView ub_titlePadding] floatValue]);
+        make.centerX.equalTo(self.playAgainButton.mas_centerX);
+        make.top.equalTo(self.playAgainButton.mas_bottom).with.offset([[UIView ub_padding] floatValue]);
         make.width.equalTo([UIView ub_buttonWidth]);
     }];
     

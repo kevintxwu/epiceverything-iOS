@@ -1,5 +1,5 @@
 //
-//  UBCreditsViewController.h
+//  UBEndViewController.h
 //  EpicEverything
 //
 //  Created by Varun Rau on 11/9/14.
@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UBCreditsView.h"
+#import "UBEndView.h"
 
-@interface UBCreditsViewController : UIViewController<UBCreditsViewDelegate>
+@interface UBEndViewController : UIViewController<UBEndViewDelegate>
 
 @end
