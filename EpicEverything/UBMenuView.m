@@ -50,7 +50,7 @@
     
     _start = [({
         UIButton *start = [[UIButton alloc] init];
-        [start setTitle:@"Start Game" forState:UIControlStateNormal];
+        [start setTitle:@"Play" forState:UIControlStateNormal];
         start.backgroundColor = [UIColor clearColor];
         [start.titleLabel setFont:[UIFont ub_uchiyama]];
         [start.layer setBorderColor:[UIColor whiteColor].CGColor];
