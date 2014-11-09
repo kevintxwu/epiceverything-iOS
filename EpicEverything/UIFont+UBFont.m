@@ -14,6 +14,10 @@
     return [UIFont fontWithName:@"Adventure" size:75.0f];
 }
 
++ (UIFont *)ub_endTurn {
+    return [UIFont fontWithName:@"Adventure" size:25.0f];
+}
+
 + (UIFont *)ub_blackCastle {
     return [UIFont fontWithName:@"BlackCastleMF" size:30.0f];
 }
