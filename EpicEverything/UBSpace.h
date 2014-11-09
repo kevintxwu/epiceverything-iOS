@@ -17,7 +17,6 @@
 @property (nonatomic) int index;
 @property (nonatomic) UBBoard* board;
 @property (nonatomic) UBCreature* creature;
-@property (nonatomic) UIImageView* view;
 
 - (BOOL) occupied;
 

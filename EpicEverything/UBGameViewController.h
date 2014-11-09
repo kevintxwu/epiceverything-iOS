@@ -10,8 +10,9 @@
 #import "UBGameView.h"
 #import "UBGame.h"
 #import "UBCardView.h"
+#import "UBSpaceView.h"
 
-@interface UBGameViewController : UIViewController<UBGameViewDelegate, UBCardViewDelegate>
+@interface UBGameViewController : UIViewController<UBGameViewDelegate, UBCardViewDelegate, UBSpaceViewDelegate>
 
 @property (nonatomic) UBGame* game;
 

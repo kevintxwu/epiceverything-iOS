@@ -19,6 +19,8 @@
     _creaturesInPlay = [NSMutableArray arrayWithCapacity:4];
     _game = game;
     _playerOne = which;
+    _mana = 0;
+    _health = 20;
     
     return self;
 }
@@ -52,6 +54,7 @@
         [self.creaturesInPlay addObject:card];
         [(UBCreature*)card playOnSpace:[self.game.board spaceAtIndex:index]];
         self.mana -= card.manaCost;
+        NSLog(@"Playing %@", card.name);
     }
     
 }
@@ -80,6 +83,7 @@
 }
 
 - (void) startTurn {
+    NSLog(@"Starting Turn %d!", self.game.turnNumber);
     self.myTurn = YES;
     self.mana = self.game.turnNumber;
     if (self.mana > 10){
@@ -97,6 +101,7 @@
     UBCard *card = [self.deck lastObject];
     [self.deck removeLastObject];
     [self.hand addObject:card];
+    NSLog(@"Drew %@!", card.name);
     return card;
 }
 

@@ -19,8 +19,6 @@
     if (self){
         _board = self.board;
         _index = i;
-        _view = [[UIImageView alloc] init];
-        [self.view setImage:[UIImage ub_space]];
     }
     return self;
 }

@@ -15,6 +15,7 @@
 		133BCCB01A0F44660026023D /* UBSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = 133BCCAF1A0F44660026023D /* UBSpace.m */; };
 		133BCCB21A0F4F630026023D /* cards.plist in Resources */ = {isa = PBXBuildFile; fileRef = 133BCCB11A0F4F630026023D /* cards.plist */; };
 		133BCCB41A0F50600026023D /* statusEffects.plist in Resources */ = {isa = PBXBuildFile; fileRef = 133BCCB31A0F50600026023D /* statusEffects.plist */; };
+		138A00661A1029200087768F /* UBSpaceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 138A00651A1029200087768F /* UBSpaceView.m */; };
 		139FDC6C1A0FF91A003758C0 /* UBCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 139FDC6B1A0FF91A003758C0 /* UBCardView.m */; };
 		1890E52F8B997666001E6434 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8439F5EC4DE85BEDAB0EC52 /* libPods.a */; };
 		233937071A0FB7F600A46160 /* board-bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 233936E11A0FB7F600A46160 /* board-bg.jpg */; };
@@ -108,6 +109,8 @@
 		133BCCAF1A0F44660026023D /* UBSpace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBSpace.m; sourceTree = "<group>"; };
 		133BCCB11A0F4F630026023D /* cards.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cards.plist; sourceTree = "<group>"; };
 		133BCCB31A0F50600026023D /* statusEffects.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = statusEffects.plist; sourceTree = "<group>"; };
+		138A00651A1029200087768F /* UBSpaceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBSpaceView.m; sourceTree = "<group>"; };
+		138A00671A1029440087768F /* UBSpaceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBSpaceView.h; sourceTree = "<group>"; };
 		139FDC6A1A0FF8FB003758C0 /* UBCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBCardView.h; sourceTree = "<group>"; };
 		139FDC6B1A0FF91A003758C0 /* UBCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBCardView.m; sourceTree = "<group>"; };
 		233936E11A0FB7F600A46160 /* board-bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "board-bg.jpg"; sourceTree = "<group>"; };
@@ -303,6 +306,8 @@
 				8B8375B51A0F312700A2CF18 /* UBMenuView.m */,
 				8B8375B71A0F313300A2CF18 /* UBGameView.h */,
 				8B8375B81A0F313300A2CF18 /* UBGameView.m */,
+				138A00671A1029440087768F /* UBSpaceView.h */,
+				138A00651A1029200087768F /* UBSpaceView.m */,
 				139FDC6A1A0FF8FB003758C0 /* UBCardView.h */,
 				139FDC6B1A0FF91A003758C0 /* UBCardView.m */,
 				8B8375BD1A0F318300A2CF18 /* UBResultsView.h */,
@@ -633,6 +638,7 @@
 				8B854E291A10002000E9BF5B /* UBCreditsView.m in Sources */,
 				8B854E371A100D0400E9BF5B /* UBEndViewController.m in Sources */,
 				8B854E2F1A10043F00E9BF5B /* NSString+UBString.m in Sources */,
+				138A00661A1029200087768F /* UBSpaceView.m in Sources */,
 				8B854E2C1A10002B00E9BF5B /* UBCreditsViewController.m in Sources */,
 				8B8375B31A0F288700A2CF18 /* UBGameViewController.m in Sources */,
 				133BCCAB1A0F41CD0026023D /* UBPlayer.m in Sources */,
