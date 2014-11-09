@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>type</key>
+		<string>creature</string>
+		<key>effect</key>
+		<string></string>
+		<key>name</key>
+		<string>Frogger</string>
+		<key>attack</key>
+		<integer>1</integer>
+		<key>hitPoints</key>
+		<integer>1</integer>
+		<key>manaCost</key>
+		<integer>1</integer>
+		<key>speed</key>
+		<true/>
+		<key>block</key>
+		<false/>
+		<key>range</key>
+		<false/>
+		<key>mobility</key>
+		<string>0</string>
+	</dict>
+</array>
+</plist>
