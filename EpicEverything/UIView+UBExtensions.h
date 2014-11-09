@@ -10,6 +10,7 @@
 #import "UIColor+UBColors.h"
 #import "UIImage+UBImage.h"
 #import "UIFont+UBFont.h"
+#import "NSString+UBString.h"
 #import <Masonry/Masonry.h>
 
 @interface UIView (UBExtensions)
@@ -25,5 +26,8 @@
 + (NSNumber *)ub_titlePadding;
 + (CGFloat)ub_borderWidth;
 + (CGFloat)ub_borderRadius;
+
+#pragma mark - Credit View
++ (NSNumber *)ub_creditsParagraphPadding;
 
 @end

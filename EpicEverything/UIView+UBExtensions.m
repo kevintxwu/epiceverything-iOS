@@ -48,4 +48,10 @@
     return 6.0f;
 }
 
+#pragma mark - Credits View
+
++ (NSNumber *)ub_creditsParagraphPadding {
+    return @90;
+}
+
 @end
