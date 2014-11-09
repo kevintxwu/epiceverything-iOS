@@ -47,7 +47,7 @@
         [self setUpNewCard:card playerOne:YES];
     }
     
-    for(int i=[self.game.playerTwo.hand count] - 1; i >= 0; i--){
+    for(int i=0; i < [self.game.playerTwo.hand count]; i++){
         UBCard *card = ((UBCard*)(self.game.playerTwo.hand[i]));
         [self setUpNewCard:card playerOne:NO];
     }
@@ -249,7 +249,7 @@
     for (int i = [self.opponentHand count] - 1; i >= 0; i--){
         [self.opponentHand[i] mas_updateConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(@(-180 - 50 * i));
-            make.centerY.equalTo(self.mas_top).with.offset(0.0);
+            make.centerY.equalTo(self.mas_top);
             make.width.equalTo(@70);
             make.height.equalTo(@108.3);
         }];
