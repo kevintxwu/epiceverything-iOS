@@ -10,6 +10,7 @@
 #import "UBSpace.h"
 
 @class UBGame;
+@class UBSpace;
 
 @interface UBBoard : NSObject
 
@@ -17,7 +18,7 @@
 @property (nonatomic, copy) NSMutableArray* spaces;
 @property (nonatomic) UBGame* game;
 
-- (UBSpace*) spaceAtIndex:(int)index;
+- (UBSpace*)spaceAtIndex:(int)index;
 
 
 @end

@@ -16,6 +16,8 @@
     self = [super init];
     _name = data[@"name"];
     _manaCost = (int)data[@"manaCost"];
+    _iconImageName = self.name;
+    _cardImageName = [self.name stringByAppendingString:@"-card"];
     return self;
 }
 

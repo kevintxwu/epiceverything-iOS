@@ -19,6 +19,8 @@
         
         _playerOne = [[UBPlayer alloc] initWithGame:self asPlayerOne:YES];
         _playerTwo = [[UBPlayer alloc] initWithGame:self asPlayerOne:NO];
+        self.playerOne.opponent = self.playerTwo;
+        self.playerTwo.opponent = self.playerOne;
         
         NSString *plistCatPath = [[NSBundle mainBundle] pathForResource:@"cards" ofType:@"plist"];
         NSMutableArray *allCards = [NSMutableArray arrayWithContentsOfFile:plistCatPath];

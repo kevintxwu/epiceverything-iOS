@@ -8,11 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "UBPlayer.h"
-#import "UBBoard.h"
 #import "UBCard.h"
 #import "UBBoard.h"
 #import "UBCreature.h"
-#import "UBSpace.h"
 
 @class UBCreature;
 @class UBPlayer;
