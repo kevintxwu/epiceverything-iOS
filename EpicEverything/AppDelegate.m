@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "UBGame.h"
 #import "UBMenuViewController.h"
+#import "UBEndViewController.h"
 
 @interface AppDelegate ()
 
@@ -21,8 +22,8 @@
     // Override point for customization after application launch.
     //UBGame* game = [[UBGame alloc] initTestGame];
     UBMenuViewController *menuVC = [[UBMenuViewController alloc] init];
-    
-    UINavigationController *nvcontrol =[[UINavigationController alloc] initWithRootViewController: menuVC];
+    UBEndViewController *endVC = [[UBEndViewController alloc] init];
+    UINavigationController *nvcontrol =[[UINavigationController alloc] initWithRootViewController: endVC];
     self.window.rootViewController = nvcontrol;
     nvcontrol.navigationBarHidden = YES;
     return YES;
