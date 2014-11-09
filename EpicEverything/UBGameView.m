@@ -206,14 +206,19 @@
 
 #pragma mark - UBCardViewDelegate Methods
 
-- (void)cardViewMoved:(UIView *)view toLocation:(CGPoint)location {
-    [view mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(@(location.x));
-        make.centerY.equalTo(@(location.y));
-        make.height.equalTo(view.mas_height);
-        make.width.equalTo(view.mas_width);
-    }];
-    [self setNeedsUpdateConstraints];
+- (void)cardViewMoved:(UIView *)view withTouch:(UITouch *)touch {
+    CGPoint location = [touch locationInView:self];
+    NSLog(@"%@", NSStringFromCGPoint(location));
+    if (CGRectContainsPoint(self.bounds, location)) {
+        [view mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(@(location.x - 35));
+            make.top.equalTo(@(location.y - 100));
+            // I h8 this
+            make.height.equalTo(@150);
+            make.width.equalTo(@116);
+        }];
+        
+    }
 }
 
 - (void)cardPressed:(id)sender withCard:(UBCard*)card{

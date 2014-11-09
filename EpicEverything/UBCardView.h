@@ -31,6 +31,6 @@
 
 - (void)cardPressed:(id)sender withCard:(UBCard*)card;
 - (void)piecePressed:(id)sender withCard:(UBCard*)card;
-- (void)cardViewMoved:(UIView *)view toLocation:(CGPoint)location;
+- (void)cardViewMoved:(UIView *)view withTouch:(UITouch *)touch;
 
 @end

@@ -38,10 +38,7 @@
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    NSLog(@"moved");
-    UITouch *touch = [[event allTouches] anyObject];
-    CGPoint touchLocation = [touch locationInView:self];
-    [self.delegate cardViewMoved:self toLocation:touchLocation];
+    [self.delegate cardViewMoved:self withTouch:[[event allTouches] anyObject]];
 }
 
 - (void)switchToPiece{
