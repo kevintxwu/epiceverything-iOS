@@ -14,9 +14,10 @@
 
 - (id)initFromHash:(NSDictionary*)data{
     self = [super initFromHash:data];
-    _baseAttack = (int)data[@"attack"];
-    _totalHitPoints = (int)data[@"hitPoints"];
-    _mobility = (int)data[@"mobility"];
+    
+    _baseAttack = [data[@"attack"] integerValue];
+    _totalHitPoints = [data[@"hitPoints"] integerValue];
+    _mobility = [data[@"mobility"] integerValue];
     _turnsInPlay = -1;
     _isDead = NO;
     
@@ -53,6 +54,7 @@
 
 - (void) attackSpace: (UBSpace*)target{
     NSAssert([self canAttackSpace:target], @"Must be able to attack space!");
+    NSLog(@"%@ is attacking space %d!", self.name,target.index);
     if (!target.occupied && ![self.owner isMySpace:target.index]){
         self.owner.opponent.health -= self.baseAttack;
         if (self.owner.opponent.health <= 0){
@@ -65,6 +67,8 @@
         if(![self.owner isMySpace:target.index]){ //not attacking own creature
             self.hitPoints -= target.creature.baseAttack;
         }
+        NSLog(@"%@ now has %d hit points!", target.creature.name, target.creature.hitPoints);
+        NSLog(@"%@ now has %d hit points!", self.name, self.hitPoints);
         if (target.creature.hitPoints <= 0){
             [target.creature removeFromPlay];
         }
@@ -95,6 +99,7 @@
     [self.owner.graveyard addObject:self];
     self.space.creature = nil;
     self.space = nil;
+    self.isDead = YES;
 }
 
 

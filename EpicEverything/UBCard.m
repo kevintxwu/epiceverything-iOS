@@ -15,7 +15,7 @@
 - (id)initFromHash:(NSDictionary*)data{
     self = [super init];
     _name = data[@"name"];
-    _manaCost = (int)data[@"manaCost"];
+    _manaCost = [data[@"manaCost"] integerValue];
     return self;
 }
 

@@ -40,6 +40,13 @@
 }
 
 
+- (void)endTurnPressed:(id)sender{
+    [self.game endTurnByPlayer:(UBPlayer*)self.game.currentPlayer];
+    
+}
+
+
+
 
 
 

@@ -52,6 +52,7 @@
         }
         
         [_playerOne shuffleDeck];
+        [_playerTwo shuffleDeck];
         _turnNumber = 0;
     }
     NSLog(@"Game Created!!!");
@@ -71,6 +72,8 @@
     _currentPlayer = self.playerOne;
     _turnNumber = 1;
     [self.playerOne startTurn];
+    //[self computerMove:self.playerOne];
+    
 }
 
 - (void) endTurnByPlayer:(UBPlayer*)cPlayer{
@@ -79,17 +82,54 @@
     if(self.currentPlayer == self.playerOne){
         self.currentPlayer = self.playerTwo;
         [self.playerTwo startTurn];
+        [self computerMove:self.playerTwo];
     }
     else{
         self.currentPlayer = self.playerOne;
         self.turnNumber++;
         [self.playerOne startTurn];
+        //[self computerMove:self.playerOne];
     }
     
 }
 
 - (void) gameWonByPlayer:(UBPlayer*)winner{
-    
+    NSLog(@"GAME OVER");
+    exit(0);
+}
+
+- (void) computerMove:(UBPlayer*)player{
+   
+    NSInteger targets[4];
+    NSInteger spaces[4];
+    spaces[0] = 5;
+    spaces[1] = 3;
+    spaces[2] = 7;
+    spaces[3] = 1;
+    for(int i= 0; i < 4; i++){
+        targets[i] = 2*i;
+    }
+    for(int i = 0; i < [player.hand count]; i++){
+        UBCard* selected = player.hand[i];
+        for(int j = 0; j < 4; j++){
+            if([player canPlayCard:selected atSpace:spaces[j]]){
+                [player playCard:selected atSpace:spaces[j]];
+                i--;
+                break;
+            }
+        }
+    }
+    for(int i = 0; i < [player.creaturesInPlay count]; i++){
+        UBCreature* creature = player.creaturesInPlay[i];
+        for(int j = 0; j < 4; j++){
+            if([creature canAttackSpace:[self.board spaceAtIndex:targets[j]]]){
+                NSLog(@"Can attack!");
+                [creature attackSpace:[self.board spaceAtIndex:targets[j]]];
+                break;
+            }
+        }
+    }
+    [player endTurn];
 }
 
 

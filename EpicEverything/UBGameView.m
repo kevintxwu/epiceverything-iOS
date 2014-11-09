@@ -8,6 +8,7 @@
 
 #import "UBGameView.h"
 #import "UBCardView.h"
+#import "UBSpaceView.h"
 #import "UIView+UBExtensions.h"
 
 @interface UBGameView ()
@@ -16,6 +17,7 @@
 @property (nonatomic) UIImageView *background;
 @property (nonatomic) NSMutableArray *myHand;
 @property (nonatomic) NSMutableArray *opponentHand;
+@property (nonatomic) NSMutableArray *spaces;
 
 
 @end
@@ -36,8 +38,12 @@
 
 - (void)createSubviews {
     [_game startGame];
+    
+    _spaces = [NSMutableArray arrayWithCapacity:8];
     for(int i=0; i<8; i++){
-        [[self.game.board spaceAtIndex:i].view ub_addToSuperview:self];
+        UBSpaceView* spaceView = [[UBSpaceView alloc] initWithSpace:[self.game.board spaceAtIndex:i]];
+        [spaceView ub_addToSuperview:self];
+        [self.spaces addObject:spaceView];
     }
     
     _myHand = [NSMutableArray array];
@@ -187,7 +193,7 @@
     }) ub_addToSuperview:self];
 }
 
-- (void)setUpNewCard:(UBCard*)card playerOne:(BOOL)player {
+- (UBCardView*)setUpNewCard:(UBCard*)card playerOne:(BOOL)player{
     UBCardView *cardView = [[UBCardView alloc] initWithCard:card forPlayerOne:player];
     cardView.delegate = self;
     [cardView ub_addToSuperview:self];
@@ -197,6 +203,7 @@
     else {
         [self.opponentHand addObject: cardView];
     }
+    return cardView;
 }
 
 - (void)removeCardView:(UBCardView*)cardView{
@@ -251,13 +258,13 @@
 
     
     for (int i = 0; i < 8; i+=2){
-        [[self.game.board spaceAtIndex:i].view mas_updateConstraints:^(MASConstraintMaker *make) {
+        [self.spaces[i] mas_updateConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.mas_centerX).with.offset(-175.0 + 50.0*i);
             make.centerY.equalTo(self.mas_centerY).with.offset(32.0);
             make.width.equalTo(@100);
             make.height.equalTo(@100);
         }];
-        [[self.game.board spaceAtIndex:i+1].view mas_updateConstraints:^(MASConstraintMaker *make) {
+        [self.spaces[i+1] mas_updateConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.mas_centerX).with.offset(-125.0 + 50.0*i);
             make.centerY.equalTo(self.mas_centerY).with.offset(-55.0);
             make.width.equalTo(@100);
@@ -373,6 +380,10 @@
     }];
     
     [super updateConstraints];
+}
+
+- (void) updateBoard {
+    
 }
 
     

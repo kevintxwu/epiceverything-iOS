@@ -45,5 +45,7 @@
 
 - (BOOL) isMySpace:(int)index;
 
+- (void) playCard:(UBCard*)card atSpace:(int) index;
+
 
 @end
