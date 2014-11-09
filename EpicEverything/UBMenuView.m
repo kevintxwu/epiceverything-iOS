@@ -43,6 +43,7 @@
         [title setFont:[UIFont ub_adventure]];
         [title setText:@"Epic Everything"];
         [title setTextColor:[UIColor whiteColor]];
+        title.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
         title.layer.shadowColor = [UIColor blackColor].CGColor;
         title.layer.shadowOpacity = 0.5;
         title;
@@ -56,6 +57,7 @@
         [start.layer setBorderColor:[UIColor whiteColor].CGColor];
         [start.layer setBorderWidth:[UIView ub_borderWidth]];
         [start.layer setCornerRadius:[UIView ub_borderRadius]];
+        start.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
         start.layer.shadowColor = [UIColor blackColor].CGColor;
         start.layer.shadowOpacity = 0.5;
         [start addTarget:_delegate action:@selector(startButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -70,6 +72,7 @@
         [instructions.layer setBorderColor:[UIColor whiteColor].CGColor];
         [instructions.layer setBorderWidth:[UIView ub_borderWidth]];
         [instructions.layer setCornerRadius:[UIView ub_borderRadius]];
+        instructions.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
         instructions.layer.shadowColor = [UIColor blackColor].CGColor;
         instructions.layer.shadowOpacity = 0.5;
         //[instructions addTarget:_delegate action:@selector(instructionsButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
