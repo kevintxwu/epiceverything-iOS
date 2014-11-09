@@ -28,7 +28,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view = [[UBGameView alloc] init];
+    _game = [[UBGame alloc] initTestGame];
+    self.view = [[UBGameView alloc] initWithFrame: CGRectMake(0,0,0,0) andGame: self.game];
 }
 
 - (void)nextButtonPressed:(id)sender {
@@ -37,5 +38,16 @@
         return;
     }];
 }
+
+- (void)cardPressed:(id)sender withCard:(UBCard*)card{
+    sender 
+}
+
+- (void)piecePressed:(id)sender withCard:(UBCard*)card{
+    
+}
+
+
+
 
 @end

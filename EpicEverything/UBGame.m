@@ -62,6 +62,7 @@
 }
 
 - (void) startGame{
+    NSLog(@"Starting Game!");
     for (int i=0; i<4; i++){
         [_playerOne drawCard];
         [_playerTwo drawCard];

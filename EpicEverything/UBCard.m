@@ -16,12 +16,6 @@
     self = [super init];
     _name = data[@"name"];
     _manaCost = (int)data[@"manaCost"];
-    _iconImageView = [[UIButton alloc] init];
-    [self.iconImageView setImage:[UIImage imageNamed: [self.name stringByAppendingString:@".png"]] forState: UIControlStateNormal];
-    self.iconImageView.contentMode = UIViewContentModeScaleAspectFill;
-    _cardImageView = [[UIButton alloc] init];
-    [self.cardImageView setImage:[UIImage imageNamed: [self.name stringByAppendingString:@"-card.png"]] forState: UIControlStateNormal];
-    self.cardImageView.contentMode = UIViewContentModeScaleAspectFill;
     return self;
 }
 

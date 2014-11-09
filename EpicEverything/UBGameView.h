@@ -15,8 +15,7 @@
 @interface UBGameView : UIView
 
 @property (nonatomic, weak) id<UBGameViewDelegate> delegate;
-@property (nonatomic) NSMutableArray *topSpaces;
-@property (nonatomic) NSMutableArray *bottomSpaces;
+@property (nonatomic) NSMutableArray *myCards;
 @property (nonatomic) UBBoard *board;
 @property (nonatomic) UBGame *game;
 @property (nonatomic) UIImageView *playerHealth;
@@ -35,10 +34,13 @@
 
 @property (nonatomic) UIButton *endTurn;
 
+- (id)initWithFrame:(CGRect)frame andGame:(UBGame*)game;
+
 @end
 
 @protocol UBGameViewDelegate <NSObject>
 
 - (void)nextButtonPressed:(id)sender;
+
 
 @end
