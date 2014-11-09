@@ -41,12 +41,12 @@
     }
     
     _myHand = [NSMutableArray array];
-    _opponentHand = [NSMutableArray array];
     for(int i=0; i<[self.game.playerOne.hand count]; i++){
          UBCard *card = ((UBCard*)(self.game.playerOne.hand[i]));
         [self setUpNewCard:card playerOne:YES];
     }
     
+    _opponentHand = [NSMutableArray array];
     for(int i=0; i<[self.game.playerTwo.hand count]; i++){
         UBCard *card = ((UBCard*)(self.game.playerTwo.hand[i]));
         [self setUpNewCard:card playerOne:NO];
@@ -187,13 +187,14 @@
     }) ub_addToSuperview:self];
 }
 
-- (void)setUpNewCard:(UBCard*)card playerOne:(BOOL)player{
+- (void)setUpNewCard:(UBCard*)card playerOne:(BOOL)player {
     UBCardView *cardView = [[UBCardView alloc] initWithCard:card forPlayerOne:player];
+    cardView.delegate = self;
     [cardView ub_addToSuperview:self];
-    if(player){
+    if (player) {
        [self.myHand addObject: cardView];
     }
-    else{
+    else {
         [self.opponentHand addObject: cardView];
     }
 }
@@ -203,6 +204,25 @@
     [self.myHand removeObject: cardView];
 }
 
+#pragma mark - UBCardViewDelegate Methods
+
+- (void)cardViewMoved:(UIView *)view toLocation:(CGPoint)location {
+    [view mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(@(location.x));
+        make.centerY.equalTo(@(location.y));
+        make.height.equalTo(view.mas_height);
+        make.width.equalTo(view.mas_width);
+    }];
+    [self setNeedsUpdateConstraints];
+}
+
+- (void)cardPressed:(id)sender withCard:(UBCard*)card{
+    
+}
+
+- (void)piecePressed:(id)sender withCard:(UBCard*)card{
+    
+}
 
 - (void)updateConstraints {
     

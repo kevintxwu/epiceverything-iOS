@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "UBGame.h"
+#import "UBCardView.h"
 
 
 @protocol UBGameViewDelegate;
 
-@interface UBGameView : UIView
+@interface UBGameView : UIView<UBCardViewDelegate>
 
 @property (nonatomic, weak) id<UBGameViewDelegate> delegate;
 @property (nonatomic) UBBoard *board;
