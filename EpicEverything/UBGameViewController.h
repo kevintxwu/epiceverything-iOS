@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UBGameView.h"
 
-@interface UBGameViewController : UIViewController
+@interface UBGameViewController : UIViewController<UBGameViewDelegate>
 
 @end
