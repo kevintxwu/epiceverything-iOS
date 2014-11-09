@@ -166,6 +166,16 @@
         title;
     }) ub_addToSuperview:self];
     
+    _endTurn = [({
+        UIButton *start = [[UIButton alloc] init];
+        [start setTitle:@"End Turn " forState:UIControlStateNormal];
+        start.backgroundColor = [UIColor clearColor];
+        [start.titleLabel setFont:[UIFont ub_endTurn]];
+        start.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+        start.layer.shadowColor = [UIColor blackColor].CGColor;
+        start.layer.shadowOpacity = 0.5;
+        start;
+    }) ub_addToSuperview:self];
 }
 
 - (void)updateConstraints {
@@ -301,6 +311,11 @@
         make.top.equalTo(@8);
         make.width.equalTo(@50);
         make.height.equalTo(@50);
+    }];
+    
+    [self.endTurn mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(@-12);
+        make.bottom.equalTo(@-5);
     }];
     
     [super updateConstraints];

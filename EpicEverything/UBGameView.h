@@ -33,6 +33,8 @@
 @property (nonatomic) UILabel *playerManaLabel;
 @property (nonatomic) UILabel *opponentManaLabel;
 
+@property (nonatomic) UIButton *endTurn;
+
 @end
 
 @protocol UBGameViewDelegate <NSObject>
