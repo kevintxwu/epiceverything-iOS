@@ -495,7 +495,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8BB1A5331A0F218A00CD2FE9 /* Build configuration list for PBXProject "EpicEverything" */;
+			buildConfigurationList = 8BB1A5331A0F218A00CD2FE9 /* Build configuration list for PBXProject "Epic Everything" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -817,7 +817,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8BB1A5331A0F218A00CD2FE9 /* Build configuration list for PBXProject "EpicEverything" */ = {
+		8BB1A5331A0F218A00CD2FE9 /* Build configuration list for PBXProject "Epic Everything" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8BB1A5591A0F218A00CD2FE9 /* Debug */,
