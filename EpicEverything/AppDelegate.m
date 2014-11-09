@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "UBGame.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    UBGame* game = [[UBGame alloc] initTestGame];
     return YES;
 }
 

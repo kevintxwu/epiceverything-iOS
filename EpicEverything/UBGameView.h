@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UBGameView : UIView
+@interface UBGameView :  UIView
 
 @end
