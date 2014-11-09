@@ -7,12 +7,6 @@
 //
 
 #import "UBMenuView.h"
-#import "UBGame.h"
-#import "UBCard.h"
-#import "UBBoard.h"
-#import "UBCreature.h"
-#import "UBPlayer.h"
-#import "UBSpace.h"
 #import "UIView+UBExtensions.h"
 
 @interface UBMenuView ()
