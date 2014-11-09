@@ -22,6 +22,7 @@
 + (NSNumber *)ub_buttonHeight;
 + (NSNumber *)ub_buttonWidth;
 + (NSNumber *)ub_padding;
++ (NSNumber *)ub_titlePadding;
 + (CGFloat)ub_borderWidth;
 + (CGFloat)ub_borderRadius;
 

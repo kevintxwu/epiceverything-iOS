@@ -11,7 +11,7 @@
 @implementation UIFont (UBFont)
 
 + (UIFont *)ub_adventure {
-    return [UIFont fontWithName:@"Adventure" size:60.0f];
+    return [UIFont fontWithName:@"Adventure" size:75.0f];
 }
 
 + (UIFont *)ub_blackCastle {
@@ -19,7 +19,7 @@
 }
 
 + (UIFont *)ub_uchiyama {
-    return [UIFont fontWithName:@"uchiyama" size:20.0f];
+    return [UIFont fontWithName:@"uchiyama" size:30.0f];
 }
 
 @end

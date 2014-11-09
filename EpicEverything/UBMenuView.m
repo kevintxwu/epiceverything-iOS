@@ -43,6 +43,8 @@
         [title setFont:[UIFont ub_adventure]];
         [title setText:@"Epic Everything"];
         [title setTextColor:[UIColor whiteColor]];
+        title.layer.shadowColor = [UIColor blackColor].CGColor;
+        title.layer.shadowOpacity = 0.5;
         title;
     }) ub_addToSuperview:self];
     
@@ -54,6 +56,8 @@
         [start.layer setBorderColor:[UIColor whiteColor].CGColor];
         [start.layer setBorderWidth:[UIView ub_borderWidth]];
         [start.layer setCornerRadius:[UIView ub_borderRadius]];
+        start.layer.shadowColor = [UIColor blackColor].CGColor;
+        start.layer.shadowOpacity = 0.5;
         [start addTarget:_delegate action:@selector(startButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         start;
     }) ub_addToSuperview:self];
@@ -66,6 +70,8 @@
         [instructions.layer setBorderColor:[UIColor whiteColor].CGColor];
         [instructions.layer setBorderWidth:[UIView ub_borderWidth]];
         [instructions.layer setCornerRadius:[UIView ub_borderRadius]];
+        instructions.layer.shadowColor = [UIColor blackColor].CGColor;
+        instructions.layer.shadowOpacity = 0.5;
         //[instructions addTarget:_delegate action:@selector(instructionsButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         instructions;
     }) ub_addToSuperview:self];
@@ -81,7 +87,7 @@
     }];
     
     [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.start.mas_top).with.offset([[UIView ub_padding] floatValue]);
+        make.bottom.equalTo(self.start.mas_top).with.offset([[UIView ub_titlePadding] floatValue]);
         make.centerX.equalTo(self.mas_centerX);
         make.top.equalTo(self.mas_top).with.offset([[UIView ub_padding] floatValue]);
     }];

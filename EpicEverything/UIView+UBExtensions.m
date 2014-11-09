@@ -25,15 +25,19 @@
 #pragma mark - Menu View
 
 + (NSNumber *)ub_buttonHeight {
-    return @40;
+    return @50;
 }
 
 + (NSNumber *)ub_buttonWidth {
-    return @200;
+    return @250;
 }
 
 + (NSNumber *)ub_padding {
-    return @10;
+    return @15;
+}
+
++ (NSNumber *)ub_titlePadding {
+    return @30;
 }
 
 + (CGFloat)ub_borderWidth {
