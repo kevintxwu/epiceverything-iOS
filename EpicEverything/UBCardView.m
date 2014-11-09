@@ -41,6 +41,10 @@
     [self.delegate cardViewMoved:self withTouch:[[event allTouches] anyObject]];
 }
 
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.delegate cardPlaced:self withTouch:[[event allTouches] anyObject]];
+}
+
 - (void)switchToPiece{
     [self.currentImageView setImage:[UIImage imageNamed: [self.card.name stringByAppendingString:@".png"]]];
     self.inCardForm = NO;

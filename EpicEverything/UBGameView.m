@@ -208,7 +208,6 @@
 
 - (void)cardViewMoved:(UIView *)view withTouch:(UITouch *)touch {
     CGPoint location = [touch locationInView:self];
-    NSLog(@"%@", NSStringFromCGPoint(location));
     if (CGRectContainsPoint(self.bounds, location)) {
         [view mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(@(location.x - 15));
@@ -219,6 +218,10 @@
         }];
         
     }
+}
+
+- (void)cardPlaced:(UIView *)view withTouch:(UITouch *)touch {
+    [self setNeedsUpdateConstraints];
 }
 
 - (void)cardPressed:(id)sender withCard:(UBCard*)card{
@@ -263,7 +266,7 @@
     }
     
     for (int i = 0; i < [self.myHand count]; i++){
-        [self.myHand[i] mas_updateConstraints:^(MASConstraintMaker *make) {
+        [self.myHand[i] mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(@(180 + 40 * i));
             make.centerY.equalTo(self.mas_bottom).with.offset(-10.0);
             make.width.equalTo(@75);
@@ -272,7 +275,7 @@
     }
     
     for (int i = 0; i < [self.opponentHand count]; i++){
-        [self.opponentHand[i] mas_updateConstraints:^(MASConstraintMaker *make) {
+        [self.opponentHand[i] mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(@(-180 - 50 * i));
             make.centerY.equalTo(self.mas_top).with.offset(0.0);
             make.width.equalTo(@70);
