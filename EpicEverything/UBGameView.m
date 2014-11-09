@@ -219,7 +219,6 @@
             make.height.equalTo(@113);
         }];
     }
-    }];
     
     [self.playerHealth mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@20);
