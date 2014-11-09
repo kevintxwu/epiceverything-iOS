@@ -21,7 +21,10 @@
     // Override point for customization after application launch.
     //UBGame* game = [[UBGame alloc] initTestGame];
     UBMenuViewController *menuVC = [[UBMenuViewController alloc] init];
-    self.window.rootViewController = menuVC;
+    
+    UINavigationController *nvcontrol =[[UINavigationController alloc] initWithRootViewController: menuVC];
+    self.window.rootViewController = nvcontrol;
+    nvcontrol.navigationBarHidden = YES;
     return YES;
 }
 

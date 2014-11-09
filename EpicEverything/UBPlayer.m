@@ -85,7 +85,10 @@
     if (self.mana > 10){
         self.mana = 10;
     }
-    [self drawCard];
+    if(!(self.playerOne && self.game.turnNumber == 1)){  //Player 1 doesn't draw on first turn
+        [self drawCard];
+    }
+    
 }
 
 - (UBCard *)drawCard
