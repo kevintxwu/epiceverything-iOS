@@ -14,6 +14,7 @@
 - (id) initTestGame {
     self = [super init];
     if (self) {
+        NSLog(@"Creating Game!");
         _board = [[UBBoard alloc] init];
         
         _playerOne = [[UBPlayer alloc] initWithGame:self asPlayerOne:YES];

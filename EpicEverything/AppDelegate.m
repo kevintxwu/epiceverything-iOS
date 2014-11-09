@@ -7,11 +7,8 @@
 //
 
 #import "AppDelegate.h"
-<<<<<<< HEAD
 #import "UBGame.h"
-=======
 #import "UBMenuViewController.h"
->>>>>>> master
 
 @interface AppDelegate ()
 
