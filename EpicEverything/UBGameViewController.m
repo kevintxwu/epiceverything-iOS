@@ -39,13 +39,6 @@
     }];
 }
 
-- (void)cardPressed:(id)sender withCard:(UBCard*)card{
-    
-}
-
-- (void)piecePressed:(id)sender withCard:(UBCard*)card{
-    
-}
 
 - (void)endTurnPressed:(id)sender{
     [self.game endTurnByPlayer:(UBPlayer*)self.game.currentPlayer];

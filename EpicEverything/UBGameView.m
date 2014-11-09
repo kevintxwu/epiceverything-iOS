@@ -47,13 +47,13 @@
     }
     
     _myHand = [NSMutableArray array];
-    _opponentHand = [NSMutableArray array];
     for(int i=0; i<[self.game.playerOne.hand count]; i++){
          UBCard *card = ((UBCard*)(self.game.playerOne.hand[i]));
         [self setUpNewCard:card playerOne:YES];
     }
     
-    for(int i=[self.game.playerTwo.hand count] - 1; i >= 0; i--){
+    _opponentHand = [NSMutableArray array];
+    for(int i=0; i < [self.game.playerTwo.hand count]; i++){
         UBCard *card = ((UBCard*)(self.game.playerTwo.hand[i]));
         [self setUpNewCard:card playerOne:NO];
     }
@@ -195,11 +195,12 @@
 
 - (UBCardView*)setUpNewCard:(UBCard*)card playerOne:(BOOL)player{
     UBCardView *cardView = [[UBCardView alloc] initWithCard:card forPlayerOne:player];
+    cardView.delegate = self;
     [cardView ub_addToSuperview:self];
-    if(player){
+    if (player) {
        [self.myHand addObject: cardView];
     }
-    else{
+    else {
         [self.opponentHand addObject: cardView];
     }
     return cardView;
@@ -210,6 +211,33 @@
     [self.myHand removeObject: cardView];
 }
 
+#pragma mark - UBCardViewDelegate Methods
+
+- (void)cardViewMoved:(UIView *)view withTouch:(UITouch *)touch {
+    CGPoint location = [touch locationInView:self];
+    if (CGRectContainsPoint(self.bounds, location)) {
+        [view mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(@(location.x - 15));
+            make.top.equalTo(@(location.y - 110));
+            // I h8 this
+            make.height.equalTo(@186.5);
+            make.width.equalTo(@116);
+        }];
+        
+    }
+}
+
+- (void)cardPlaced:(UIView *)view withTouch:(UITouch *)touch {
+    [self setNeedsUpdateConstraints];
+}
+
+- (void)cardPressed:(id)sender withCard:(UBCard*)card{
+    
+}
+
+- (void)piecePressed:(id)sender withCard:(UBCard*)card{
+    
+}
 
 - (void)updateConstraints {
     
@@ -245,7 +273,7 @@
     }
     
     for (int i = 0; i < [self.myHand count]; i++){
-        [self.myHand[i] mas_updateConstraints:^(MASConstraintMaker *make) {
+        [self.myHand[i] mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(@(180 + 40 * i));
             make.centerY.equalTo(self.mas_bottom).with.offset(-10.0);
             make.width.equalTo(@75);
@@ -254,9 +282,9 @@
     }
     
     for (int i = [self.opponentHand count] - 1; i >= 0; i--){
-        [self.opponentHand[i] mas_updateConstraints:^(MASConstraintMaker *make) {
+        [self.opponentHand[i] mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(@(-180 - 50 * i));
-            make.centerY.equalTo(self.mas_top).with.offset(0.0);
+            make.centerY.equalTo(self.mas_top);
             make.width.equalTo(@70);
             make.height.equalTo(@108.3);
         }];
