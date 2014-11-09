@@ -16,9 +16,10 @@
 @property (nonatomic) UIImageView* currentImageView;
 @property (nonatomic) UBCard* card;
 @property (nonatomic) BOOL inCardForm;
+@property (nonatomic) BOOL playerOneCard; //as opposed to opponent card
 @property (nonatomic, weak) id<UBCardViewDelegate> delegate;
 
-- (id)initWithCard:(UBCard*)card;
+- (id)initWithCard:(UBCard*)card forPlayerOne:(BOOL)player;
 
 - (void)switchToPiece;
 

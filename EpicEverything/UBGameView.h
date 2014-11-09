@@ -15,7 +15,6 @@
 @interface UBGameView : UIView
 
 @property (nonatomic, weak) id<UBGameViewDelegate> delegate;
-@property (nonatomic) NSMutableArray *myCards;
 @property (nonatomic) UBBoard *board;
 @property (nonatomic) UBGame *game;
 @property (nonatomic) UIImageView *playerHealth;

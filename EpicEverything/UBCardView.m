@@ -12,11 +12,12 @@
 
 @implementation UBCardView
 
-- (id)initWithCard:(UBCard*)card {
+- (id)initWithCard:(UBCard*)card forPlayerOne:(BOOL)player {
     self = [super init];
     if (self){
         _card = card;
         _inCardForm = YES;
+        _playerOneCard = player;
         _currentImageView = [[UIImageView alloc] init];
         self.currentImageView.contentMode = UIViewContentModeScaleAspectFill;
         self.currentImageView.userInteractionEnabled = YES;
@@ -46,7 +47,12 @@
 }
 
 - (void)switchToCard{
-    [self.currentImageView setImage:[UIImage imageNamed: [self.card.name stringByAppendingString:@"-card.png"]]];
+    if (self.playerOneCard){
+        [self.currentImageView setImage:[UIImage imageNamed: [self.card.name stringByAppendingString:@"-card.png"]]];
+    }
+    else{
+        [self.currentImageView setImage:[UIImage ub_cardBack]];
+    }
     self.inCardForm = YES;
     
 }
