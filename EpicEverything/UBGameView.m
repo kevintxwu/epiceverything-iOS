@@ -211,10 +211,10 @@
     NSLog(@"%@", NSStringFromCGPoint(location));
     if (CGRectContainsPoint(self.bounds, location)) {
         [view mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(@(location.x - 35));
-            make.top.equalTo(@(location.y - 100));
+            make.left.equalTo(@(location.x - 15));
+            make.top.equalTo(@(location.y - 110));
             // I h8 this
-            make.height.equalTo(@150);
+            make.height.equalTo(@186.5);
             make.width.equalTo(@116);
         }];
         
