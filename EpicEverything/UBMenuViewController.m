@@ -7,7 +7,7 @@
 //
 
 #import "UBMenuViewController.h"
-#import "GameViewController.h"
+#import "UBGameViewController.h"
 
 @interface UBMenuViewController ()
 
