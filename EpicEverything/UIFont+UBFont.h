@@ -15,4 +15,8 @@
 + (UIFont *)ub_blackCastle;
 + (UIFont *)ub_uchiyama;
 
+// Credits
++ (UIFont *)ub_creditsTitle;
++ (UIFont *)ub_creditsParagraph;
+
 @end
