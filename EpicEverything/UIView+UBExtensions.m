@@ -15,6 +15,12 @@
     return self;
 }
 
+- (instancetype)ub_addToBackOfSuperview:(UIView *)view {
+    [view addSubview:self];
+    [view sendSubviewToBack:self];
+    return self;
+}
+
 
 #pragma mark - Menu View
 
@@ -23,11 +29,19 @@
 }
 
 + (NSNumber *)ub_buttonWidth {
-    return @100;
+    return @200;
 }
 
 + (NSNumber *)ub_padding {
     return @10;
+}
+
++ (CGFloat)ub_borderWidth {
+    return 2.0f;
+}
+
++ (CGFloat)ub_borderRadius {
+    return 6.0f;
 }
 
 @end

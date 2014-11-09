@@ -17,6 +17,10 @@
 		8B8375C61A0F320700A2CF18 /* UIImage+UBImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8375C51A0F320700A2CF18 /* UIImage+UBImage.m */; };
 		8B8375CC1A0F336400A2CF18 /* UIView+UBExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8375CB1A0F336400A2CF18 /* UIView+UBExtensions.m */; };
 		8B8375CF1A0F359300A2CF18 /* UIFont+UBFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8375CE1A0F359300A2CF18 /* UIFont+UBFont.m */; };
+		8B8375D11A0F44B400A2CF18 /* menu-bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8B8375D01A0F44B400A2CF18 /* menu-bg.jpg */; };
+		8B854E201A0F500700E9BF5B /* Adventure.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8B8375D41A0F495D00A2CF18 /* Adventure.otf */; };
+		8B854E211A0F500A00E9BF5B /* uchiyama.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8B8375D31A0F495D00A2CF18 /* uchiyama.ttf */; };
+		8B854E221A0F500D00E9BF5B /* BlackCastleMF.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8B8375D51A0F495D00A2CF18 /* BlackCastleMF.ttf */; };
 		8BB1A53E1A0F218A00CD2FE9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB1A53D1A0F218A00CD2FE9 /* main.m */; };
 		8BB1A5411A0F218A00CD2FE9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB1A5401A0F218A00CD2FE9 /* AppDelegate.m */; };
 		8BB1A5441A0F218A00CD2FE9 /* UBMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB1A5431A0F218A00CD2FE9 /* UBMenuViewController.m */; };
@@ -57,6 +61,10 @@
 		8B8375CB1A0F336400A2CF18 /* UIView+UBExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+UBExtensions.m"; sourceTree = "<group>"; };
 		8B8375CD1A0F359300A2CF18 /* UIFont+UBFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+UBFont.h"; sourceTree = "<group>"; };
 		8B8375CE1A0F359300A2CF18 /* UIFont+UBFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+UBFont.m"; sourceTree = "<group>"; };
+		8B8375D01A0F44B400A2CF18 /* menu-bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "menu-bg.jpg"; sourceTree = "<group>"; };
+		8B8375D31A0F495D00A2CF18 /* uchiyama.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = uchiyama.ttf; sourceTree = "<group>"; };
+		8B8375D41A0F495D00A2CF18 /* Adventure.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Adventure.otf; sourceTree = "<group>"; };
+		8B8375D51A0F495D00A2CF18 /* BlackCastleMF.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BlackCastleMF.ttf; sourceTree = "<group>"; };
 		8BB1A5381A0F218A00CD2FE9 /* EpicEverything.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EpicEverything.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BB1A53C1A0F218A00CD2FE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BB1A53D1A0F218A00CD2FE9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -145,6 +153,8 @@
 		8B8375C01A0F31D400A2CF18 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8B8375D61A0F496000A2CF18 /* Fonts */,
+				8B8375D21A0F44B700A2CF18 /* Images */,
 				8B8375C11A0F31F600A2CF18 /* UIColor+UBColors.h */,
 				8B8375C21A0F31F600A2CF18 /* UIColor+UBColors.m */,
 				8B8375C41A0F320700A2CF18 /* UIImage+UBImage.h */,
@@ -155,6 +165,24 @@
 				8B8375CB1A0F336400A2CF18 /* UIView+UBExtensions.m */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		8B8375D21A0F44B700A2CF18 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				8B8375D01A0F44B400A2CF18 /* menu-bg.jpg */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		8B8375D61A0F496000A2CF18 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				8B8375D41A0F495D00A2CF18 /* Adventure.otf */,
+				8B8375D31A0F495D00A2CF18 /* uchiyama.ttf */,
+				8B8375D51A0F495D00A2CF18 /* BlackCastleMF.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 		8BB1A52F1A0F218A00CD2FE9 = {
@@ -303,6 +331,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BB1A5471A0F218A00CD2FE9 /* Main.storyboard in Resources */,
+				8B854E211A0F500A00E9BF5B /* uchiyama.ttf in Resources */,
+				8B854E201A0F500700E9BF5B /* Adventure.otf in Resources */,
+				8B854E221A0F500D00E9BF5B /* BlackCastleMF.ttf in Resources */,
+				8B8375D11A0F44B400A2CF18 /* menu-bg.jpg in Resources */,
 				8BB1A54C1A0F218A00CD2FE9 /* LaunchScreen.xib in Resources */,
 				8BB1A5491A0F218A00CD2FE9 /* Images.xcassets in Resources */,
 			);

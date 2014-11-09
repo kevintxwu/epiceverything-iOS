@@ -11,6 +11,8 @@
 
 @interface UBMenuView ()
 
+@property (nonatomic) UIImageView *background;
+@property (nonatomic) UILabel *title;
 @property (nonatomic) UIButton *start;
 @property (nonatomic) UIButton *instructions;
 
@@ -29,20 +31,41 @@
 }
 
 - (void)createSubviews {
+    
+    _background = [({
+        UIImageView *background = [[UIImageView alloc] init];
+        [background setImage:[UIImage ub_menuBackground]];
+        background;
+    }) ub_addToBackOfSuperview:self];
+    
+    _title = [({
+        UILabel *title = [[UILabel alloc] init];
+        [title setFont:[UIFont ub_adventure]];
+        [title setText:@"Epic Everything"];
+        [title setTextColor:[UIColor whiteColor]];
+        title;
+    }) ub_addToSuperview:self];
+    
     _start = [({
         UIButton *start = [[UIButton alloc] init];
         [start setTitle:@"Start Game" forState:UIControlStateNormal];
-        start.backgroundColor = [UIColor redColor];
-        //[start.titleLabel setFont:[UIFont ub_textFont]];
+        start.backgroundColor = [UIColor clearColor];
+        [start.titleLabel setFont:[UIFont ub_uchiyama]];
+        [start.layer setBorderColor:[UIColor whiteColor].CGColor];
+        [start.layer setBorderWidth:[UIView ub_borderWidth]];
+        [start.layer setCornerRadius:[UIView ub_borderRadius]];
         [start addTarget:_delegate action:@selector(startButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         start;
     }) ub_addToSuperview:self];
     
     _instructions = [({
         UIButton *instructions = [[UIButton alloc] init];
-        [instructions setTitle:@"Instructions" forState:UIControlStateNormal];
-        instructions.backgroundColor = [UIColor redColor];
-        //[instructions.titleLabel setFont:[UIFont ub_textFont]];
+        [instructions setTitle:@"Credits" forState:UIControlStateNormal];
+        instructions.backgroundColor = [UIColor clearColor];
+        [instructions.titleLabel setFont:[UIFont ub_uchiyama]];
+        [instructions.layer setBorderColor:[UIColor whiteColor].CGColor];
+        [instructions.layer setBorderWidth:[UIView ub_borderWidth]];
+        [instructions.layer setCornerRadius:[UIView ub_borderRadius]];
         //[instructions addTarget:_delegate action:@selector(instructionsButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         instructions;
     }) ub_addToSuperview:self];
@@ -50,9 +73,22 @@
 
 - (void)updateConstraints {
     
+    [self.background mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.mas_top);
+        make.bottom.equalTo(self.mas_bottom);
+        make.left.equalTo(self.mas_left);
+        make.right.equalTo(self.mas_right);
+    }];
+    
+    [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.start.mas_top).with.offset([[UIView ub_padding] floatValue]);
+        make.centerX.equalTo(self.mas_centerX);
+        make.top.equalTo(self.mas_top).with.offset([[UIView ub_padding] floatValue]);
+    }];
+    
     [self.start mas_updateConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX);
-        make.centerY.equalTo(self.mas_centerY).with.offset(-[[UIView ub_buttonHeight] floatValue]);
+        make.centerY.equalTo(self.mas_centerY).with.offset([[UIView ub_buttonHeight] floatValue]);
         make.width.equalTo([UIView ub_buttonWidth]);
     }];
     

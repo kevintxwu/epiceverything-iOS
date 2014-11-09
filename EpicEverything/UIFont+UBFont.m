@@ -10,4 +10,16 @@
 
 @implementation UIFont (UBFont)
 
++ (UIFont *)ub_adventure {
+    return [UIFont fontWithName:@"Adventure" size:60.0f];
+}
+
++ (UIFont *)ub_blackCastle {
+    return nil;
+}
+
++ (UIFont *)ub_uchiyama {
+    return [UIFont fontWithName:@"uchiyama" size:20.0f];
+}
+
 @end

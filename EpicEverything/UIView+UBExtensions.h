@@ -15,11 +15,14 @@
 @interface UIView (UBExtensions)
 
 - (instancetype)ub_addToSuperview:(UIView *)view;
+- (instancetype)ub_addToBackOfSuperview:(UIView *)view;
 
 #pragma mark - Menu View
 
 + (NSNumber *)ub_buttonHeight;
 + (NSNumber *)ub_buttonWidth;
 + (NSNumber *)ub_padding;
++ (CGFloat)ub_borderWidth;
++ (CGFloat)ub_borderRadius;
 
 @end

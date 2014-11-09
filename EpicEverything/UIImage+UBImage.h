@@ -10,4 +10,6 @@
 
 @interface UIImage (UBImage)
 
++ (UIImage *)ub_menuBackground;
+
 @end
