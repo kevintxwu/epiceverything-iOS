@@ -12,4 +12,16 @@
 
 + (UIImage *)ub_menuBackground;
 
++ (UIImage *)ub_gameBackground;
+
++ (UIImage *)ub_cardBack;
+
++ (UIImage *)ub_cards;
+
++ (UIImage *)ub_hp;
+
++ (UIImage *)ub_mana;
+
++ (UIImage *)ub_space;
+
 @end

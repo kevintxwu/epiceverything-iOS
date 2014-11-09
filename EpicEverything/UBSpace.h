@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Unboard. All rights reserved.
 //
 
-
+#import <UIKit/UIKit.h>
 #import "UBBoard.h"
 
 @class UBCreature;
@@ -17,6 +17,7 @@
 @property (nonatomic) int index;
 @property (nonatomic) UBBoard* board;
 @property (nonatomic) UBCreature* creature;
+@property (nonatomic, copy) UIImageView* image;
 
 - (BOOL) occupied;
 

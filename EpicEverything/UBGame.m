@@ -15,7 +15,7 @@
     self = [super init];
     if (self) {
         NSLog(@"Creating Game!");
-        _board = [[UBBoard alloc] init];
+        _board = [[UBBoard alloc] initWithGame:self];
         
         _playerOne = [[UBPlayer alloc] initWithGame:self asPlayerOne:YES];
         _playerTwo = [[UBPlayer alloc] initWithGame:self asPlayerOne:NO];

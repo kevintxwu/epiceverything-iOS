@@ -12,6 +12,8 @@
 @interface UBGameView ()
 
 @property (nonatomic) UIButton *next;
+@property (nonatomic) UIImageView *background;
+
 
 @end
 
@@ -28,6 +30,16 @@
 }
 
 - (void)createSubviews {
+    _game = [[UBGame alloc] initTestGame];
+    _topSpaces = [NSMutableArray arrayWithCapacity:4];
+    _bottomSpaces = [NSMutableArray arrayWithCapacity:4];
+    for(int i=0; i<8; i+=2){
+        [_topSpaces addObject:[[self.game.board spaceAtIndex:i].image ub_addToSuperview:self]];
+        [_bottomSpaces addObject:[[self.game.board spaceAtIndex:i+1].image ub_addToSuperview:self]];
+    }
+    
+    
+    
     _next = [({
         UIButton *start = [[UIButton alloc] init];
         [start setTitle:@"Next" forState:UIControlStateNormal];
@@ -36,9 +48,29 @@
         [start addTarget:_delegate action:@selector(nextButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         start;
     }) ub_addToSuperview:self];
+    
+    _background = [({
+        UIImageView *background = [[UIImageView alloc] init];
+        [background setImage:[UIImage ub_gameBackground]];
+        background;
+    }) ub_addToBackOfSuperview:self];
+    
+    _playerHealth = [({
+        UIImageView *health = [[UIImageView alloc] init];
+        [health setImage:[UIImage ub_hp]];
+        health;
+    }) ub_addToSuperview:self];
+    
 }
 
 - (void)updateConstraints {
+    
+    [self.background mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.mas_top);
+        make.bottom.equalTo(self.mas_bottom);
+        make.left.equalTo(self.mas_left);
+        make.right.equalTo(self.mas_right);
+    }];
     
     [self.next mas_updateConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX);
@@ -46,6 +78,24 @@
         make.width.equalTo([UIView ub_buttonWidth]);
         make.height.equalTo([UIView ub_buttonHeight]);
     }];
+    
+    [self.playerHealth mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.mas_centerX).with.offset(20.0);
+        make.centerY.equalTo(self.mas_centerY);
+        make.width.equalTo([UIView ub_buttonWidth]);
+        make.height.equalTo([UIView ub_buttonHeight]);
+    }];
+    
+    [self.topSpaces[0] mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.mas_centerX).with.offset(20.0);
+        make.centerY.equalTo(self.mas_centerY).with.offset(20.0);
+        make.width.equalTo(@20);
+        make.height.equalTo(@20);
+    }];
+    
+    for (int i = 0; i < 4; i++){
+        
+    }
     
     [super updateConstraints];
 }

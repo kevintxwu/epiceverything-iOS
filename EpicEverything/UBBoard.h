@@ -19,6 +19,7 @@
 @property (nonatomic) UBGame* game;
 
 - (UBSpace*)spaceAtIndex:(int)index;
+- (id) initWithGame:(UBGame*)game;
 
 
 @end
