@@ -24,6 +24,7 @@
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
         [self createSubviews];
+        [self setUpActions];
         [self updateConstraints];
     }
     return self;
@@ -37,6 +38,7 @@
     }
     for(int i=0; i<[self.game.playerOne.hand count]; i++){
         [((UBCard*)(self.game.playerOne.hand[i])).cardImageView ub_addToSuperview:self];
+        [((UBCard*)(self.game.playerOne.hand[i])).cardImageView addTarget:_delegate action:@selector(cardPressed:) forControlEvents: UIControlEventTouchDown];
     }
     
     for(int i=0; i<[self.game.playerTwo.hand count]; i++){
@@ -50,11 +52,11 @@
         background;
     }) ub_addToBackOfSuperview:self];
     
-   /* _playerHealth = [({
+    _playerHealth = [({
         UIImageView *health = [[UIImageView alloc] init];
         [health setImage:[UIImage ub_hp]];
         health;
-    }) ub_addToSuperview:self]; */
+    }) ub_addToSuperview:self];
     
     /*_next = [({
         UIButton *start = [[UIButton alloc] init];
@@ -167,6 +169,10 @@
         title;
     }) ub_addToSuperview:self];
     
+}
+
+- (void)setUpActions {
+    //[self.endTurn addTarget:self action:@selector(endTurnPressed:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)updateConstraints {

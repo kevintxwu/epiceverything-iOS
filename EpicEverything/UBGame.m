@@ -62,13 +62,14 @@
 }
 
 - (void) startGame{
-    for (int i=0; i<5; i++){
+    for (int i=0; i<4; i++){
         [_playerOne drawCard];
         [_playerTwo drawCard];
     }
     
     _currentPlayer = self.playerOne;
     _turnNumber = 1;
+    [self.playerOne startTurn];
 }
 
 - (void) endTurnByPlayer:(UBPlayer*)cPlayer{

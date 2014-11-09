@@ -24,9 +24,7 @@
 
 - (void)startButtonPressed:(id)sender {
     UBGameViewController *gameVC = [[UBGameViewController alloc] init];
-    [self presentViewController:gameVC animated:NO completion:^{
-        return;
-    }];
+    [self.navigationController pushViewController: gameVC animated:YES];
 }
 
 - (void)instructionsButtonPressed:(id)sender {
