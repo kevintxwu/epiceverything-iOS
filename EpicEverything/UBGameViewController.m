@@ -39,13 +39,6 @@
     }];
 }
 
-- (void)cardPressed:(id)sender withCard:(UBCard*)card{
-    
-}
-
-- (void)piecePressed:(id)sender withCard:(UBCard*)card{
-    
-}
 
 
 

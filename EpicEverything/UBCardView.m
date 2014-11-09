@@ -30,17 +30,22 @@
     return self;
 }
 
-- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    NSLog(@"Touched!");
-    if(self.inCardForm){
-        [_delegate cardPressed:self withCard:self.card];
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    if (self.inCardForm) {
+        [self.delegate cardPressed:self withCard:self.card];
     }
-    else{
-        [_delegate piecePressed:self withCard:self.card];
+    else {
+        [self.delegate piecePressed:self withCard:self.card];
     }
 }
 
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.delegate cardViewMoved:self withTouch:[[event allTouches] anyObject]];
+}
 
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.delegate cardPlaced:self withTouch:[[event allTouches] anyObject]];
+}
 
 - (void)switchToPiece{
     [self.currentImageView setImage:[UIImage imageNamed: [self.card.name stringByAppendingString:@".png"]]];
@@ -49,10 +54,10 @@
 }
 
 - (void)switchToCard{
-    if (self.playerOneCard){
+    if (self.playerOneCard) {
         [self.currentImageView setImage:[UIImage imageNamed: [self.card.name stringByAppendingString:@"-card.png"]]];
     }
-    else{
+    else {
         [self.currentImageView setImage:[UIImage ub_cardBack]];
     }
     self.inCardForm = YES;
