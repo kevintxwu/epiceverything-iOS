@@ -10,4 +10,8 @@
 
 @interface UIFont (UBFont)
 
++ (UIFont *)ub_adventure;
++ (UIFont *)ub_blackCastle;
++ (UIFont *)ub_uchiyama;
+
 @end

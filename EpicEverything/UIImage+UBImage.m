@@ -10,4 +10,8 @@
 
 @implementation UIImage (UBImage)
 
++ (UIImage *)ub_menuBackground {
+    return [UIImage imageNamed:@"menu-bg.jpg"];
+}
+
 @end
