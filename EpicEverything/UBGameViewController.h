@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "UBGameView.h"
+#import "UBGame.h"
 
 @interface UBGameViewController : UIViewController<UBGameViewDelegate>
+
+@property (nonatomic) UBGame* game;
 
 @end

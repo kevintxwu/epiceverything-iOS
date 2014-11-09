@@ -2,7 +2,7 @@
 //  GameViewController.m
 //  EpicEverything
 //
-//  Created by Varun Rau on 11/8/14.
+//  Created by Varun Rau, Joel Jacobs, Jordeen Chang, and Kevin Wu on 11/8/14.
 //  Copyright (c) 2014 Unboard. All rights reserved.
 //
 

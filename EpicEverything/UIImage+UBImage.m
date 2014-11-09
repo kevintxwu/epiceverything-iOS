@@ -14,4 +14,28 @@
     return [UIImage imageNamed:@"menu-bg.jpg"];
 }
 
++ (UIImage *)ub_gameBackground {
+    return [UIImage imageNamed:@"board-bg.jpg"];
+}
+
++ (UIImage *)ub_cardBack {
+    return [UIImage imageNamed:@"card-back.jpg"];
+}
+
++ (UIImage *)ub_cards {
+    return [UIImage imageNamed:@"cards.jpg"];
+}
+
++ (UIImage *)ub_hp {
+    return [UIImage imageNamed:@"hp.png"];
+}
+
++ (UIImage *)ub_mana {
+    return [UIImage imageNamed:@"mana.png"];
+}
+
++ (UIImage *)ub_space {
+    return [UIImage imageNamed:@"space.png"];
+}
+
 @end

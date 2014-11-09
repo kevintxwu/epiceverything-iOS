@@ -20,6 +20,7 @@
         for(int i=0; i < 8; i++){
             [self.spaces addObject: [[UBSpace alloc] initWithBoard:self withIndex:i]];
         }
+        NSLog(@"Creating Board");
     }
     
     return self;

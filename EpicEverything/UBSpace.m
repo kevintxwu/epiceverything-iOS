@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "UBSpace.h"
+#import "UIImage+UBImage.h"
 
 @implementation UBSpace : NSObject
 
@@ -18,6 +19,8 @@
     if (self){
         _board = self.board;
         _index = i;
+        _image = [[UIImageView alloc] init];
+        [self.image setImage:[UIImage ub_space]];
     }
     return self;
 }
