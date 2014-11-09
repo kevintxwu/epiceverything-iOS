@@ -20,7 +20,9 @@
         _playerOneCard = player;
         _currentImageView = [[UIImageView alloc] init];
         self.currentImageView.contentMode = UIViewContentModeScaleAspectFill;
-        self.currentImageView.userInteractionEnabled = YES;
+        if(_playerOneCard){
+            self.currentImageView.userInteractionEnabled = YES;
+        }
         [_currentImageView ub_addToSuperview:self];
         [self switchToCard];
         [self updateConstraints];
