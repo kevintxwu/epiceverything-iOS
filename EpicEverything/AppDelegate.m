@@ -7,7 +7,11 @@
 //
 
 #import "AppDelegate.h"
+<<<<<<< HEAD
 #import "UBGame.h"
+=======
+#import "UBMenuViewController.h"
+>>>>>>> master
 
 @interface AppDelegate ()
 
@@ -19,6 +23,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     UBGame* game = [[UBGame alloc] initTestGame];
+    UBMenuViewController *menuVC = [[UBMenuViewController alloc] init];
+    self.window.rootViewController = menuVC;
     return YES;
 }
 

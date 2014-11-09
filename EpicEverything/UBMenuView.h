@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol UBMenuViewDelegate;
+
 @interface UBMenuView : UIView
+
+@property (nonatomic, weak) id<UBMenuViewDelegate> delegate;
+
+@end
+
+@protocol UBMenuViewDelegate <NSObject>
+
+- (void)startButtonPressed:(id)sender;
+- (void)instructionsButtonPressed:(id)sender;
 
 @end

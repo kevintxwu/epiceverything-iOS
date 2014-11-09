@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  UIFont+UBFont.h
 //  EpicEverything
 //
 //  Created by Varun Rau on 11/8/14.
@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UBMenuView.h"
 
-@interface UBMenuViewController : UIViewController<UBMenuViewDelegate>
+@interface UIFont (UBFont)
 
++ (UIFont *)ub_adventure;
++ (UIFont *)ub_blackCastle;
++ (UIFont *)ub_uchiyama;
 
 @end
-

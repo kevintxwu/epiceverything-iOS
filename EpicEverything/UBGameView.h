@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UBGameView :  UIView
+
+@protocol UBGameViewDelegate;
+
+@interface UBGameView : UIView
+
+@property (nonatomic, weak) id<UBGameViewDelegate> delegate;
+
+@end
+
+@protocol UBGameViewDelegate <NSObject>
+
+- (void)nextButtonPressed:(id)sender;
 
 @end

@@ -11,16 +11,25 @@
 
 @interface UBMenuViewController ()
 
+@property (nonatomic) UBMenuView *view;
+
 @end
 
 @implementation UBMenuViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    self.view = [[UBMenuView alloc] init];
 }
 
-- (void)startGamePressed:(id)sender {
+- (void)startButtonPressed:(id)sender {
+    UBGameViewController *gameVC = [[UBGameViewController alloc] init];
+    [self presentViewController:gameVC animated:NO completion:^{
+        return;
+    }];
+}
+
+- (void)instructionsButtonPressed:(id)sender {
     
 }
 
