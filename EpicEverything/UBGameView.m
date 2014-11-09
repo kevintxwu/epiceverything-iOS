@@ -14,6 +14,8 @@
 
 @property (nonatomic) UIButton *next;
 @property (nonatomic) UIImageView *background;
+@property (nonatomic) NSMutableArray *myHand;
+@property (nonatomic) NSMutableArray *opponentHand;
 
 
 @end
@@ -38,14 +40,16 @@
         [[self.game.board spaceAtIndex:i].view ub_addToSuperview:self];
     }
     
-    _myCards = [NSMutableArray array];
+    _myHand = [NSMutableArray array];
+    _opponentHand = [NSMutableArray array];
     for(int i=0; i<[self.game.playerOne.hand count]; i++){
-        UBCard *card = ((UBCard*)(self.game.playerOne.hand[i]));
-        [self setUpNewCard:card];
+         UBCard *card = ((UBCard*)(self.game.playerOne.hand[i]));
+        [self setUpNewCard:card playerOne:YES];
     }
     
     for(int i=0; i<[self.game.playerTwo.hand count]; i++){
-        [((UBCard*)(self.game.playerTwo.hand[i])).backImageView ub_addToSuperview:self];
+        UBCard *card = ((UBCard*)(self.game.playerTwo.hand[i]));
+        [self setUpNewCard:card playerOne:NO];
     }
     
     _background = [({
@@ -183,15 +187,20 @@
     }) ub_addToSuperview:self];
 }
 
-- (void)setUpNewCard:(UBCard*)card{
-    UBCardView *cardView = [[UBCardView alloc] initWithCard:card];
+- (void)setUpNewCard:(UBCard*)card playerOne:(BOOL)player{
+    UBCardView *cardView = [[UBCardView alloc] initWithCard:card forPlayerOne:player];
     [cardView ub_addToSuperview:self];
-    [self.myCards addObject: cardView];
+    if(player){
+       [self.myHand addObject: cardView];
+    }
+    else{
+        [self.opponentHand addObject: cardView];
+    }
 }
 
 - (void)removeCardView:(UBCardView*)cardView{
     [cardView removeFromSuperview];
-    [self.myCards removeObject: cardView];
+    [self.myHand removeObject: cardView];
 }
 
 
@@ -204,12 +213,12 @@
         make.right.equalTo(self.mas_right);
     }];
     
-    /*[self.next mas_updateConstraints:^(MASConstraintMaker *make) {
+    [self.next mas_updateConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX);
         make.centerY.equalTo(self.mas_centerY);
         make.width.equalTo([UIView ub_buttonWidth]);
         make.height.equalTo([UIView ub_buttonHeight]);
-    }]; */
+    }];
     
 
     
@@ -228,8 +237,8 @@
         }];
     }
     
-    for (int i = 0; i < [self.myCards count]; i++){
-        [self.myCards[i] mas_updateConstraints:^(MASConstraintMaker *make) {
+    for (int i = 0; i < [self.myHand count]; i++){
+        [self.myHand[i] mas_updateConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(@(180 + 40 * i));
             make.centerY.equalTo(self.mas_bottom).with.offset(-10.0);
             make.width.equalTo(@75);
@@ -237,13 +246,14 @@
         }];
     }
     
-    /*for (int i = 0; i < [self.game.playerTwo.hand count]; i++){
-        [((UBCard*)(self.game.playerTwo.hand[i])).backImageView mas_updateConstraints:^(MASConstraintMaker *make) {
+    for (int i = 0; i < [self.opponentHand count]; i++){
+        [self.opponentHand[i] mas_updateConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(@(-180 - 50 * i));
             make.centerY.equalTo(self.mas_top).with.offset(0.0);
             make.width.equalTo(@70);
             make.height.equalTo(@108.3);
-    }*/
+        }];
+    }
     
     [self.playerHealth mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@20);
@@ -338,12 +348,4 @@
 }
 
     
-    
-    
-
-
-
-
-
 @end
-
