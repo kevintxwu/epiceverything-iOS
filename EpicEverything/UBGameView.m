@@ -43,18 +43,17 @@
         [((UBCard*)(self.game.playerTwo.hand[i])).cardImageView ub_addToSuperview:self];
     }
     
-    
     _background = [({
         UIImageView *background = [[UIImageView alloc] init];
         [background setImage:[UIImage ub_gameBackground]];
         background;
     }) ub_addToBackOfSuperview:self];
     
-   /* _playerHealth = [({
+    _playerHealth = [({
         UIImageView *health = [[UIImageView alloc] init];
         [health setImage:[UIImage ub_hp]];
         health;
-    }) ub_addToSuperview:self]; */
+    }) ub_addToSuperview:self];
     
     /*_next = [({
         UIButton *start = [[UIButton alloc] init];
@@ -189,14 +188,14 @@
     
     for (int i = 0; i < 8; i+=2){
         [[self.game.board spaceAtIndex:i].view mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.mas_centerX).with.offset(-200.0 + 50.0*i);
-            make.centerY.equalTo(self.mas_centerY).with.offset(40.0);
+            make.centerX.equalTo(self.mas_centerX).with.offset(-175.0 + 50.0*i);
+            make.centerY.equalTo(self.mas_centerY).with.offset(35.0);
             make.width.equalTo(@100);
             make.height.equalTo(@100);
         }];
         [[self.game.board spaceAtIndex:i+1].view mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.mas_centerX).with.offset(-150.0 + 50.0*i);
-            make.centerY.equalTo(self.mas_centerY).with.offset(-40.0);
+            make.centerX.equalTo(self.mas_centerX).with.offset(-125.0 + 50.0*i);
+            make.centerY.equalTo(self.mas_centerY).with.offset(-55.0);
             make.width.equalTo(@100);
             make.height.equalTo(@100);
         }];
@@ -204,8 +203,8 @@
     
     for (int i = 0; i < [self.game.playerOne.hand count]; i++){
         [((UBCard*)(self.game.playerOne.hand[i])).cardImageView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.mas_left).with.offset(100.0 + 50.0*i);
-            make.centerY.equalTo(self.mas_bottom).with.offset(-30.0);
+            make.left.equalTo(@(180 + 40 * i));
+            make.centerY.equalTo(self.mas_bottom).with.offset(-10.0);
             make.width.equalTo(@75);
             make.height.equalTo(@113);
         }];
@@ -213,8 +212,8 @@
     
     for (int i = 0; i < [self.game.playerTwo.hand count]; i++){
         [((UBCard*)(self.game.playerTwo.hand[i])).cardImageView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.mas_left).with.offset(100.0 + 50.0*i);
-            make.centerY.equalTo(self.mas_top).with.offset(-30.0);
+            make.right.equalTo(@(-170 - 40 * i));
+            make.centerY.equalTo(self.mas_top).with.offset(-20.0);
             make.width.equalTo(@75);
             make.height.equalTo(@113);
         }];
@@ -263,43 +262,43 @@
     }];
     
     [self.opponentHealth mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(@-115);
-        make.top.equalTo(@10);
+        make.right.equalTo(@-108);
+        make.top.equalTo(@7);
         make.width.equalTo(@50);
         make.height.equalTo(@50);
     }];
     
     [self.opponentHealthLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(@-115);
-        make.top.equalTo(@11);
+        make.right.equalTo(@-108);
+        make.top.equalTo(@8);
         make.width.equalTo(@50);
         make.height.equalTo(@50);
     }];
     
     [self.opponentMana mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(@-65);
-        make.top.equalTo(@10);
+        make.right.equalTo(@-58);
+        make.top.equalTo(@7);
         make.width.equalTo(@50);
         make.height.equalTo(@50);
     }];
     
     [self.opponentManaLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(@-65);
-        make.top.equalTo(@11);
+        make.right.equalTo(@-58);
+        make.top.equalTo(@8);
         make.width.equalTo(@50);
         make.height.equalTo(@50);
     }];
     
     [self.opponentCards mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(@-15);
-        make.top.equalTo(@10);
+        make.right.equalTo(@-8);
+        make.top.equalTo(@7);
         make.width.equalTo(@50);
         make.height.equalTo(@50);
     }];
     
     [self.opponentCardsLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(@-15);
-        make.top.equalTo(@11);
+        make.right.equalTo(@-8);
+        make.top.equalTo(@8);
         make.width.equalTo(@50);
         make.height.equalTo(@50);
     }];
