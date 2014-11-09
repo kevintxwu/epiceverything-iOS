@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Unboard. All rights reserved.
 //
 
-#import "UBCreature.h"
+
 #import "UBBoard.h"
 
 @class UBCreature;

@@ -49,7 +49,8 @@
     [self.hand removeObject:card];
     if ([card isKindOfClass:[UBCreature class]]){
         [self.creaturesInPlay addObject:card];
-        
+        [(UBCreature*)card playOnSpace:[self.game.board spaceAtIndex:index]];
+        self.mana -= card.manaCost;
     }
     
 }
@@ -102,6 +103,7 @@
     for(int i=0; i < [self.creaturesInPlay count]; i++){
         UBCreature* currCreature = [self.creaturesInPlay objectAtIndex:i];
         currCreature.turnsInPlay++;
+        currCreature.attackedThisTurn = NO;
     }
     [self.game endTurnByPlayer:self];
     

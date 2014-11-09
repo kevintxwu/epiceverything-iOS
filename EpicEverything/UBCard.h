@@ -19,6 +19,8 @@
 @property (nonatomic) UBPlayer* owner;
 @property (nonatomic) UBGame* game;
 @property (nonatomic) int manaCost;
+@property (nonatomic, copy) NSString* iconImageName;
+@property (nonatomic, copy) NSString* cardImageName;
 
 
 - (id)initFromHash:(NSDictionary*)data;

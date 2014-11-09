@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "UBCard.h"
+#import "UBSpace.h"
 
 @class UBSpace;
 
@@ -16,21 +17,31 @@
 
 @property (nonatomic) int baseAttack;
 @property (nonatomic) int hitPoints;
+@property (nonatomic) int totalHitPoints;
 @property (nonatomic) int mobility;
-@property (nonatomic) int turnsInPlay;
+@property (nonatomic) int turnsInPlay;  //Set to -1 if not in play
 
 @property (nonatomic) BOOL hasBlock;
-@property (nonatomic) BOOL hasHaste;
+@property (nonatomic) BOOL hasSpeed;
 @property (nonatomic) BOOL hasRange;
 @property (nonatomic) BOOL isDead;
-@property (nonatomic) UBSpace* position;
+@property (nonatomic) BOOL attackedThisTurn;
+@property (nonatomic) UBSpace* space;
 @property (nonatomic) NSMutableArray* statusEffects;
+
+
 
 - (id)initFromHash:(NSDictionary*)data;
 
-- (BOOL) canAttackCreature: (UBCreature*)target;
+- (BOOL) canAttackSpace: (UBSpace*)target;
+
+- (void) attackSpace: (UBSpace*)target;
+
+- (void) removeFromPlay;
 
 - (int) getTotalAttack;
+
+- (void) playOnSpace:(UBSpace*)space;
 
 
 

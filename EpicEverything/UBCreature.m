@@ -15,15 +15,88 @@
 - (id)initFromHash:(NSDictionary*)data{
     self = [super initFromHash:data];
     _baseAttack = (int)data[@"attack"];
-    _hitPoints = (int)data[@"hitPoints"];
+    _totalHitPoints = (int)data[@"hitPoints"];
     _mobility = (int)data[@"mobility"];
-    _turnsInPlay = 0;
+    _turnsInPlay = -1;
     _isDead = NO;
     
     _hasBlock = (BOOL)data[@"block"];
-    _hasHaste = (BOOL)data[@"haste"];
+    _hasSpeed = (BOOL)data[@"haste"];
     _hasRange = (BOOL)data[@"range"];
     return self;
 }
+    
+- (void) playOnSpace:(UBSpace*)space{
+    self.space = space;
+    self.space.creature = self;
+    self.turnsInPlay = 0;
+    self.hitPoints = self.totalHitPoints;
+}
+
+- (BOOL) canAttackSpace: (UBSpace*)target{
+    if(!(self.hasSpeed || self.turnsInPlay > 0) || self.attackedThisTurn)
+        return NO;
+    else if([[self enemiesInRangeWithBlock] count] != 0){
+        if(!target.occupied || !target.creature.hasBlock){
+            return NO;
+        }
+        else{
+            return YES;
+        }
+    }
+    else if(self.hasRange || target.index - self.space.index <= 2){
+        return YES;
+    }
+    return NO;
+       
+}
+
+- (void) attackSpace: (UBSpace*)target{
+    NSAssert([self canAttackSpace:target], @"Must be able to attack space!");
+    if (!target.occupied && ![self.owner isMySpace:target.index]){
+        self.owner.opponent.health -= self.baseAttack;
+        if (self.owner.opponent.health <= 0){
+            [self.owner.game gameWonByPlayer:self.owner];
+        }
+    }
+    else
+    {
+        target.creature.hitPoints -= self.baseAttack;
+        if(![self.owner isMySpace:target.index]){ //not attacking own creature
+            self.hitPoints -= target.creature.baseAttack;
+        }
+        if (target.creature.hitPoints <= 0){
+            [target.creature removeFromPlay];
+        }
+        if (self.hitPoints <= 0){
+            [self removeFromPlay];
+        }
+        else{
+            self.attackedThisTurn = YES;
+        }
+
+        
+    }
+}
+
+- (NSMutableArray*) enemiesInRangeWithBlock{
+    NSMutableArray *inRange = [NSMutableArray array];
+    NSMutableArray *enemyCreatures = self.owner.opponent.creaturesInPlay;
+    for (int i=0; i < [enemyCreatures count]; i++){
+        if((self.hasRange || (((UBCreature*)enemyCreatures[i]).space.index - self.space.index) == 1) &&((UBCreature*)enemyCreatures[i]).hasBlock){
+            [inRange addObject:enemyCreatures[i]];
+        }
+    }
+    return inRange;
+}
+
+- (void) removeFromPlay{
+    [self.owner.creaturesInPlay removeObject:self];
+    [self.owner.graveyard addObject:self];
+    self.space.creature = nil;
+    self.space = nil;
+}
+
+
 
 @end
