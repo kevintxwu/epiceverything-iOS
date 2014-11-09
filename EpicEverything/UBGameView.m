@@ -42,7 +42,7 @@
     }
     
     for(int i=0; i<[self.game.playerTwo.hand count]; i++){
-        [((UBCard*)(self.game.playerTwo.hand[i])).cardImageView ub_addToSuperview:self];
+        [((UBCard*)(self.game.playerTwo.hand[i])).backImageView ub_addToSuperview:self];
     }
     
     _background = [({
@@ -205,7 +205,7 @@
     for (int i = 0; i < 8; i+=2){
         [[self.game.board spaceAtIndex:i].view mas_updateConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.mas_centerX).with.offset(-175.0 + 50.0*i);
-            make.centerY.equalTo(self.mas_centerY).with.offset(35.0);
+            make.centerY.equalTo(self.mas_centerY).with.offset(32.0);
             make.width.equalTo(@100);
             make.height.equalTo(@100);
         }];
@@ -222,16 +222,16 @@
             make.left.equalTo(@(180 + 40 * i));
             make.centerY.equalTo(self.mas_bottom).with.offset(-10.0);
             make.width.equalTo(@75);
-            make.height.equalTo(@113);
+            make.height.equalTo(@120.6);
         }];
     }
     
-    for (int i = 0; i < [self.game.playerTwo.hand count]; i++){
-        [((UBCard*)(self.game.playerTwo.hand[i])).cardImageView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(@(-170 - 40 * i));
-            make.centerY.equalTo(self.mas_top).with.offset(-20.0);
-            make.width.equalTo(@75);
-            make.height.equalTo(@113);
+    for (int i = [self.game.playerTwo.hand count] - 1; i >= 0; i--){
+        [((UBCard*)(self.game.playerTwo.hand[i])).backImageView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(@(-180 - 50 * i));
+            make.centerY.equalTo(self.mas_top).with.offset(0.0);
+            make.width.equalTo(@70);
+            make.height.equalTo(@108.3);
         }];
     }
     

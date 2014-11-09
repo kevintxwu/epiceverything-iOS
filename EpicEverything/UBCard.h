@@ -23,6 +23,7 @@
 @property (nonatomic) int manaCost;
 @property (nonatomic, copy) UIButton* iconImageView;
 @property (nonatomic, copy) UIButton* cardImageView;
+@property (nonatomic, copy) UIImageView* backImageView;
 
 
 - (id)initFromHash:(NSDictionary*)data;

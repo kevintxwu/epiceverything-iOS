@@ -22,6 +22,9 @@
     _cardImageView = [[UIButton alloc] init];
     [self.cardImageView setImage:[UIImage imageNamed: [self.name stringByAppendingString:@"-card.png"]] forState: UIControlStateNormal];
     self.cardImageView.contentMode = UIViewContentModeScaleAspectFill;
+    _backImageView = [[UIImageView alloc] init];
+    [self.backImageView setImage:[UIImage imageNamed: @"card-back.png"]];
+    self.backImageView.contentMode = UIViewContentModeScaleAspectFill;
     return self;
 }
 
