@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UBResultsView.h"
 
-@interface UBResultViewController : UIViewController
+@interface UBResultViewController : UIViewController<UBResultsViewDelegate>
 
 @end

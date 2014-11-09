@@ -15,7 +15,8 @@
 		8B8375BF1A0F318300A2CF18 /* UBResultsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8375BE1A0F318300A2CF18 /* UBResultsView.m */; };
 		8B8375C31A0F31F600A2CF18 /* UIColor+UBColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8375C21A0F31F600A2CF18 /* UIColor+UBColors.m */; };
 		8B8375C61A0F320700A2CF18 /* UIImage+UBImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8375C51A0F320700A2CF18 /* UIImage+UBImage.m */; };
-		8B8375C91A0F327C00A2CF18 /* UIView+UBView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8375C81A0F327C00A2CF18 /* UIView+UBView.m */; };
+		8B8375CC1A0F336400A2CF18 /* UIView+UBExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8375CB1A0F336400A2CF18 /* UIView+UBExtensions.m */; };
+		8B8375CF1A0F359300A2CF18 /* UIFont+UBFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8375CE1A0F359300A2CF18 /* UIFont+UBFont.m */; };
 		8BB1A53E1A0F218A00CD2FE9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB1A53D1A0F218A00CD2FE9 /* main.m */; };
 		8BB1A5411A0F218A00CD2FE9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB1A5401A0F218A00CD2FE9 /* AppDelegate.m */; };
 		8BB1A5441A0F218A00CD2FE9 /* UBMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB1A5431A0F218A00CD2FE9 /* UBMenuViewController.m */; };
@@ -52,8 +53,10 @@
 		8B8375C21A0F31F600A2CF18 /* UIColor+UBColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+UBColors.m"; sourceTree = "<group>"; };
 		8B8375C41A0F320700A2CF18 /* UIImage+UBImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UBImage.h"; sourceTree = "<group>"; };
 		8B8375C51A0F320700A2CF18 /* UIImage+UBImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UBImage.m"; sourceTree = "<group>"; };
-		8B8375C71A0F327C00A2CF18 /* UIView+UBView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+UBView.h"; sourceTree = "<group>"; };
-		8B8375C81A0F327C00A2CF18 /* UIView+UBView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+UBView.m"; sourceTree = "<group>"; };
+		8B8375CA1A0F336400A2CF18 /* UIView+UBExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+UBExtensions.h"; sourceTree = "<group>"; };
+		8B8375CB1A0F336400A2CF18 /* UIView+UBExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+UBExtensions.m"; sourceTree = "<group>"; };
+		8B8375CD1A0F359300A2CF18 /* UIFont+UBFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+UBFont.h"; sourceTree = "<group>"; };
+		8B8375CE1A0F359300A2CF18 /* UIFont+UBFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+UBFont.m"; sourceTree = "<group>"; };
 		8BB1A5381A0F218A00CD2FE9 /* EpicEverything.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EpicEverything.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BB1A53C1A0F218A00CD2FE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BB1A53D1A0F218A00CD2FE9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -146,8 +149,10 @@
 				8B8375C21A0F31F600A2CF18 /* UIColor+UBColors.m */,
 				8B8375C41A0F320700A2CF18 /* UIImage+UBImage.h */,
 				8B8375C51A0F320700A2CF18 /* UIImage+UBImage.m */,
-				8B8375C71A0F327C00A2CF18 /* UIView+UBView.h */,
-				8B8375C81A0F327C00A2CF18 /* UIView+UBView.m */,
+				8B8375CD1A0F359300A2CF18 /* UIFont+UBFont.h */,
+				8B8375CE1A0F359300A2CF18 /* UIFont+UBFont.m */,
+				8B8375CA1A0F336400A2CF18 /* UIView+UBExtensions.h */,
+				8B8375CB1A0F336400A2CF18 /* UIView+UBExtensions.m */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -351,15 +356,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B8375C61A0F320700A2CF18 /* UIImage+UBImage.m in Sources */,
+				8B8375CC1A0F336400A2CF18 /* UIView+UBExtensions.m in Sources */,
 				8B8375BC1A0F315E00A2CF18 /* UBResultViewController.m in Sources */,
 				8B8375B31A0F288700A2CF18 /* UBGameViewController.m in Sources */,
 				8B8375B91A0F313300A2CF18 /* UBGameView.m in Sources */,
 				8BB1A5441A0F218A00CD2FE9 /* UBMenuViewController.m in Sources */,
 				8BB1A5411A0F218A00CD2FE9 /* AppDelegate.m in Sources */,
 				8BB1A53E1A0F218A00CD2FE9 /* main.m in Sources */,
+				8B8375CF1A0F359300A2CF18 /* UIFont+UBFont.m in Sources */,
 				8B8375BF1A0F318300A2CF18 /* UBResultsView.m in Sources */,
 				8B8375C31A0F31F600A2CF18 /* UIColor+UBColors.m in Sources */,
-				8B8375C91A0F327C00A2CF18 /* UIView+UBView.m in Sources */,
 				8B8375B61A0F312700A2CF18 /* UBMenuView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,7 +7,27 @@
 //
 
 #import "UBGameViewController.h"
+#import "UBResultViewController.h"
+#import "UBGameView.h"
+
+@interface UBGameViewController ()
+
+@property (nonatomic) UBGameView *view;
+
+@end
 
 @implementation UBGameViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.view = [[UBGameView alloc] init];
+}
+
+- (void)nextButtonPressed:(id)sender {
+    UBResultViewController *resultsVC = [[UBResultViewController alloc] init];
+    [self presentViewController:resultsVC animated:NO completion:^{
+        return;
+    }];
+}
 
 @end

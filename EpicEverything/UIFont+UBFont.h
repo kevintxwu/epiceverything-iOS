@@ -1,13 +1,13 @@
 //
-//  UIView+UBView.m
+//  UIFont+UBFont.h
 //  EpicEverything
 //
 //  Created by Varun Rau on 11/8/14.
 //  Copyright (c) 2014 Unboard. All rights reserved.
 //
 
-#import "UIView+UBView.h"
+#import <UIKit/UIKit.h>
 
-@implementation UIView (UBView)
+@interface UIFont (UBFont)
 
 @end

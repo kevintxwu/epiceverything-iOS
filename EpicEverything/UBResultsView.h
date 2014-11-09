@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol UBResultsViewDelegate;
+
 @interface UBResultsView : UIView
+
+@property (nonatomic, weak) id<UBResultsViewDelegate> delegate;
+
+@end
+
+@protocol UBResultsViewDelegate <NSObject>
+
+- (void)endButtonPressed:(id)sender;
 
 @end

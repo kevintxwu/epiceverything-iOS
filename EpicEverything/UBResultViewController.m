@@ -7,7 +7,25 @@
 //
 
 #import "UBResultViewController.h"
+#import "UBMenuViewController.h"
+
+@interface UBResultViewController ()
+
+@property (nonatomic) UBResultsView *view;
+
+@end
 
 @implementation UBResultViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.view = [[UBResultsView alloc] init];
+}
+
+- (void)endButtonPressed:(id)sender {
+    UBMenuViewController *menuVC = [[UBMenuViewController alloc] init];
+    [self presentViewController:menuVC animated:NO completion:^{
+        return;
+    }];
+}
 @end

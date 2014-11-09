@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UBMenuView.h"
 
-@interface UBMenuViewController : UIViewController
+@interface UBMenuViewController : UIViewController<UBMenuViewDelegate>
 
 
 @end
