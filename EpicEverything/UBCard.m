@@ -16,8 +16,12 @@
     self = [super init];
     _name = data[@"name"];
     _manaCost = (int)data[@"manaCost"];
-    _iconImageName = self.name;
-    _cardImageName = [self.name stringByAppendingString:@"-card"];
+    _iconImageView = [[UIImageView alloc] init];
+    [self.iconImageView setImage:[UIImage imageNamed: [self.name stringByAppendingString:@".png"]]];
+    self.iconImageView.contentMode = UIViewContentModeScaleAspectFill;
+    _cardImageView = [[UIImageView alloc] init];
+    [self.cardImageView setImage:[UIImage imageNamed: [self.name stringByAppendingString:@"-card.png"]]];
+    self.cardImageView.contentMode = UIViewContentModeScaleAspectFill;
     return self;
 }
 

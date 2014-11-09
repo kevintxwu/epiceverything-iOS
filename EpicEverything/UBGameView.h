@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UBBoard.h"
 #import "UBGame.h"
 
 

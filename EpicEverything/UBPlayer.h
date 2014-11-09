@@ -16,10 +16,10 @@
 
 @interface UBPlayer : NSObject
 
-@property (nonatomic, copy) NSMutableArray* hand;
-@property (nonatomic, copy) NSMutableArray* deck;
-@property (nonatomic, copy) NSMutableArray* graveyard;
-@property (nonatomic, copy) NSMutableArray* creaturesInPlay;
+@property (nonatomic) NSMutableArray* hand;
+@property (nonatomic) NSMutableArray* deck;
+@property (nonatomic) NSMutableArray* graveyard;
+@property (nonatomic) NSMutableArray* creaturesInPlay;
 @property (nonatomic) UBGame* game;
 @property (nonatomic) UBPlayer* opponent;
 @property (nonatomic) BOOL myTurn;
