@@ -15,7 +15,7 @@
 }
 
 + (UIFont *)ub_blackCastle {
-    return nil;
+    return [UIFont fontWithName:@"BlackCastleMF" size:30.0f];
 }
 
 + (UIFont *)ub_uchiyama {

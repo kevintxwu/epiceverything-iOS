@@ -27,6 +27,13 @@
 @property (nonatomic) UIImageView *playerMana;
 @property (nonatomic) UIImageView *opponentMana;
 
+@property (nonatomic) UILabel *playerHealthLabel;
+@property (nonatomic) UILabel *opponentHealthLabel;
+@property (nonatomic) UILabel *playerCardsLabel;
+@property (nonatomic) UILabel *opponentCardsLabel;
+@property (nonatomic) UILabel *playerManaLabel;
+@property (nonatomic) UILabel *opponentManaLabel;
+
 @end
 
 @protocol UBGameViewDelegate <NSObject>
