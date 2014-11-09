@@ -40,7 +40,7 @@
 }
 
 - (void)cardPressed:(id)sender withCard:(UBCard*)card{
-    sender 
+    
 }
 
 - (void)piecePressed:(id)sender withCard:(UBCard*)card{
