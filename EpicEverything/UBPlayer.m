@@ -1,5 +1,5 @@
 //
-//  EEPlayer.m
+//  UBPlayer.m
 //  EpicEverything
 //
 //  Created by Joel Jacobs on 11/8/14.
@@ -24,7 +24,8 @@
 }
 
 - (BOOL) isMySpace:(int)index {
-    if((index % 2 == 0 && !self.playerOne) || (index % 2 == 1 && self.playerOne)){
+    //Player 1 has spaces 0, 2, 4, 6.  Player 2 has spaces 1, 3, 5, 7
+    if((index % 2 == 0 && self.playerOne) || (index % 2 == 1 && !self.playerOne)){
         return YES;
     }
     return NO;

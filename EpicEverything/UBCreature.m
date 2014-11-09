@@ -1,5 +1,5 @@
 //
-//  EECreature.m
+//  UBCreature.m
 //  EpicEverything
 //
 //  Created by Joel Jacobs on 11/8/14.

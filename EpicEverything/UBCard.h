@@ -1,5 +1,5 @@
 //
-//  EECard.h
+//  UBCard.h
 //  EpicEverything
 //
 //  Created by Joel Jacobs on 11/8/14.
@@ -8,6 +8,8 @@
 
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 
 @class UBPlayer;
 @class UBGame;
@@ -19,8 +21,8 @@
 @property (nonatomic) UBPlayer* owner;
 @property (nonatomic) UBGame* game;
 @property (nonatomic) int manaCost;
-@property (nonatomic, copy) NSString* iconImageName;
-@property (nonatomic, copy) NSString* cardImageName;
+@property (nonatomic, copy) UIImageView* iconImageView;
+@property (nonatomic, copy) UIImageView* cardImageView;
 
 
 - (id)initFromHash:(NSDictionary*)data;
