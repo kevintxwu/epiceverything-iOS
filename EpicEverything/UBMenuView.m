@@ -75,7 +75,7 @@
         instructions.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
         instructions.layer.shadowColor = [UIColor blackColor].CGColor;
         instructions.layer.shadowOpacity = 0.5;
-        //[instructions addTarget:_delegate action:@selector(instructionsButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [instructions addTarget:_delegate action:@selector(creditsButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         instructions;
     }) ub_addToSuperview:self];
 }

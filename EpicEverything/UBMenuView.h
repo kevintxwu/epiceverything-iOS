@@ -19,7 +19,7 @@
 @protocol UBMenuViewDelegate <NSObject>
 
 - (void)startButtonPressed:(id)sender;
-- (void)instructionsButtonPressed:(id)sender;
+- (void)creditsButtonPressed:(id)sender;
 
 
 @end

@@ -8,6 +8,7 @@
 
 #import "UBMenuViewController.h"
 #import "UBGameViewController.h"
+#import "UBCreditsViewController.h"
 
 @interface UBMenuViewController ()
 
@@ -24,11 +25,12 @@
 
 - (void)startButtonPressed:(id)sender {
     UBGameViewController *gameVC = [[UBGameViewController alloc] init];
-    [self.navigationController pushViewController: gameVC animated:YES];
+    [self.navigationController pushViewController:gameVC animated:YES];
 }
 
-- (void)instructionsButtonPressed:(id)sender {
-    
+- (void)creditsButtonPressed:(id)sender {
+    UBCreditsViewController *creditsVC = [[UBCreditsViewController alloc] init];
+    [self.navigationController pushViewController:creditsVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

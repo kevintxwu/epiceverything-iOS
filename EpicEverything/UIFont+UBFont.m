@@ -26,4 +26,12 @@
     return [UIFont fontWithName:@"uchiyama" size:30.0f];
 }
 
++ (UIFont *)ub_creditsTitle {
+    return [UIFont fontWithName:@"Adventure" size:55.0f];
+}
+
++ (UIFont *)ub_creditsParagraph {
+    return [UIFont fontWithName:@"Lato-Black" size:18.0f];
+}
+
 @end
