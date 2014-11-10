@@ -236,10 +236,13 @@
     // Check if we are on a space
     CGPoint location = [touch locationInView:self];
     UBSpaceView *spaceView = [self locationOnSpace:location];
-    if (spaceView) {
+    if (spaceView && [self.game.playerOne canPlayCard:view.card atSpace:spaceView.space.index]) {
         // Remove card from my hand
         [self.myHand removeObject:view.card];
         [view switchToPiece];
+        self.game.playerOne.mana -= view.card.manaCost;
+        self.playerManaLabel.text = [NSString stringWithFormat: @"%d", self.game.playerOne.mana];
+        
         
         // Move the card to the space
         [view mas_remakeConstraints:^(MASConstraintMaker *make) {
