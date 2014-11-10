@@ -47,7 +47,7 @@
         damage.layer.shadowColor = [UIColor blackColor].CGColor;
         damage.layer.shadowOpacity = 0.5;
         damage.textAlignment = NSTextAlignmentCenter;
-        damage.hidden = YES;
+        damage.hidden = NO;
         damage;
     }) ub_addToSuperview:self];
     
@@ -59,7 +59,7 @@
         hitPoints.layer.shadowColor = [UIColor blackColor].CGColor;
         hitPoints.layer.shadowOpacity = 0.5;
         hitPoints.textAlignment = NSTextAlignmentCenter;
-        hitPoints.hidden = YES;
+        hitPoints.hidden = NO;
         hitPoints;
     }) ub_addToSuperview:self];
 }

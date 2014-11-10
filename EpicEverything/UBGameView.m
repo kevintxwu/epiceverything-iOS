@@ -432,7 +432,17 @@
     
     for (int i = 0; i < [self.playedCards count]; i++){
         UBCardView* cardView = (UBCardView*) self.playedCards[i];
-        [((UBSpaceView*)(self.spaces[((UBCreature*)(cardView.card)).space.index])).image setImage: cardView.currentImageView.image];
+        
+        UBSpaceView *spaceView = self.spaces[((UBCreature*)(cardView.card)).space.index];
+        
+        [cardView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(spaceView.mas_left);
+            make.right.equalTo(spaceView.mas_right);
+            make.top.equalTo(spaceView.mas_top);
+            make.bottom.equalTo(spaceView.mas_bottom);
+        }];
+
+        [cardView switchToPiece];
     }
     
     
