@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "UBGame.h"
 #import "UBCardView.h"
+#import "UBGameViewController.h"
 
 
 @protocol UBGameViewDelegate;
@@ -36,11 +37,15 @@
 
 - (id)initWithFrame:(CGRect)frame andGame:(UBGame*)game;
 
+- (void) updateBoardConstraints;
+
+- (void) updateBoard;
+
 @end
 
 @protocol UBGameViewDelegate <NSObject>
 
-- (void)nextButtonPressed:(id)sender;
+- (void)endTurnPressed:(id)sender;
 
 
 @end
