@@ -243,6 +243,7 @@
             make.top.equalTo(spaceView.mas_top);
             make.bottom.equalTo(spaceView.mas_bottom);
         }];
+        view.userInteractionEnabled = NO;
     } else {
         // Didn't select a space
         [view switchToCard];
