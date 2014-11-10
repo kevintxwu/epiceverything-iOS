@@ -47,6 +47,7 @@
         damage.layer.shadowColor = [UIColor blackColor].CGColor;
         damage.layer.shadowOpacity = 0.5;
         damage.textAlignment = NSTextAlignmentCenter;
+        damage.hidden = YES;
         damage;
     }) ub_addToSuperview:self];
     
@@ -58,6 +59,7 @@
         hitPoints.layer.shadowColor = [UIColor blackColor].CGColor;
         hitPoints.layer.shadowOpacity = 0.5;
         hitPoints.textAlignment = NSTextAlignmentCenter;
+        hitPoints.hidden = YES;
         hitPoints;
     }) ub_addToSuperview:self];
 }
@@ -72,10 +74,27 @@
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.damagePoints mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.mas_centerX).with.offset(-46);
+        make.centerY.equalTo(self.mas_centerY).with.offset(58);
+    }];
+    [self.hitPoints mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.mas_centerX).with.offset(46);
+        make.centerY.equalTo(self.mas_centerY).with.offset(58);
+    }];
     [self.delegate cardViewMoved:self withTouch:[[event allTouches] anyObject]];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.damagePoints mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.mas_centerX).with.offset(-24);
+        make.centerY.equalTo(self.mas_centerY).with.offset(32);
+    }];
+    
+    [self.hitPoints mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.mas_centerX).with.offset(24);
+        make.centerY.equalTo(self.mas_centerY).with.offset(32);
+    }];
     [self.delegate cardPlaced:self withTouch:[[event allTouches] anyObject]];
 }
 
@@ -96,10 +115,8 @@
     }
     else {
         [self.currentImageView setImage:[UIImage ub_cardBack]];
-        self.damagePoints.hidden = NO;
-        self.hitPoints.hidden = NO;
-        self.damagePoints.text = [NSString stringWithFormat:@"%d",((UBCreature*)self.card).baseAttack];
-        self.hitPoints.text = [NSString stringWithFormat:@"%d",((UBCreature*)self.card).totalHitPoints];
+        self.damagePoints.hidden = YES;
+        self.hitPoints.hidden = YES;
     }
     self.inCardForm = YES;
     
@@ -117,6 +134,7 @@
         make.centerX.equalTo(self.mas_centerX).with.offset(-24);
         make.centerY.equalTo(self.mas_centerY).with.offset(32);
     }];
+
     [self.hitPoints mas_updateConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX).with.offset(24);
         make.centerY.equalTo(self.mas_centerY).with.offset(32);
