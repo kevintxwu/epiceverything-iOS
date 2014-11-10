@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "UBGame.h"
 #import "UBMenuViewController.h"
+#import <AVFoundation/AVFoundation.h>
+
 
 @interface AppDelegate ()
 
@@ -16,6 +18,7 @@
 
 @implementation AppDelegate
 
+@synthesize player;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -24,6 +27,12 @@
     UINavigationController *nvcontrol =[[UINavigationController alloc] initWithRootViewController: menuVC];
     self.window.rootViewController = nvcontrol;
     nvcontrol.navigationBarHidden = YES;
+    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:@"backgroundMusic" ofType:@"mp3"];
+    NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
+    player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
+    player.numberOfLoops = -1; //infinite
+    
+    [player play];
     return YES;
 }
 
