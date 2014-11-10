@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		069A4E301A1035A800E0AEC0 /* backgroundMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 069A4E2F1A1035A800E0AEC0 /* backgroundMusic.mp3 */; };
 		133BCCA91A0F41CD0026023D /* UBCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 133BCCA01A0F41CD0026023D /* UBCard.m */; };
 		133BCCAA1A0F41CD0026023D /* UBBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 133BCCA41A0F41CD0026023D /* UBBoard.m */; };
 		133BCCAB1A0F41CD0026023D /* UBPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 133BCCA61A0F41CD0026023D /* UBPlayer.m */; };
@@ -94,6 +95,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		069A4E2F1A1035A800E0AEC0 /* backgroundMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = backgroundMusic.mp3; sourceTree = "<group>"; };
 		133BCC9C1A0F40AC0026023D /* UBPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPlayer.h; sourceTree = "<group>"; };
 		133BCC9F1A0F41CD0026023D /* UBCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBCard.h; sourceTree = "<group>"; };
 		133BCCA01A0F41CD0026023D /* UBCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBCard.m; sourceTree = "<group>"; };
@@ -226,6 +228,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		069A4E311A10393400E0AEC0 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				069A4E2F1A1035A800E0AEC0 /* backgroundMusic.mp3 */,
+			);
+			name = Sounds;
+			sourceTree = "<group>";
+		};
 		233936E31A0FB7F600A46160 /* cards */ = {
 			isa = PBXGroup;
 			children = (
@@ -337,6 +347,7 @@
 		8B8375C01A0F31D400A2CF18 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				069A4E311A10393400E0AEC0 /* Sounds */,
 				8B8375D61A0F496000A2CF18 /* Fonts */,
 				8B8375D21A0F44B700A2CF18 /* Images */,
 				8B8375C11A0F31F600A2CF18 /* UIColor+UBColors.h */,
@@ -573,6 +584,7 @@
 				233937161A0FB7F600A46160 /* tank-card.png in Resources */,
 				2339370B1A0FB7F600A46160 /* elvisbot-card.png in Resources */,
 				233937181A0FB7F600A46160 /* cards.png in Resources */,
+				069A4E301A1035A800E0AEC0 /* backgroundMusic.mp3 in Resources */,
 				2339372C1A0FB86900A46160 /* loading-bg.jpg in Resources */,
 				2339371E1A0FB7F600A46160 /* froggy.png in Resources */,
 				2339370C1A0FB7F600A46160 /* froggy-card.png in Resources */,
