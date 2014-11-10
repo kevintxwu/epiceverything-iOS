@@ -213,7 +213,7 @@
 
 #pragma mark - UBCardViewDelegate Methods
 
-- (void)cardViewMoved:(UIView *)view withTouch:(UITouch *)touch {
+- (void)cardViewMoved:(UBCardView *)view withTouch:(UITouch *)touch {
     CGPoint location = [touch locationInView:self];
     if (CGRectContainsPoint(self.bounds, location)) {
         [view mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -227,16 +227,51 @@
     }
 }
 
-- (void)cardPlaced:(UIView *)view withTouch:(UITouch *)touch {
-    [self setNeedsUpdateConstraints];
+- (void)cardPlaced:(UBCardView *)view withTouch:(UITouch *)touch {
+    // Check if we are on a space
+    CGPoint location = [touch locationInView:self];
+    UBSpaceView *spaceView = [self locationOnSpace:location];
+    if (spaceView) {
+        // Remove card from my hand
+        [self.myHand removeObject:view.card];
+        [view switchToPiece];
+        
+        // Move the card to the space
+        [view mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(spaceView.mas_left);
+            make.right.equalTo(spaceView.mas_right);
+            make.top.equalTo(spaceView.mas_top);
+            make.bottom.equalTo(spaceView.mas_bottom);
+        }];
+    } else {
+        // Didn't select a space
+        [view switchToCard];
+        int i = [self.myHand indexOfObject:view];
+        [self.myHand[i] mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(@(180 + 40 * i));
+            make.centerY.equalTo(self.mas_bottom).with.offset(-10.0);
+            make.width.equalTo(@75);
+            make.height.equalTo(@120.6);
+        }];
+    }
 }
 
-- (void)cardPressed:(id)sender withCard:(UBCard*)card{
+- (void)cardPressed:(id)sender withCard:(UBCard*)card {
     
 }
 
 - (void)piecePressed:(id)sender withCard:(UBCard*)card{
     
+}
+
+- (UBSpaceView *)locationOnSpace:(CGPoint)location {
+    for (UBSpaceView *spaceView in self.spaces) {
+        CGRect frame = [self convertRect:spaceView.frame toView:self];
+        if (CGRectContainsPoint(frame, location)) {
+            return spaceView;
+        }
+    }
+    return nil;
 }
 
 - (void)updateConstraints {
