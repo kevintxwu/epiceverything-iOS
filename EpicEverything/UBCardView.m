@@ -115,10 +115,8 @@
     }
     else {
         [self.currentImageView setImage:[UIImage ub_cardBack]];
-        self.damagePoints.hidden = NO;
-        self.hitPoints.hidden = NO;
-        self.damagePoints.text = [NSString stringWithFormat:@"%d",((UBCreature*)self.card).baseAttack];
-        self.hitPoints.text = [NSString stringWithFormat:@"%d",((UBCreature*)self.card).totalHitPoints];
+        self.damagePoints.hidden = YES;
+        self.hitPoints.hidden = YES;
     }
     self.inCardForm = YES;
     
