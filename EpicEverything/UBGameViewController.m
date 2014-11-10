@@ -41,8 +41,10 @@
 
 
 - (void)endTurnPressed:(id)sender{
+    NSLog(@"end");
     [self.game endTurnByPlayer:(UBPlayer*)self.game.currentPlayer];
-    
+    [self.view updateBoard];
+    [self.view updateBoardConstraints];
 }
 
 
