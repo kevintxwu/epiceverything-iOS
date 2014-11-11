@@ -29,6 +29,7 @@
 
 - (BOOL)isAlive;
 
+
 @end
 
 @protocol UBCardViewDelegate <NSObject>

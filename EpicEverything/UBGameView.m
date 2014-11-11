@@ -209,19 +209,8 @@
         // Play card
         [self.game.playerOne playCard:view.card atSpace:[spaceView.space getIndex]];
         [self updateBoard];
-        
     } else {
-        // Didn't select a space
-        /*[view switchToCard];
-        int i = [self.myHand indexOfObject:view];
-        [self.myHand[i] mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(@(180 + 40 * i));
-            make.centerY.equalTo(self.mas_bottom).with.offset(-10.0);
-            make.width.equalTo(@75);
-            make.height.equalTo(@120.6);
-        }]; */
         [self updateBoard];
-        //[self updateBoardConstraints];
     }
 }
 
@@ -399,7 +388,7 @@
     for (int i = 0; i < [self.allCards count]; i++){
         UBCardView *curr = (UBCardView*)(self.allCards[i]);
         if (![curr isAlive]){
-             NSLog(@"CARD DEAD");
+            //this is dumb, but removeFromSuperview was not working
             [curr mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.right.equalTo(self.mas_right);
                 make.centerY.equalTo(self.mas_top);

@@ -63,8 +63,10 @@
     }
     else
     {
+        
         target.creature.hitPoints -= self.baseAttack;
-        if(![self.owner isMySpace:target.position]){ //not attacking own creature
+        if(![self.owner isMySpace:target.position] && (target.creature.hasRange || abs(target.position - self.space.position) <= 2)){
+            //if not attacking own creature and in range of enemy, take counterattack damage
             self.hitPoints -= target.creature.baseAttack;
         }
         NSLog(@"%@ now has %d hit points!", target.creature.name, target.creature.hitPoints);

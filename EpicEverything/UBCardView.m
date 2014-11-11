@@ -112,7 +112,7 @@
     self.damagePoints.hidden = NO;
     self.hitPoints.hidden = NO;
     self.damagePoints.text = [NSString stringWithFormat:@"%d",((UBCreature*)self.card).baseAttack];
-    self.hitPoints.text = [NSString stringWithFormat:@"%d",((UBCreature*)self.card).totalHitPoints];
+    self.hitPoints.text = [NSString stringWithFormat:@"%d",((UBCreature*)self.card).hitPoints];
 }
 
 - (void)switchToCard{
@@ -129,6 +129,7 @@
     self.inCardForm = YES;
     
 }
+
 
 - (void)updateConstraints{
     [self.currentImageView mas_updateConstraints:^(MASConstraintMaker *make) {

@@ -76,6 +76,7 @@
 		8B854E311A1007AC00E9BF5B /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8B854E301A1007AC00E9BF5B /* Lato-Black.ttf */; };
 		8B854E341A100BAA00E9BF5B /* UBEndView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B854E331A100BAA00E9BF5B /* UBEndView.m */; };
 		8B854E371A100D0400E9BF5B /* UBEndViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B854E361A100D0400E9BF5B /* UBEndViewController.m */; };
+		8B854E391A105BE700E9BF5B /* screenshot.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8B854E381A105BE700E9BF5B /* screenshot.jpg */; };
 		8BB1A53E1A0F218A00CD2FE9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB1A53D1A0F218A00CD2FE9 /* main.m */; };
 		8BB1A5411A0F218A00CD2FE9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB1A5401A0F218A00CD2FE9 /* AppDelegate.m */; };
 		8BB1A5441A0F218A00CD2FE9 /* UBMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB1A5431A0F218A00CD2FE9 /* UBMenuViewController.m */; };
@@ -188,6 +189,7 @@
 		8B854E331A100BAA00E9BF5B /* UBEndView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBEndView.m; sourceTree = "<group>"; };
 		8B854E351A100D0400E9BF5B /* UBEndViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBEndViewController.h; sourceTree = "<group>"; };
 		8B854E361A100D0400E9BF5B /* UBEndViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBEndViewController.m; sourceTree = "<group>"; };
+		8B854E381A105BE700E9BF5B /* screenshot.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = screenshot.jpg; sourceTree = "<group>"; };
 		8BB1A5381A0F218A00CD2FE9 /* EpicEverything.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EpicEverything.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BB1A53C1A0F218A00CD2FE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BB1A53D1A0F218A00CD2FE9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -372,6 +374,7 @@
 		8B8375D21A0F44B700A2CF18 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8B854E381A105BE700E9BF5B /* screenshot.jpg */,
 				233936E21A0FB7F600A46160 /* card-back.png */,
 				233936F31A0FB7F600A46160 /* cards.png */,
 				233936F41A0FB7F600A46160 /* hp.png */,
@@ -564,6 +567,7 @@
 				233937231A0FB7F600A46160 /* overlord.png in Resources */,
 				233937261A0FB7F600A46160 /* rogue.png in Resources */,
 				233937131A0FB7F600A46160 /* robowolf-card.png in Resources */,
+				8B854E391A105BE700E9BF5B /* screenshot.jpg in Resources */,
 				233937291A0FB7F600A46160 /* volcanohead.png in Resources */,
 				2339371F1A0FB7F600A46160 /* lavaling.png in Resources */,
 				8BB1A54C1A0F218A00CD2FE9 /* LaunchScreen.xib in Resources */,
