@@ -21,9 +21,9 @@
     _turnsInPlay = -1;
     _isDead = NO;
     
-    _hasBlock = (BOOL)data[@"block"];
-    _hasSpeed = (BOOL)data[@"haste"];
-    _hasRange = (BOOL)data[@"range"];
+    _hasBlock = [data[@"block"] boolValue];
+    _hasSpeed = [data[@"speed"] boolValue];
+    _hasRange = [data[@"range"] boolValue];
     return self;
 }
     
@@ -89,12 +89,13 @@
     NSMutableArray *inRange = [NSMutableArray array];
     NSMutableArray *enemyCreatures = self.owner.opponent.creaturesInPlay;
     for (int i=0; i < [enemyCreatures count]; i++){
-        if((self.hasRange || (((UBCreature*)enemyCreatures[i]).space.position - self.space.position) == 1) &&((UBCreature*)enemyCreatures[i]).hasBlock){
+        if((self.hasRange || abs(((UBCreature*)enemyCreatures[i]).space.position - self.space.position) == 1) && ((UBCreature*)enemyCreatures[i]).hasBlock){
             [inRange addObject:enemyCreatures[i]];
         }
     }
     return inRange;
 }
+
 
 - (void) removeFromPlay{
     [self.owner.creaturesInPlay removeObject:self];
