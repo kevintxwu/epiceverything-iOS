@@ -16,4 +16,6 @@
 
 @property (nonatomic) UBGame* game;
 
+- (void) startGame;
+
 @end

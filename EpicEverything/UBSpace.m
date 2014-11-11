@@ -18,7 +18,7 @@
     self = [self init];
     if (self){
         _board = self.board;
-        _index = i;
+        _position = i;
     }
     return self;
 }
@@ -29,6 +29,10 @@
         return YES;
     }
     return NO;
+}
+
+- (int) getIndex {
+    return self.position;
 }
 
 @end

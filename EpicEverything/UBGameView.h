@@ -41,6 +41,8 @@
 
 - (void) updateBoard;
 
+- (UBCardView*)setUpNewCard:(UBCard*)card playerOne:(BOOL)player;
+
 @end
 
 @protocol UBGameViewDelegate <NSObject>

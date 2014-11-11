@@ -54,7 +54,7 @@
         [self.creaturesInPlay addObject:card];
         [(UBCreature*)card playOnSpace:[self.game.board spaceAtIndex:index]];
         self.mana -= card.manaCost;
-        NSLog(@"Playing %@", card.name);
+        NSLog(@"Playing %@ at space %d", card.name,index);
     }
     
 }
@@ -82,7 +82,7 @@
     self.deck = shuffled;
 }
 
-- (void) startTurn {
+/*- (void) startTurn {
     NSLog(@"Starting Turn %d!", self.game.turnNumber);
     self.myTurn = YES;
     self.mana = self.game.turnNumber;
@@ -93,7 +93,7 @@
         [self drawCard];
     }
     
-}
+} */
 
 - (UBCard *)drawCard
 {
@@ -105,7 +105,7 @@
     return card;
 }
 
-- (void) endTurn
+/*- (void) endTurn
 {
     NSAssert(self.myTurn, @"Only the current player can switch turns!");
     self.myTurn = NO;
@@ -116,7 +116,7 @@
     }
     [self.game endTurnByPlayer:self];
     
-}
+} */
 
 - (int)cardsRemaining
 {

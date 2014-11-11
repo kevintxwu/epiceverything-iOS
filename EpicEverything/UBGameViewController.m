@@ -30,6 +30,7 @@
     [super viewDidLoad];
     _game = [[UBGame alloc] initTestGame];
     self.view = [[UBGameView alloc] initWithFrame: CGRectMake(0,0,0,0) andGame: self.game];
+    [self startGame];
 }
 
 - (void)nextButtonPressed:(id)sender {
@@ -42,9 +43,91 @@
 
 - (void)endTurnPressed:(id)sender{
     NSLog(@"end");
-    [self.game endTurnByPlayer:(UBPlayer*)self.game.currentPlayer];
+    [self switchTurn:self.game.playerOne];
+    
+}
+
+- (void) startGame{
+    NSLog(@"Starting Game!");
+    for (int i=0; i<4; i++){
+        [self.view setUpNewCard:[self.game.playerOne drawCard] playerOne:YES];
+        [self.view setUpNewCard:[self.game.playerTwo drawCard] playerOne:NO];
+        [self.view updateBoard];
+        sleep(0.5);
+    }
+    
+    
+    self.game.currentPlayer = self.game.playerOne;
+    self.game.turnNumber = 1;
+    UBCard *drawnCard = [self.game startTurn:self.game.currentPlayer];
+    NSAssert(!drawnCard, @"Should not draw on first turn!!");
     [self.view updateBoard];
-    [self.view updateBoardConstraints];
+    
+}
+
+//switches turn from given player to other player
+- (void) switchTurn:(UBPlayer*)player{
+    NSLog(@"Switching turn!");
+    if(player == self.game.currentPlayer){
+        [self.game endTurn:player];
+        
+        UBCard *drawnCard = [self.game startTurn:self.game.currentPlayer];
+        
+        if (drawnCard){
+            [self.view setUpNewCard:drawnCard playerOne:self.game.playerOne.myTurn];
+        }
+        [self.view updateBoard];
+        if(self.game.currentPlayer == self.game.playerTwo){
+            [self computerMove:self.game.playerTwo];
+        }
+    }
+    
+
+
+}
+
+
+
+
+- (void) computerMove:(UBPlayer*)player{
+    
+    NSInteger targets[4];
+    NSInteger spaces[4];
+    spaces[0] = 5;
+    spaces[1] = 3;
+    spaces[2] = 7;
+    spaces[3] = 1;
+    for(int i= 0; i < 4; i++){
+        targets[i] = 2*i;
+    }
+    for(int i = 0; i < [player.hand count]; i++){
+        UBCard* selected = player.hand[i];
+        for(int j = 0; j < 4; j++){
+            if([player canPlayCard:selected atSpace:spaces[j]]){
+                [player playCard:selected atSpace:spaces[j]];
+                i--;
+                //insert play animation here
+                [self.view updateBoard];
+                sleep(1);
+                break;
+            }
+        }
+    }
+    sleep(1);
+    for(int i = 0; i < [player.creaturesInPlay count]; i++){
+        UBCreature* creature = player.creaturesInPlay[i];
+        for(int j = 0; j < 4; j++){
+            if([creature canAttackSpace:[self.game.board spaceAtIndex:targets[j]]]){
+                NSLog(@"Can attack!");
+                [creature attackSpace:[self.game.board spaceAtIndex:targets[j]]];
+                //insert attack animation here
+                [self.view updateBoard];
+                sleep(1);
+                break;
+            }
+        }
+    }
+    [self switchTurn:player];
 }
 
 
