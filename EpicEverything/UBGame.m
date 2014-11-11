@@ -62,33 +62,36 @@
     
 }
 
-- (void) startGame{
-    NSLog(@"Starting Game!");
-    for (int i=0; i<4; i++){
-        [_playerOne drawCard];
-        [_playerTwo drawCard];
+
+
+- (UBCard*) startTurn:(UBPlayer*)player{
+    NSAssert(player == self.currentPlayer, @"Only the current player can start their turn!");
+    NSLog(@"Starting Turn %d!", self.turnNumber);
+    player.myTurn = YES;
+    player.mana = self.turnNumber;
+    if (player.mana > 10){
+        player.mana = 10;
     }
-    
-    _currentPlayer = self.playerOne;
-    _turnNumber = 1;
-    [self.playerOne startTurn];
-    //[self computerMove:self.playerOne];
-    
+    if(!(player.playerOne && self.turnNumber == 1)){  //Player 1 doesn't draw on first turn
+        return [player drawCard];
+    }
+    return nil;
 }
 
-- (void) endTurnByPlayer:(UBPlayer*)cPlayer{
-    NSAssert(cPlayer == self.currentPlayer, @"Only the current player can switch turns!");
-    
-    if(self.currentPlayer == self.playerOne){
-        self.currentPlayer = self.playerTwo;
-        [self.playerTwo startTurn];
-        [self computerMove:self.playerTwo];
+
+- (void) endTurn:(UBPlayer*)player
+{
+    NSAssert(player.myTurn, @"Only the current player can end their turn!");
+    player.myTurn = NO;
+    for(int i=0; i < [player.creaturesInPlay count]; i++){
+        UBCreature* currCreature = [player.creaturesInPlay objectAtIndex:i];
+        currCreature.turnsInPlay++;
+        currCreature.attackedThisTurn = NO;
     }
-    else{
-        self.currentPlayer = self.playerOne;
+    
+    self.currentPlayer = player.opponent;
+    if (player == self.playerTwo){
         self.turnNumber++;
-        [self.playerOne startTurn];
-        //[self computerMove:self.playerOne];
     }
     
 }
@@ -98,7 +101,7 @@
     exit(0);
 }
 
-- (void) computerMove:(UBPlayer*)player{
+/*- (void) computerMove:(UBPlayer*)player{
    
     NSInteger targets[4];
     NSInteger spaces[4];
@@ -130,7 +133,7 @@
         }
     }
     [player endTurn];
-}
+} */
 
 
 @end

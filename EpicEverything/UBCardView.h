@@ -25,6 +25,11 @@
 
 - (void)switchToCard;
 
+- (BOOL)isPlayed;
+
+- (BOOL)isAlive;
+
+
 @end
 
 @protocol UBCardViewDelegate <NSObject>
@@ -33,5 +38,6 @@
 - (void)piecePressed:(id)sender withCard:(UBCard*)card;
 - (void)cardViewMoved:(UBCardView *)view withTouch:(UITouch *)touch;
 - (void)cardPlaced:(UBCardView *)view withTouch:(UITouch *)touch;
+- (void)cardAttack:(UBCardView *)view withTouch:(UITouch *)touch;
 
 @end

@@ -29,9 +29,11 @@
 
 - (id) initTestGame;
 
-- (void) startGame;
+//- (void) startGame;
 
-- (void) endTurnByPlayer:(UBPlayer*)currPlayer;
+- (UBCard*) startTurn:(UBPlayer*)player;
+
+- (void) endTurn:(UBPlayer*)player;
 
 - (void) gameWonByPlayer:(UBPlayer*)winner;
 

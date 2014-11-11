@@ -14,12 +14,14 @@
 
 @interface UBSpace : NSObject
 
-@property (nonatomic) int index;
+@property (nonatomic) int position;
 @property (nonatomic) UBBoard* board;
 @property (nonatomic) UBCreature* creature;
 
 - (BOOL) occupied;
 
 - (id) initWithBoard:(UBBoard*)board withIndex:(int)i;
+
+- (int) getIndex;
 
 @end

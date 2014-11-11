@@ -45,7 +45,7 @@
             return YES;
         }
     }
-    else if(self.hasRange || target.index - self.space.index <= 2){
+    else if(self.hasRange || abs(target.position - self.space.position) <= 2){
         return YES;
     }
     return NO;
@@ -54,8 +54,8 @@
 
 - (void) attackSpace: (UBSpace*)target{
     NSAssert([self canAttackSpace:target], @"Must be able to attack space!");
-    NSLog(@"%@ is attacking space %d!", self.name,target.index);
-    if (!target.occupied && ![self.owner isMySpace:target.index]){
+    NSLog(@"%@ is attacking space %d!", self.name, target.position);
+    if (!target.occupied && ![self.owner isMySpace:target.position]){
         self.owner.opponent.health -= self.baseAttack;
         if (self.owner.opponent.health <= 0){
             [self.owner.game gameWonByPlayer:self.owner];
@@ -63,8 +63,10 @@
     }
     else
     {
+        
         target.creature.hitPoints -= self.baseAttack;
-        if(![self.owner isMySpace:target.index]){ //not attacking own creature
+        if(![self.owner isMySpace:target.position] && (target.creature.hasRange || abs(target.position - self.space.position) <= 2)){
+            //if not attacking own creature and in range of enemy, take counterattack damage
             self.hitPoints -= target.creature.baseAttack;
         }
         NSLog(@"%@ now has %d hit points!", target.creature.name, target.creature.hitPoints);
@@ -87,7 +89,7 @@
     NSMutableArray *inRange = [NSMutableArray array];
     NSMutableArray *enemyCreatures = self.owner.opponent.creaturesInPlay;
     for (int i=0; i < [enemyCreatures count]; i++){
-        if((self.hasRange || (((UBCreature*)enemyCreatures[i]).space.index - self.space.index) == 1) &&((UBCreature*)enemyCreatures[i]).hasBlock){
+        if((self.hasRange || (((UBCreature*)enemyCreatures[i]).space.position - self.space.position) == 1) &&((UBCreature*)enemyCreatures[i]).hasBlock){
             [inRange addObject:enemyCreatures[i]];
         }
     }

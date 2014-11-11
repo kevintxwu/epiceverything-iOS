@@ -31,9 +31,9 @@
 
 - (UBCard*) drawCard;
 
-- (void) startTurn;
+//- (void) startTurn;
 
-- (void) endTurn;
+//- (void) endTurn;
 
 - (int) cardsRemaining;
 

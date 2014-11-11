@@ -74,28 +74,36 @@
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self.damagePoints mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.mas_centerX).with.offset(-46);
-        make.centerY.equalTo(self.mas_centerY).with.offset(58);
-    }];
-    [self.hitPoints mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.mas_centerX).with.offset(46);
-        make.centerY.equalTo(self.mas_centerY).with.offset(58);
-    }];
-    [self.delegate cardViewMoved:self withTouch:[[event allTouches] anyObject]];
+    if (self.inCardForm){
+        [self.damagePoints mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.mas_centerX).with.offset(-46);
+            make.centerY.equalTo(self.mas_centerY).with.offset(58);
+        }];
+        [self.hitPoints mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.mas_centerX).with.offset(46);
+            make.centerY.equalTo(self.mas_centerY).with.offset(58);
+        }];
+        [self.delegate cardViewMoved:self withTouch:[[event allTouches] anyObject]];
+    }
+   
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self.damagePoints mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.mas_centerX).with.offset(-24);
-        make.centerY.equalTo(self.mas_centerY).with.offset(32);
-    }];
-    
-    [self.hitPoints mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.mas_centerX).with.offset(24);
-        make.centerY.equalTo(self.mas_centerY).with.offset(32);
-    }];
-    [self.delegate cardPlaced:self withTouch:[[event allTouches] anyObject]];
+    if (self.inCardForm){
+        [self.damagePoints mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.mas_centerX).with.offset(-24);
+            make.centerY.equalTo(self.mas_centerY).with.offset(32);
+        }];
+        
+        [self.hitPoints mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.mas_centerX).with.offset(24);
+            make.centerY.equalTo(self.mas_centerY).with.offset(32);
+        }];
+        [self.delegate cardPlaced:self withTouch:[[event allTouches] anyObject]];
+    }
+    else {
+        [self.delegate cardAttack:self withTouch:[[event allTouches] anyObject]];
+    }
 }
 
 - (void)switchToPiece{
@@ -104,7 +112,7 @@
     self.damagePoints.hidden = NO;
     self.hitPoints.hidden = NO;
     self.damagePoints.text = [NSString stringWithFormat:@"%d",((UBCreature*)self.card).baseAttack];
-    self.hitPoints.text = [NSString stringWithFormat:@"%d",((UBCreature*)self.card).totalHitPoints];
+    self.hitPoints.text = [NSString stringWithFormat:@"%d",((UBCreature*)self.card).hitPoints];
 }
 
 - (void)switchToCard{
@@ -121,6 +129,7 @@
     self.inCardForm = YES;
     
 }
+
 
 - (void)updateConstraints{
     [self.currentImageView mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -140,6 +149,14 @@
         make.centerY.equalTo(self.mas_centerY).with.offset(32);
     }];
     [super updateConstraints];
+}
+
+- (BOOL)isPlayed{
+    return ((UBCreature*)self.card).turnsInPlay >= 0;
+}
+
+- (BOOL)isAlive{
+    return !((UBCreature*)self.card).isDead;
 }
 
 @end

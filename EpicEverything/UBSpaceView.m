@@ -13,9 +13,10 @@
 - (id)initWithSpace:(UBSpace*)space{
     self = [super init];
     if (self) {
+        _space = space;
         _image = [[UIImageView alloc] init];
         [self.image setImage:[UIImage ub_space]];
-        if(space.index % 2 == 0){
+        if(space.position % 2 == 0){
             self.image.userInteractionEnabled = YES;
         }
         [_image ub_addToSuperview:self];

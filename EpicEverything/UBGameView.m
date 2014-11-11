@@ -16,10 +16,8 @@
 
 @property (nonatomic) UIButton *next;
 @property (nonatomic) UIImageView *background;
-@property (nonatomic) NSMutableArray *myHand;
-@property (nonatomic) NSMutableArray *opponentHand;
 @property (nonatomic) NSMutableArray *spaces;
-@property (nonatomic) NSMutableArray *playedCards;
+@property (nonatomic) NSMutableArray *allCards;
 
 
 @end
@@ -32,6 +30,7 @@
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
         _game = game;
+        _allCards = [NSMutableArray array];
         //_delegate = delegate;
         [self createSubviews];
         [self updateConstraints];
@@ -40,8 +39,6 @@
 }
 
 - (void)createSubviews {
-    [_game startGame];
-    
     _spaces = [NSMutableArray arrayWithCapacity:8];
     for(int i=0; i<8; i++){
         UBSpaceView* spaceView = [[UBSpaceView alloc] initWithSpace:[self.game.board spaceAtIndex:i]];
@@ -183,7 +180,6 @@
         start;
     }) ub_addToSuperview:self];
     
-    [self updateBoard];
     
     [self.endTurn addTarget:self.delegate action:@selector(endTurnPressed:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -193,30 +189,39 @@
     UBCardView *cardView = [[UBCardView alloc] initWithCard:card forPlayerOne:player];
     cardView.delegate = self;
     [cardView ub_addToSuperview:self];
-    if (player) {
-       [self.myHand addObject: cardView];
-    }
-    else {
-        [self.opponentHand addObject: cardView];
-    }
-    return cardView;
-}
-
-- (UBCardView*)setCardOnBoard:(UBCard*)card playerOne:(BOOL)player{
-    UBCardView *cardView = [[UBCardView alloc] initWithCard:card forPlayerOne:player];
-    cardView.delegate = self;
-    [cardView switchToPiece];
-    [cardView ub_addToSuperview:self];
-    [_playedCards addObject:cardView];
+    [self.allCards addObject:cardView];
     return cardView;
 }
 
 
-- (void)removeCardView:(UBCardView*)cardView{
-    [cardView removeFromSuperview];
-}
+
+
 
 #pragma mark - UBCardViewDelegate Methods
+
+
+- (void)cardPlaced:(UBCardView *)view withTouch:(UITouch *)touch {
+    // Check if we are on a space
+    CGPoint location = [touch locationInView:self];
+    UBSpaceView *spaceView = [self locationOnSpace:location];
+    NSLog(@"INDEX %d", [spaceView.space getIndex]);
+    if (spaceView && [self.game.playerOne canPlayCard:view.card atSpace:spaceView.space.position]) {
+        // Play card
+        [self.game.playerOne playCard:view.card atSpace:[spaceView.space getIndex]];
+        [self updateBoard];
+    } else {
+        [self updateBoard];
+    }
+}
+
+- (void)cardAttack:(UBCardView *)view withTouch:(UITouch *)touch {
+    // Check if we are on a space
+    CGPoint location = [touch locationInView:self];
+    UBSpaceView *spaceView = [self locationOnSpace:location];
+    /*if (spaceView && [((UBCreature*)(view.card)) canAttackSpace: [spaceView.space.index ] ]) {
+        
+    } */
+}
 
 - (void)cardViewMoved:(UBCardView *)view withTouch:(UITouch *)touch {
     CGPoint location = [touch locationInView:self];
@@ -228,42 +233,9 @@
             make.height.equalTo(@186.5);
             make.width.equalTo(@116);
         }];
-        
     }
 }
 
-- (void)cardPlaced:(UBCardView *)view withTouch:(UITouch *)touch {
-    // Check if we are on a space
-    CGPoint location = [touch locationInView:self];
-    UBSpaceView *spaceView = [self locationOnSpace:location];
-    if (spaceView && [self.game.playerOne canPlayCard:view.card atSpace:spaceView.space.index]) {
-        // Remove card from my hand
-        [self.myHand removeObject:view.card];
-        [view switchToPiece];
-        self.game.playerOne.mana -= view.card.manaCost;
-        self.playerManaLabel.text = [NSString stringWithFormat: @"%d", self.game.playerOne.mana];
-        
-        
-        // Move the card to the space
-        [view mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(spaceView.mas_left);
-            make.right.equalTo(spaceView.mas_right);
-            make.top.equalTo(spaceView.mas_top);
-            make.bottom.equalTo(spaceView.mas_bottom);
-        }];
-        view.userInteractionEnabled = NO;
-    } else {
-        // Didn't select a space
-        [view switchToCard];
-        int i = [self.myHand indexOfObject:view];
-        [self.myHand[i] mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(@(180 + 40 * i));
-            make.centerY.equalTo(self.mas_bottom).with.offset(-10.0);
-            make.width.equalTo(@75);
-            make.height.equalTo(@120.6);
-        }];
-    }
-}
 
 - (void)cardPressed:(id)sender withCard:(UBCard*)card {
     
@@ -275,7 +247,7 @@
 
 - (UBSpaceView *)locationOnSpace:(CGPoint)location {
     for (UBSpaceView *spaceView in self.spaces) {
-        CGRect frame = [self convertRect:spaceView.frame toView:self];
+        CGRect frame = spaceView.frame;
         if (CGRectContainsPoint(frame, location)) {
             return spaceView;
         }
@@ -404,64 +376,43 @@
         make.right.equalTo(@-12);
         make.bottom.equalTo(@-5);
     }];
-    [self updateBoardConstraints];
     [super updateConstraints];
 }
 
 - (void) updateBoard {
-    _myHand = [NSMutableArray array];
-    for(int i=0; i<[self.game.playerOne.hand count]; i++){
-        UBCard *card = ((UBCard*)(self.game.playerOne.hand[i]));
-        [self setUpNewCard:card playerOne:YES];
-    }
+    NSMutableArray *myHand = [NSMutableArray array];
+    NSMutableArray *opponentHand = [NSMutableArray array];
+    NSMutableArray *playedCards = [NSMutableArray array];
+    NSLog(@"CARDS ON SCREEN %lu", (unsigned long)[self.allCards count]);
     
-    _opponentHand = [NSMutableArray array];
-    for(int i=0; i < [self.game.playerTwo.hand count]; i++){
-        UBCard *card = ((UBCard*)(self.game.playerTwo.hand[i]));
-        [self setUpNewCard:card playerOne:NO];
-    }
-    
-    _playedCards = [NSMutableArray array];
-    
-    for(int i = 0; i < [self.game.playerOne.creaturesInPlay count]; i++){
-        [self setCardOnBoard:self.game.playerOne.creaturesInPlay[i] playerOne:YES];
-    }
-    
-    for(int i = 0; i < [self.game.playerTwo.creaturesInPlay count]; i++){
-        [self setCardOnBoard:self.game.playerTwo.creaturesInPlay[i] playerOne:NO];
-    }
-    
-    for (int i = 0; i < [self.playedCards count]; i++){
-        UBCardView* cardView = (UBCardView*) self.playedCards[i];
-        
-        UBSpaceView *spaceView = self.spaces[((UBCreature*)(cardView.card)).space.index];
-        
-        [cardView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(spaceView.mas_left);
-            make.right.equalTo(spaceView.mas_right);
-            make.top.equalTo(spaceView.mas_top);
-            make.bottom.equalTo(spaceView.mas_bottom);
-        }];
-
-        [cardView switchToPiece];
+    for (int i = 0; i < [self.allCards count]; i++){
+        UBCardView *curr = (UBCardView*)(self.allCards[i]);
+        if (![curr isAlive]){
+            //this is dumb, but removeFromSuperview was not working
+            [curr mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.right.equalTo(self.mas_right);
+                make.centerY.equalTo(self.mas_top);
+                make.width.equalTo(@0);
+                make.height.equalTo(@0);
+            }];
+            [self.allCards removeObject:curr];
+            i--;
+        }
+        else if ([curr isPlayed] ){
+            [playedCards addObject:curr];
+        }
+        else if (curr.playerOneCard){
+            [myHand addObject:curr];
+        }
+        else if (!curr.playerOneCard){
+            [opponentHand addObject:curr];
+        }
     }
     
     
-    
-    
-    self.playerHealthLabel.text = [NSString stringWithFormat: @"%d", self.game.playerOne.health];
-    self.playerManaLabel.text = [NSString stringWithFormat: @"%d", self.game.playerOne.mana];
-    self.playerCardsLabel.text = [NSString stringWithFormat: @"%d", self.game.playerOne.cardsRemaining];
-    self.opponentHealthLabel.text = [NSString stringWithFormat: @"%d", self.game.playerTwo.health];
-    self.opponentManaLabel.text = [NSString stringWithFormat: @"%d", self.game.playerTwo.mana];
-    self.opponentCardsLabel.text = [NSString stringWithFormat: @"%d", self.game.playerTwo.cardsRemaining];
-    
-}
-
-
-- (void) updateBoardConstraints {
-    for (int i = 0; i < [self.myHand count]; i++){
-        [self.myHand[i] mas_remakeConstraints:^(MASConstraintMaker *make) {
+    for (int i = 0; i < [myHand count]; i++){
+        [myHand[i] switchToCard];
+        [myHand[i] mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(@(180 + 40 * i));
             make.centerY.equalTo(self.mas_bottom).with.offset(-10.0);
             make.width.equalTo(@75);
@@ -469,15 +420,40 @@
         }];
     }
     
-    for (int i = [self.opponentHand count] - 1; i >= 0; i--){
-        [self.opponentHand[i] mas_remakeConstraints:^(MASConstraintMaker *make) {
+    for (int i = [opponentHand count] - 1; i >= 0; i--){
+        [opponentHand[i] switchToCard];
+        [opponentHand[i] mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(@(-180 - 50 * i));
             make.centerY.equalTo(self.mas_top);
             make.width.equalTo(@70);
             make.height.equalTo(@108.3);
         }];
     }
+    
+    for (int i = 0; i < [playedCards count]; i++){
+        UBCardView* cardView = (UBCardView*) playedCards[i];
+        
+        UBSpaceView *spaceView = self.spaces[[((UBCreature*)(cardView.card)).space getIndex]];
+        
+        [cardView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(spaceView.mas_left);
+            make.right.equalTo(spaceView.mas_right);
+            make.top.equalTo(spaceView.mas_top);
+            make.bottom.equalTo(spaceView.mas_bottom);
+        }];
+        
+        [cardView switchToPiece];
+    }
+    
+    self.playerHealthLabel.text = [NSString stringWithFormat: @"%d", self.game.playerOne.health];
+    self.playerManaLabel.text = [NSString stringWithFormat: @"%d", self.game.playerOne.mana];
+    self.playerCardsLabel.text = [NSString stringWithFormat: @"%d", self.game.playerOne.cardsRemaining];
+    self.opponentHealthLabel.text = [NSString stringWithFormat: @"%d", self.game.playerTwo.health];
+    self.opponentManaLabel.text = [NSString stringWithFormat: @"%d", self.game.playerTwo.mana];
+    self.opponentCardsLabel.text = [NSString stringWithFormat: @"%d", self.game.playerTwo.cardsRemaining];
+
 }
+
 
 
 
