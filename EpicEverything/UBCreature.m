@@ -35,8 +35,9 @@
 }
 
 - (BOOL) canAttackSpace: (UBSpace*)target{
-    if(!(self.hasSpeed || self.turnsInPlay > 0) || self.attackedThisTurn)
-        return NO;
+    if(![self canAttackNow] || (!target.occupied && [self.owner isMySpace:target.position]) || target == self.space){
+           return NO;
+    }
     else if([[self enemiesInRangeWithBlock] count] != 0){
         if(!target.occupied || !target.creature.hasBlock){
             return NO;
@@ -52,6 +53,13 @@
        
 }
 
+- (BOOL) canAttackNow{
+    if(!(self.hasSpeed || self.turnsInPlay > 0) || self.attackedThisTurn){
+        return NO;
+    }
+    return YES;
+}
+
 - (void) attackSpace: (UBSpace*)target{
     NSAssert([self canAttackSpace:target], @"Must be able to attack space!");
     NSLog(@"%@ is attacking space %d!", self.name, target.position);
@@ -60,6 +68,7 @@
         if (self.owner.opponent.health <= 0){
             [self.owner.game gameWonByPlayer:self.owner];
         }
+        self.attackedThisTurn = YES;
     }
     else
     {
