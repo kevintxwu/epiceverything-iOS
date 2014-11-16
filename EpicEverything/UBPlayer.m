@@ -97,7 +97,11 @@
 
 - (UBCard *)drawCard
 {
-    NSAssert([self cardsRemaining] > 0, @"No more cards in the deck");
+    if([self cardsRemaining] <= 0){
+        NSLog(@"No more cards in the deck!");
+        return nil;
+    }
+    
     UBCard *card = [self.deck lastObject];
     [self.deck removeLastObject];
     [self.hand addObject:card];

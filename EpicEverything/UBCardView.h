@@ -29,15 +29,18 @@
 
 - (BOOL)isAlive;
 
+- (void)tempViewCard;
+
+
 
 @end
 
 @protocol UBCardViewDelegate <NSObject>
 
-- (void)cardPressed:(id)sender withCard:(UBCard*)card;
-- (void)piecePressed:(id)sender withCard:(UBCard*)card;
 - (void)cardViewMoved:(UBCardView *)view withTouch:(UITouch *)touch;
 - (void)cardPlaced:(UBCardView *)view withTouch:(UITouch *)touch;
 - (void)cardAttack:(UBCardView *)view withTouch:(UITouch *)touch;
+- (void)piecePressed:(UBCardView *)view withTouch:(UITouch *)touch;
+- (void)drawAttackPath:(UBCardView *)view withTouch:(UITouch *)touch;
 
 @end

@@ -30,7 +30,12 @@
     [super viewDidLoad];
     _game = [[UBGame alloc] initTestGame];
     self.view = [[UBGameView alloc] initWithFrame: CGRectMake(0,0,0,0) andGame: self.game];
-    [self startGame];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    NSLog(@"View did appear!");
+    [self performSelector:@selector(startGame) withObject:nil afterDelay:1.0f];
 }
 
 - (void)nextButtonPressed:(id)sender {
@@ -50,10 +55,12 @@
 - (void) startGame{
     NSLog(@"Starting Game!");
     for (int i=0; i<4; i++){
-        [self.view setUpNewCard:[self.game.playerOne drawCard] playerOne:YES];
-        [self.view setUpNewCard:[self.game.playerTwo drawCard] playerOne:NO];
+        [self.view drawCardAnimation:[self.view setUpNewCard:[self.game.playerOne drawCard] playerOne:YES]];
         [self.view updateBoard];
-        sleep(0.5);
+        //sleep(1.5);
+        [self.view drawCardAnimation:[self.view setUpNewCard:[self.game.playerTwo drawCard] playerOne:NO]];
+        [self.view updateBoard];
+        //sleep(1.5);
     }
     
     
@@ -74,7 +81,7 @@
         UBCard *drawnCard = [self.game startTurn:self.game.currentPlayer];
         
         if (drawnCard){
-            [self.view setUpNewCard:drawnCard playerOne:self.game.playerOne.myTurn];
+            [self.view drawCardAnimation:[self.view setUpNewCard:drawnCard playerOne:self.game.playerOne.myTurn]];
         }
         [self.view updateBoard];
         if(self.game.currentPlayer == self.game.playerTwo){
@@ -108,7 +115,7 @@
                 i--;
                 //insert play animation here
                 [self.view updateBoard];
-                sleep(1);
+                //sleep(1);
                 break;
             }
         }
@@ -122,7 +129,7 @@
                 [creature attackSpace:[self.game.board spaceAtIndex:targets[j]]];
                 //insert attack animation here
                 [self.view updateBoard];
-                sleep(1);
+                //sleep(1);
                 break;
             }
         }

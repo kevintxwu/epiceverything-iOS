@@ -65,15 +65,21 @@
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    if (!self.playerOneCard){
+        return;  //Cannot use opponent cards
+    }
     if (self.inCardForm) {
-        [self.delegate cardPressed:self withCard:self.card];
+        //[self.delegate cardPressed:self withCard:self.card];
     }
     else {
-        [self.delegate piecePressed:self withCard:self.card];
+        [self.delegate piecePressed:self withTouch:[[event allTouches] anyObject]];
     }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (!self.playerOneCard){
+        return;  //Cannot use opponent cards
+    }
     if (self.inCardForm){
         [self.damagePoints mas_updateConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.mas_centerX).with.offset(-46);
@@ -85,11 +91,17 @@
         }];
         [self.delegate cardViewMoved:self withTouch:[[event allTouches] anyObject]];
     }
+    else if (((UBCreature*)self.card).canAttackNow){
+        [self.delegate drawAttackPath:self withTouch:[[event allTouches] anyObject]];
+    }
    
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (self.inCardForm){
+    if (!self.playerOneCard){
+        return;  //Cannot use opponent cards
+    }
+    if (self.inCardForm && self.playerOneCard){
         [self.damagePoints mas_updateConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.mas_centerX).with.offset(-24);
             make.centerY.equalTo(self.mas_centerY).with.offset(32);
@@ -129,6 +141,11 @@
     self.inCardForm = YES;
     
 }
+
+- (void)tempViewCard{
+    [self.currentImageView setImage:[UIImage imageNamed: [self.card.name stringByAppendingString:@"-card.png"]]];
+}
+
 
 
 - (void)updateConstraints{

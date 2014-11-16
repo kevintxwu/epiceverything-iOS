@@ -41,6 +41,8 @@
 
 - (int) getTotalAttack;
 
+- (BOOL) canAttackNow;
+
 - (void) playOnSpace:(UBSpace*)space;
 
 

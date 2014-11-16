@@ -11,6 +11,7 @@
 #import "UBSpaceView.h"
 #import "UBGameViewController.h"
 #import "UIView+UBExtensions.h"
+#define kArrowPointCount 7
 
 @interface UBGameView ()
 
@@ -18,6 +19,9 @@
 @property (nonatomic) UIImageView *background;
 @property (nonatomic) NSMutableArray *spaces;
 @property (nonatomic) NSMutableArray *allCards;
+@property (nonatomic) UIImageView *drawLayer;
+@property (nonatomic) CGPoint location;
+
 
 
 @end
@@ -31,7 +35,6 @@
         self.backgroundColor = [UIColor whiteColor];
         _game = game;
         _allCards = [NSMutableArray array];
-        //_delegate = delegate;
         [self createSubviews];
         [self updateConstraints];
     }
@@ -66,6 +69,7 @@
         [start addTarget:_delegate action:@selector(nextButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         start;
     }) ub_addToSuperview:self]; */
+    
     
     _playerMana = [({
         UIImageView *mana = [[UIImageView alloc] init];
@@ -180,6 +184,12 @@
         start;
     }) ub_addToSuperview:self];
     
+    _drawLayer = [({
+        UIImageView *drawLayer = [[UIImageView alloc] init];
+        self.drawLayer.clearsContextBeforeDrawing = YES;
+        drawLayer;
+    }) ub_addToSuperview:self];
+    
     
     [self.endTurn addTarget:self.delegate action:@selector(endTurnPressed:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -215,12 +225,21 @@
 }
 
 - (void)cardAttack:(UBCardView *)view withTouch:(UITouch *)touch {
-    // Check if we are on a space
     CGPoint location = [touch locationInView:self];
     UBSpaceView *spaceView = [self locationOnSpace:location];
-    /*if (spaceView && [((UBCreature*)(view.card)) canAttackSpace: [spaceView.space.index ] ]) {
+    UBCreature *selectedCreature = (UBCreature *) view.card;
+    if(spaceView && spaceView.space == ((UBCreature *)view.card).space){
+        [self bringSubviewToFront:view];
+        NSLog(@"Showing card");
+        [view tempViewCard];
         
-    } */
+    }
+    if (spaceView && view.playerOneCard &&[selectedCreature canAttackSpace:spaceView.space]) {
+        [selectedCreature attackSpace:spaceView.space];
+        [self updateBoard];
+    } else {
+        [self updateBoard];
+    }
 }
 
 - (void)cardViewMoved:(UBCardView *)view withTouch:(UITouch *)touch {
@@ -236,13 +255,109 @@
     }
 }
 
+- (void)drawAttackPath:(UBCardView *)view withTouch:(UITouch *)touch{
+    CGPoint currentLocation = [touch locationInView:self];
+    UBSpaceView *spaceView = [self locationOnSpace:currentLocation];
+    UBCreature *selectedCreature = (UBCreature *) view.card;
+    self.drawLayer.image = nil;
+    
+    CGRect rect = CGRectMake(0.0, 0.0, self.frame.size.width, self.frame.size.height);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    UIGraphicsPushContext(context);
+    UIGraphicsBeginImageContext(rect.size); //now it's here.
+    [[UIColor colorWithRed:84/255.0 green:194/255.0 blue:197/255.0 alpha:1.0] setStroke];
+    if (spaceView && view.playerOneCard &&[selectedCreature canAttackSpace:spaceView.space]) {
+        [[UIColor colorWithRed:239/255.0 green:87/255.0 blue:88/255.0 alpha:1.0] setStroke];
+    }
+    UIBezierPath *bezier = [self dqd_bezierPathWithArrowFromPoint:self.location toPoint:currentLocation tailWidth:4.0f headWidth:25.0f headLength:15.0f];
+    
+    [bezier setLineJoinStyle:kCGLineJoinMiter];
+    [bezier setLineCapStyle:kCGLineCapButt];
+    [bezier setLineWidth:12.0];
+    [bezier stroke];
+
+    CGContextAddPath(context, bezier.CGPath);
+    self.drawLayer.image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsPopContext();
+    UIGraphicsEndImageContext();
+    
+}
+
+- (UIBezierPath *)dqd_bezierPathWithArrowFromPoint:(CGPoint)startPoint
+                                           toPoint:(CGPoint)endPoint
+                                         tailWidth:(CGFloat)tailWidth
+                                         headWidth:(CGFloat)headWidth
+                                        headLength:(CGFloat)headLength {
+    CGFloat length = hypotf(endPoint.x - startPoint.x, endPoint.y - startPoint.y);
+    
+    CGPoint points[kArrowPointCount];
+    [self dqd_getAxisAlignedArrowPoints:points
+                              forLength:length
+                              tailWidth:tailWidth
+                              headWidth:headWidth
+                             headLength:headLength];
+    
+    CGAffineTransform transform = [self dqd_transformForStartPoint:startPoint
+                                                          endPoint:endPoint
+                                                            length:length];
+    
+    CGMutablePathRef cgPath = CGPathCreateMutable();
+    CGPathAddLines(cgPath, &transform, points, sizeof points / sizeof *points);
+    CGPathCloseSubpath(cgPath);
+    
+    UIBezierPath *uiPath = [UIBezierPath bezierPathWithCGPath:cgPath];
+    CGPathRelease(cgPath);
+    return uiPath;
+}
+
+- (void)dqd_getAxisAlignedArrowPoints:(CGPoint[kArrowPointCount])points
+                            forLength:(CGFloat)length
+                            tailWidth:(CGFloat)tailWidth
+                            headWidth:(CGFloat)headWidth
+                           headLength:(CGFloat)headLength {
+    CGFloat tailLength = length - headLength;
+    points[0] = CGPointMake(0, tailWidth / 2);
+    points[1] = CGPointMake(tailLength, tailWidth / 2);
+    points[2] = CGPointMake(tailLength, headWidth / 2);
+    points[3] = CGPointMake(length, 0);
+    points[4] = CGPointMake(tailLength, -headWidth / 2);
+    points[5] = CGPointMake(tailLength, -tailWidth / 2);
+    points[6] = CGPointMake(0, -tailWidth / 2);
+}
+
+- (CGAffineTransform)dqd_transformForStartPoint:(CGPoint)startPoint
+                                       endPoint:(CGPoint)endPoint
+                                         length:(CGFloat)length {
+    CGFloat cosine = (endPoint.x - startPoint.x) / length;
+    CGFloat sine = (endPoint.y - startPoint.y) / length;
+    return (CGAffineTransform){ cosine, sine, -sine, cosine, startPoint.x, startPoint.y };
+}
+
 
 - (void)cardPressed:(id)sender withCard:(UBCard*)card {
     
 }
 
-- (void)piecePressed:(id)sender withCard:(UBCard*)card{
+- (void)piecePressed:(UBCardView *)view withTouch:(UITouch *)touch{
+    self.location = [touch locationInView:self];
+}
+
+- (void)drawCardAnimation:(UBCardView*)card{
+    CGPoint point = self.center;
+    if (!card.playerOneCard){
+        //point = ;
+    }
     
+    
+    [UIView animateWithDuration:0.4f
+                          delay:0.0f
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^
+     {
+         card.center = point;
+     }
+                     completion:nil];
+    //sleep(.5f);
 }
 
 - (UBSpaceView *)locationOnSpace:(CGPoint)location {
@@ -258,6 +373,13 @@
 - (void)updateConstraints {
     
     [self.background mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.mas_top);
+        make.bottom.equalTo(self.mas_bottom);
+        make.left.equalTo(self.mas_left);
+        make.right.equalTo(self.mas_right);
+    }];
+    
+    [self.drawLayer mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.mas_top);
         make.bottom.equalTo(self.mas_bottom);
         make.left.equalTo(self.mas_left);
@@ -409,6 +531,9 @@
         }
     }
     
+     NSLog(@"MY HAND %lu", (unsigned long)[myHand count]);
+     NSLog(@"OPP HAND %lu", (unsigned long)[opponentHand count]);
+    
     
     for (int i = 0; i < [myHand count]; i++){
         [myHand[i] switchToCard];
@@ -451,6 +576,10 @@
     self.opponentHealthLabel.text = [NSString stringWithFormat: @"%d", self.game.playerTwo.health];
     self.opponentManaLabel.text = [NSString stringWithFormat: @"%d", self.game.playerTwo.mana];
     self.opponentCardsLabel.text = [NSString stringWithFormat: @"%d", self.game.playerTwo.cardsRemaining];
+    
+    self.drawLayer.image = nil;
+    [self bringSubviewToFront:self.drawLayer];
+    
 
 }
 
