@@ -25,6 +25,7 @@
 //@property (nonatomic) UBPlayer* currentPlayer;
 @property (nonatomic) UBBoard* board;
 @property (nonatomic) int turnNumber;
+@property (nonatomic) int turnLength;
 
 
 - (id) initTestGame;

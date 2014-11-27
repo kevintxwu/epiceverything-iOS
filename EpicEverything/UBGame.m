@@ -75,10 +75,12 @@
     if (player.mana > 10){
         player.mana = 10;
     }
-    if(!self.turnNumber == 1){  //Player 1 doesn't draw on first turn
-        return [player drawCard];
+    if(self.turnNumber == 1){
+        NSLog(@"wut");
+        return nil;
     }
-    return nil;
+    return [player drawCard];
+    
 }
 
 - (void) secondPassed{

@@ -35,6 +35,8 @@
 
 @property (nonatomic) UIButton *endTurn;
 
+@property (nonatomic) int secondsPassed;
+
 - (id)initWithFrame:(CGRect)frame andGame:(UBGame*)game;
 
 - (void) updateBoardConstraints;

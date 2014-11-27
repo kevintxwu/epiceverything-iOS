@@ -21,6 +21,8 @@
 @property (nonatomic) NSMutableArray *allCards;
 @property (nonatomic) UIImageView *drawLayer;
 @property (nonatomic) CGPoint location;
+@property (nonatomic) UBCardView *selectedCard;
+@property (nonatomic) UILabel *secondsLeftLabel;
 
 
 
@@ -173,7 +175,7 @@
         title;
     }) ub_addToSuperview:self];
     
-    _endTurn = [({
+    /*_endTurn = [({
         UIButton *start = [[UIButton alloc] init];
         [start setTitle:@"End Turn " forState:UIControlStateNormal];
         start.backgroundColor = [UIColor clearColor];
@@ -182,7 +184,20 @@
         start.layer.shadowColor = [UIColor blackColor].CGColor;
         start.layer.shadowOpacity = 0.5;
         start;
+    }) ub_addToSuperview:self];*/
+    
+    _secondsLeftLabel = [({
+        UILabel *title = [[UILabel alloc] init];
+        [title setFont:[UIFont ub_endTurn]];
+        [title setText:@"Next Turn: 15"];
+        [title setTextColor:[UIColor whiteColor]];
+        title.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+        title.layer.shadowColor = [UIColor blackColor].CGColor;
+        title.layer.shadowOpacity = 0.5;
+        title.textAlignment = NSTextAlignmentCenter;
+        title;
     }) ub_addToSuperview:self];
+    
     
     _drawLayer = [({
         UIImageView *drawLayer = [[UIImageView alloc] init];
@@ -191,7 +206,7 @@
     }) ub_addToSuperview:self];
     
     
-    [self.endTurn addTarget:self.delegate action:@selector(endTurnPressed:) forControlEvents:UIControlEventTouchUpInside];
+    //[self.endTurn addTarget:self.delegate action:@selector(endTurnPressed:) forControlEvents:UIControlEventTouchUpInside];
     
 }
 
@@ -210,8 +225,23 @@
 #pragma mark - UBCardViewDelegate Methods
 
 
+- (void)cardViewMoved:(UBCardView *)view withTouch:(UITouch *)touch {
+    CGPoint location = [touch locationInView:self];
+    self.selectedCard = view;
+    if (CGRectContainsPoint(self.bounds, location)) {
+        [view mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(@(location.x - 15));
+            make.top.equalTo(@(location.y - 110));
+            // I h8 this
+            make.height.equalTo(@186.5);
+            make.width.equalTo(@116);
+        }];
+    }
+}
+
 - (void)cardPlaced:(UBCardView *)view withTouch:(UITouch *)touch {
     // Check if we are on a space
+    self.selectedCard = nil;
     CGPoint location = [touch locationInView:self];
     UBSpaceView *spaceView = [self locationOnSpace:location];
     NSLog(@"INDEX %d", [spaceView.space getIndex]);
@@ -224,39 +254,13 @@
     }
 }
 
-- (void)cardAttack:(UBCardView *)view withTouch:(UITouch *)touch {
-    CGPoint location = [touch locationInView:self];
-    UBSpaceView *spaceView = [self locationOnSpace:location];
-    UBCreature *selectedCreature = (UBCreature *) view.card;
-    if(spaceView && spaceView.space == ((UBCreature *)view.card).space){
-        [self bringSubviewToFront:view];
-        NSLog(@"Showing card");
-        [view tempViewCard];
-        
-    }
-    if (spaceView && view.playerOneCard &&[selectedCreature canAttackSpace:spaceView.space]) {
-        [selectedCreature attackSpace:spaceView.space];
-        //[self shakeCardAnimation:view];
-        //[self updateBoard];
-    } else {
-        //[self updateBoard];
-    }
+- (void)piecePressed:(UBCardView *)view withTouch:(UITouch *)touch{
+    self.location = [touch locationInView:self];
 }
 
-- (void)cardViewMoved:(UBCardView *)view withTouch:(UITouch *)touch {
-    CGPoint location = [touch locationInView:self];
-    if (CGRectContainsPoint(self.bounds, location)) {
-        [view mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(@(location.x - 15));
-            make.top.equalTo(@(location.y - 110));
-            // I h8 this
-            make.height.equalTo(@186.5);
-            make.width.equalTo(@116);
-        }];
-    }
-}
 
 - (void)drawAttackPath:(UBCardView *)view withTouch:(UITouch *)touch{
+    NSLog(@"Draw");
     CGPoint currentLocation = [touch locationInView:self];
     UBSpaceView *spaceView = [self locationOnSpace:currentLocation];
     UBCreature *selectedCreature = (UBCreature *) view.card;
@@ -281,6 +285,27 @@
     UIGraphicsPopContext();
     UIGraphicsEndImageContext();
     
+}
+
+- (void)cardAttack:(UBCardView *)view withTouch:(UITouch *)touch {
+    self.drawLayer.image = nil;
+    [self bringSubviewToFront:self.drawLayer];
+    CGPoint location = [touch locationInView:self];
+    UBSpaceView *spaceView = [self locationOnSpace:location];
+    UBCreature *selectedCreature = (UBCreature *) view.card;
+    if(spaceView && spaceView.space == ((UBCreature *)view.card).space){
+        [self bringSubviewToFront:view];
+        NSLog(@"Showing card");
+        [view tempViewCard];
+        
+    }
+    if (spaceView && view.playerOneCard &&[selectedCreature canAttackSpace:spaceView.space]) {
+        [selectedCreature attackSpace:spaceView.space];
+        //[self shakeCardAnimation:view];
+        //[self updateBoard];
+    } else {
+        //[self updateBoard];
+    }
 }
 
 - (UIBezierPath *)dqd_bezierPathWithArrowFromPoint:(CGPoint)startPoint
@@ -338,9 +363,7 @@
     
 }
 
-- (void)piecePressed:(UBCardView *)view withTouch:(UITouch *)touch{
-    self.location = [touch locationInView:self];
-}
+
 
 - (void)drawCardAnimation:(UBCardView*)card{
     CGPoint point = self.center;
@@ -349,7 +372,7 @@
     }
     
     
-    [UIView animateWithDuration:0.4f
+    /*[UIView animateWithDuration:0.4f
                           delay:0.0f
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^
@@ -360,7 +383,7 @@
     {
         //[self updateBoard];
     }];
-    //sleep(.5f);
+    //sleep(.5f); */
 
 }
 
@@ -525,10 +548,15 @@
         make.height.equalTo(@50);
     }];
     
-    [self.endTurn mas_updateConstraints:^(MASConstraintMaker *make) {
+    [self.secondsLeftLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.mas_right).with.offset(-20.0);
+         make.bottom.equalTo(self.mas_bottom).with.offset(-5.0);
+    }];
+    
+    /*[self.endTurn mas_updateConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(@-12);
         make.bottom.equalTo(@-5);
-    }];
+    }];*/
     [super updateConstraints];
 }
 
@@ -553,6 +581,7 @@
             i--;
         }
         else if ([curr isPlayed] ){
+            NSLog(@"PLAYED");
             [playedCards addObject:curr];
         }
         else if (curr.playerOneCard){
@@ -568,13 +597,15 @@
     
     
     for (int i = 0; i < [myHand count]; i++){
-        [myHand[i] switchToCard];
-        [myHand[i] mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(@(180 + 40 * i));
-            make.centerY.equalTo(self.mas_bottom).with.offset(-10.0);
-            make.width.equalTo(@75);
-            make.height.equalTo(@120.6);
-        }];
+        if (self.selectedCard != myHand[i]){
+            [myHand[i] switchToCard];
+            [myHand[i] mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(@(180 + 40 * i));
+                make.centerY.equalTo(self.mas_bottom).with.offset(-10.0);
+                make.width.equalTo(@75);
+                make.height.equalTo(@120.6);
+            }];
+        }
     }
     
     for (int i = [opponentHand count] - 1; i >= 0; i--){
@@ -609,8 +640,7 @@
     self.opponentManaLabel.text = [NSString stringWithFormat: @"%d", self.game.playerTwo.mana];
     self.opponentCardsLabel.text = [NSString stringWithFormat: @"%d", self.game.playerTwo.cardsRemaining];
     
-    self.drawLayer.image = nil;
-    [self bringSubviewToFront:self.drawLayer];
+    self.secondsLeftLabel.text = [NSString stringWithFormat: @"Next Turn: %d", self.game.turnLength - self.secondsPassed];
     
 
 }

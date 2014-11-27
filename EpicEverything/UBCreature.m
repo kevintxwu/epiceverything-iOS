@@ -20,7 +20,7 @@
     _mobility = [data[@"mobility"] integerValue];
     _secondsInPlay = -1;
     _isDead = NO;
-    _cooldown = 3;
+    _cooldown = 10;
     _secondsSinceLastAttack = 0;
     
     _hasBlock = [data[@"block"] boolValue];
@@ -33,6 +33,9 @@
     self.space = space;
     self.space.creature = self;
     self.secondsInPlay = 0;
+    if (self.hasSpeed){
+        self.secondsSinceLastAttack = self.cooldown;
+    }
     self.hitPoints = self.totalHitPoints;
 }
 
@@ -56,7 +59,7 @@
 }
 
 - (BOOL) canAttackNow{
-    if(!(self.hasSpeed || self.secondsInPlay >= 0) || self.secondsSinceLastAttack >= self.cooldown){
+    if(!(self.hasSpeed || self.secondsInPlay >= 0) || self.secondsSinceLastAttack < self.cooldown){
         return NO;
     }
     return YES;
@@ -90,6 +93,7 @@
 
         
     }
+    NSLog(@"RESETTING COOLDOWN");
     self.secondsSinceLastAttack = 0;
 }
 

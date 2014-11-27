@@ -13,6 +13,7 @@
 
 @property (nonatomic) UILabel *damagePoints;
 @property (nonatomic) UILabel *hitPoints;
+@property (nonatomic) UILabel *secondsUntilAttack;
 
 @end
 
@@ -52,6 +53,18 @@
     }) ub_addToSuperview:self];
     
     _hitPoints = [({
+        UILabel *hitPoints = [[UILabel alloc] init];
+        [hitPoints setFont:[UIFont ub_blackCastle]];
+        [hitPoints setTextColor:[UIColor whiteColor]];
+        hitPoints.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+        hitPoints.layer.shadowColor = [UIColor blackColor].CGColor;
+        hitPoints.layer.shadowOpacity = 0.5;
+        hitPoints.textAlignment = NSTextAlignmentCenter;
+        hitPoints.hidden = NO;
+        hitPoints;
+    }) ub_addToSuperview:self];
+    
+    _secondsUntilAttack = [({
         UILabel *hitPoints = [[UILabel alloc] init];
         [hitPoints setFont:[UIFont ub_blackCastle]];
         [hitPoints setTextColor:[UIColor whiteColor]];
@@ -123,8 +136,16 @@
     self.inCardForm = NO;
     self.damagePoints.hidden = NO;
     self.hitPoints.hidden = NO;
-    self.damagePoints.text = [NSString stringWithFormat:@"%d",((UBCreature*)self.card).baseAttack];
-    self.hitPoints.text = [NSString stringWithFormat:@"%d",((UBCreature*)self.card).hitPoints];
+    UBCreature * creature = ((UBCreature*)self.card);
+    self.damagePoints.text = [NSString stringWithFormat:@"%d",creature.baseAttack];
+    self.hitPoints.text = [NSString stringWithFormat:@"%d", creature.hitPoints];
+    if (creature.secondsSinceLastAttack >= creature.cooldown){
+        self.secondsUntilAttack.text = @"0";
+    }
+    else {
+        self.secondsUntilAttack.text = [NSString stringWithFormat:@"%d", creature.cooldown - creature.secondsSinceLastAttack];
+    }
+   
 }
 
 - (void)switchToCard{
@@ -165,10 +186,16 @@
         make.centerX.equalTo(self.mas_centerX).with.offset(24);
         make.centerY.equalTo(self.mas_centerY).with.offset(32);
     }];
+    
+    [self.secondsUntilAttack mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.mas_centerX).with.offset(0);
+        make.centerY.equalTo(self.mas_centerY).with.offset(-10);
+    }];
     [super updateConstraints];
 }
 
 - (BOOL)isPlayed{
+    NSLog(@"SECONDS PLAYED: %d for %@", ((UBCreature*)self.card).secondsInPlay, self.card.name);
     return ((UBCreature*)self.card).secondsInPlay >= 0;
 }
 
