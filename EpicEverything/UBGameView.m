@@ -218,9 +218,9 @@
     if (spaceView && [self.game.playerOne canPlayCard:view.card atSpace:spaceView.space.position]) {
         // Play card
         [self.game.playerOne playCard:view.card atSpace:[spaceView.space getIndex]];
-        [self updateBoard];
+        //[self updateBoard];
     } else {
-        [self updateBoard];
+        //[self updateBoard];
     }
 }
 
@@ -236,9 +236,10 @@
     }
     if (spaceView && view.playerOneCard &&[selectedCreature canAttackSpace:spaceView.space]) {
         [selectedCreature attackSpace:spaceView.space];
-        [self updateBoard];
+        //[self shakeCardAnimation:view];
+        //[self updateBoard];
     } else {
-        [self updateBoard];
+        //[self updateBoard];
     }
 }
 
@@ -276,7 +277,6 @@
     [bezier setLineWidth:12.0];
     [bezier stroke];
 
-    CGContextAddPath(context, bezier.CGPath);
     self.drawLayer.image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsPopContext();
     UIGraphicsEndImageContext();
@@ -356,8 +356,39 @@
      {
          card.center = point;
      }
-                     completion:nil];
+                     completion:^(BOOL finished)
+    {
+        //[self updateBoard];
+    }];
     //sleep(.5f);
+
+}
+
+- (void)shakeCardAnimation:(UBCardView*)card{
+    CGPoint point = CGPointMake(card.center.x - 30.0f, card.center.y);
+
+    
+    
+    [UIView animateWithDuration:0.5f
+                          delay:0.0f
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^
+     {
+         card.center = point;
+     }
+                     completion:nil];
+    sleep(.5f);
+    point = CGPointMake(card.center.x + 30.0f, card.center.y);
+    
+    [UIView animateWithDuration:0.5f
+                          delay:0.0f
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^
+     {
+         card.center = point;
+     }
+                     completion:nil];
+    sleep(.5f);
 }
 
 - (UBSpaceView *)locationOnSpace:(CGPoint)location {
@@ -510,6 +541,7 @@
     for (int i = 0; i < [self.allCards count]; i++){
         UBCardView *curr = (UBCardView*)(self.allCards[i]);
         if (![curr isAlive]){
+            NSLog(@"DEAD");
             //this is dumb, but removeFromSuperview was not working
             [curr mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.right.equalTo(self.mas_right);

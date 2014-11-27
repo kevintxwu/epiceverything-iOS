@@ -18,8 +18,10 @@
     _baseAttack = [data[@"attack"] integerValue];
     _totalHitPoints = [data[@"hitPoints"] integerValue];
     _mobility = [data[@"mobility"] integerValue];
-    _turnsInPlay = -1;
+    _secondsInPlay = -1;
     _isDead = NO;
+    _cooldown = 3;
+    _secondsSinceLastAttack = 0;
     
     _hasBlock = [data[@"block"] boolValue];
     _hasSpeed = [data[@"speed"] boolValue];
@@ -30,7 +32,7 @@
 - (void) playOnSpace:(UBSpace*)space{
     self.space = space;
     self.space.creature = self;
-    self.turnsInPlay = 0;
+    self.secondsInPlay = 0;
     self.hitPoints = self.totalHitPoints;
 }
 
@@ -54,7 +56,7 @@
 }
 
 - (BOOL) canAttackNow{
-    if(!(self.hasSpeed || self.turnsInPlay > 0) || self.attackedThisTurn){
+    if(!(self.hasSpeed || self.secondsInPlay >= 0) || self.secondsSinceLastAttack >= self.cooldown){
         return NO;
     }
     return YES;
@@ -68,7 +70,6 @@
         if (self.owner.opponent.health <= 0){
             [self.owner.game gameWonByPlayer:self.owner];
         }
-        self.attackedThisTurn = YES;
     }
     else
     {
@@ -86,12 +87,10 @@
         if (self.hitPoints <= 0){
             [self removeFromPlay];
         }
-        else{
-            self.attackedThisTurn = YES;
-        }
 
         
     }
+    self.secondsSinceLastAttack = 0;
 }
 
 - (NSMutableArray*) enemiesInRangeWithBlock{
@@ -105,12 +104,19 @@
     return inRange;
 }
 
+- (void) secondPassed {
+    self.secondsInPlay += 1;
+    self.secondsSinceLastAttack += 1;
+}
+
 
 - (void) removeFromPlay{
     [self.owner.creaturesInPlay removeObject:self];
     [self.owner.graveyard addObject:self];
     self.space.creature = nil;
     self.space = nil;
+    self.secondsInPlay = -1;
+    self.secondsSinceLastAttack = 0;
     self.isDead = YES;
 }
 

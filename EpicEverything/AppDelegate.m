@@ -32,7 +32,7 @@
     player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:nil];
     player.numberOfLoops = -1; //infinite
     
-    [player play];
+    //[player play];
     return YES;
 }
 

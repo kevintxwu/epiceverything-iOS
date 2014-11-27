@@ -22,7 +22,7 @@
 
 @property (nonatomic) UBPlayer* playerOne;
 @property (nonatomic) UBPlayer* playerTwo;
-@property (nonatomic) UBPlayer* currentPlayer;
+//@property (nonatomic) UBPlayer* currentPlayer;
 @property (nonatomic) UBBoard* board;
 @property (nonatomic) int turnNumber;
 
@@ -37,4 +37,5 @@
 
 - (void) gameWonByPlayer:(UBPlayer*)winner;
 
+- (void) secondPassed;
 @end

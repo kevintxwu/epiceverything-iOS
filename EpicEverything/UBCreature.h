@@ -19,7 +19,9 @@
 @property (nonatomic) int hitPoints;
 @property (nonatomic) int totalHitPoints;
 @property (nonatomic) int mobility;
-@property (nonatomic) int turnsInPlay;  //Set to -1 if not in play
+@property (nonatomic) int secondsInPlay;  //Set to -1 if not in play
+@property (nonatomic) int secondsSinceLastAttack;
+@property (nonatomic) int cooldown;
 
 @property (nonatomic) BOOL hasBlock;
 @property (nonatomic) BOOL hasSpeed;
@@ -45,6 +47,7 @@
 
 - (void) playOnSpace:(UBSpace*)space;
 
+- (void) secondPassed;
 
 
 

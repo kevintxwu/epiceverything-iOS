@@ -65,31 +65,44 @@
 
 
 - (UBCard*) startTurn:(UBPlayer*)player{
-    NSAssert(player == self.currentPlayer, @"Only the current player can start their turn!");
+   // NSAssert(player == self.currentPlayer, @"Only the current player can start their turn!");
+    if (player == self.playerOne){
+        self.turnNumber++;
+    }
     NSLog(@"Starting Turn %d!", self.turnNumber);
-    player.myTurn = YES;
+    //player.myTurn = YES;
     player.mana = self.turnNumber;
     if (player.mana > 10){
         player.mana = 10;
     }
-    if(!(player.playerOne && self.turnNumber == 1)){  //Player 1 doesn't draw on first turn
+    if(!self.turnNumber == 1){  //Player 1 doesn't draw on first turn
         return [player drawCard];
     }
     return nil;
 }
 
+- (void) secondPassed{
+    for(int i=0; i < [self.playerOne.creaturesInPlay count]; i++){
+        [((UBCreature*)[self.playerOne.creaturesInPlay objectAtIndex:i]) secondPassed];
+    }
+    
+    for(int i=0; i < [self.playerTwo.creaturesInPlay count]; i++){
+        [((UBCreature*)[self.playerTwo.creaturesInPlay objectAtIndex:i]) secondPassed];
+    }
+}
+
 
 - (void) endTurn:(UBPlayer*)player
 {
-    NSAssert(player.myTurn, @"Only the current player can end their turn!");
-    player.myTurn = NO;
+    //NSAssert(player.myTurn, @"Only the current player can end their turn!");
+    //player.myTurn = NO;
     for(int i=0; i < [player.creaturesInPlay count]; i++){
         UBCreature* currCreature = [player.creaturesInPlay objectAtIndex:i];
-        currCreature.turnsInPlay++;
+  //      currCreature.turnsInPlay++;
         currCreature.attackedThisTurn = NO;
     }
     
-    self.currentPlayer = player.opponent;
+    //self.currentPlayer = player.opponent;
     if (player == self.playerTwo){
         self.turnNumber++;
     }

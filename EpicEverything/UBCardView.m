@@ -169,7 +169,7 @@
 }
 
 - (BOOL)isPlayed{
-    return ((UBCreature*)self.card).turnsInPlay >= 0;
+    return ((UBCreature*)self.card).secondsInPlay >= 0;
 }
 
 - (BOOL)isAlive{
