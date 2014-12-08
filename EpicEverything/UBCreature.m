@@ -66,35 +66,41 @@
 }
 
 - (void) attackSpace: (UBSpace*)target{
-    NSAssert([self canAttackSpace:target], @"Must be able to attack space!");
-    NSLog(@"%@ is attacking space %d!", self.name, target.position);
-    if (!target.occupied && ![self.owner isMySpace:target.position]){
-        self.owner.opponent.health -= self.baseAttack;
-        if (self.owner.opponent.health <= 0){
-            [self.owner.game gameWonByPlayer:self.owner];
+    //NSAssert([self canAttackSpace:target], @"Must be able to attack space!");
+    if([self canAttackSpace:target]){
+        NSLog(@"%@ is attacking space %d!", self.name, target.position);
+        if (!target.occupied && ![self.owner isMySpace:target.position]){
+            self.owner.opponent.health -= self.baseAttack;
+            if (self.owner.opponent.health <= 0){
+                //[self.owner.game gameWonByPlayer:self.owner];
+            }
         }
+        else
+        {
+            
+            target.creature.hitPoints -= self.baseAttack;
+            if(![self.owner isMySpace:target.position] && (target.creature.hasRange || abs(target.position - self.space.position) <= 2)){
+                //if not attacking own creature and in range of enemy, take counterattack damage
+                self.hitPoints -= target.creature.baseAttack;
+            }
+            NSLog(@"%@ now has %d hit points!", target.creature.name, target.creature.hitPoints);
+            NSLog(@"%@ now has %d hit points!", self.name, self.hitPoints);
+            if (target.creature.hitPoints <= 0){
+                [target.creature removeFromPlay];
+            }
+            if (self.hitPoints <= 0){
+                [self removeFromPlay];
+            }
+            
+            
+        }
+       // NSLog(@"RESETTING COOLDOWN");
+        self.secondsSinceLastAttack = 0;
     }
-    else
-    {
-        
-        target.creature.hitPoints -= self.baseAttack;
-        if(![self.owner isMySpace:target.position] && (target.creature.hasRange || abs(target.position - self.space.position) <= 2)){
-            //if not attacking own creature and in range of enemy, take counterattack damage
-            self.hitPoints -= target.creature.baseAttack;
-        }
-        NSLog(@"%@ now has %d hit points!", target.creature.name, target.creature.hitPoints);
-        NSLog(@"%@ now has %d hit points!", self.name, self.hitPoints);
-        if (target.creature.hitPoints <= 0){
-            [target.creature removeFromPlay];
-        }
-        if (self.hitPoints <= 0){
-            [self removeFromPlay];
-        }
-
-        
+    else{
+        NSLog(@"ERROR: TRIED TO ATTACK BUT ACTUALLY CAN'T");
     }
-    NSLog(@"RESETTING COOLDOWN");
-    self.secondsSinceLastAttack = 0;
+    
 }
 
 - (NSMutableArray*) enemiesInRangeWithBlock{

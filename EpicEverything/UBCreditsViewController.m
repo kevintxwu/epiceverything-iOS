@@ -7,6 +7,7 @@
 //
 
 #import "UBCreditsViewController.h"
+#import "UBMenuViewController.h"
 #import "UBCreditsView.h"
 
 @interface UBCreditsViewController ()
@@ -24,7 +25,10 @@
 }
 
 - (void)returnButtonPressed:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    UBMenuViewController *menuVC = [[UBMenuViewController alloc] init];
+    [self presentViewController:menuVC animated:YES completion:^{
+        return;
+    }];
 }
 
 @end

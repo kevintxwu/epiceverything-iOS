@@ -113,7 +113,6 @@
 
 - (void) gameWonByPlayer:(UBPlayer*)winner{
     NSLog(@"GAME OVER");
-    exit(0);
 }
 
 /*- (void) computerMove:(UBPlayer*)player{

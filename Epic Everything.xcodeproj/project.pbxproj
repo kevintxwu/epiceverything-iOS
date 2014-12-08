@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		069A4E301A1035A800E0AEC0 /* backgroundMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 069A4E2F1A1035A800E0AEC0 /* backgroundMusic.mp3 */; };
+		133AA80C1A35D3E400B98E49 /* hourglass.png in Resources */ = {isa = PBXBuildFile; fileRef = 133AA8081A35D3E400B98E49 /* hourglass.png */; };
+		133AA80D1A35D3E400B98E49 /* block.png in Resources */ = {isa = PBXBuildFile; fileRef = 133AA8091A35D3E400B98E49 /* block.png */; };
+		133AA80E1A35D3E400B98E49 /* range.png in Resources */ = {isa = PBXBuildFile; fileRef = 133AA80A1A35D3E400B98E49 /* range.png */; };
+		133AA80F1A35D3E400B98E49 /* speed.png in Resources */ = {isa = PBXBuildFile; fileRef = 133AA80B1A35D3E400B98E49 /* speed.png */; };
+		133AA8151A35DF8500B98E49 /* overlordcard.png in Resources */ = {isa = PBXBuildFile; fileRef = 133AA8101A35DF8500B98E49 /* overlordcard.png */; };
+		133AA8161A35DF8500B98E49 /* Mothershipcard.png in Resources */ = {isa = PBXBuildFile; fileRef = 133AA8111A35DF8500B98E49 /* Mothershipcard.png */; };
+		133AA8171A35DF8500B98E49 /* necromancercard.png in Resources */ = {isa = PBXBuildFile; fileRef = 133AA8121A35DF8500B98E49 /* necromancercard.png */; };
+		133AA8181A35DF8500B98E49 /* Froggycard.png in Resources */ = {isa = PBXBuildFile; fileRef = 133AA8131A35DF8500B98E49 /* Froggycard.png */; };
+		133AA8191A35DF8500B98E49 /* swords.png in Resources */ = {isa = PBXBuildFile; fileRef = 133AA8141A35DF8500B98E49 /* swords.png */; };
 		133BCCA91A0F41CD0026023D /* UBCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 133BCCA01A0F41CD0026023D /* UBCard.m */; };
 		133BCCAA1A0F41CD0026023D /* UBBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 133BCCA41A0F41CD0026023D /* UBBoard.m */; };
 		133BCCAB1A0F41CD0026023D /* UBPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 133BCCA61A0F41CD0026023D /* UBPlayer.m */; };
@@ -98,6 +107,15 @@
 
 /* Begin PBXFileReference section */
 		069A4E2F1A1035A800E0AEC0 /* backgroundMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = backgroundMusic.mp3; sourceTree = "<group>"; };
+		133AA8081A35D3E400B98E49 /* hourglass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hourglass.png; sourceTree = "<group>"; };
+		133AA8091A35D3E400B98E49 /* block.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = block.png; sourceTree = "<group>"; };
+		133AA80A1A35D3E400B98E49 /* range.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = range.png; sourceTree = "<group>"; };
+		133AA80B1A35D3E400B98E49 /* speed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = speed.png; sourceTree = "<group>"; };
+		133AA8101A35DF8500B98E49 /* overlordcard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = overlordcard.png; sourceTree = "<group>"; };
+		133AA8111A35DF8500B98E49 /* Mothershipcard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mothershipcard.png; sourceTree = "<group>"; };
+		133AA8121A35DF8500B98E49 /* necromancercard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = necromancercard.png; sourceTree = "<group>"; };
+		133AA8131A35DF8500B98E49 /* Froggycard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Froggycard.png; sourceTree = "<group>"; };
+		133AA8141A35DF8500B98E49 /* swords.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swords.png; sourceTree = "<group>"; };
 		133BCC9C1A0F40AC0026023D /* UBPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBPlayer.h; sourceTree = "<group>"; };
 		133BCC9F1A0F41CD0026023D /* UBCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBCard.h; sourceTree = "<group>"; };
 		133BCCA01A0F41CD0026023D /* UBCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBCard.m; sourceTree = "<group>"; };
@@ -354,6 +372,15 @@
 		8B8375C01A0F31D400A2CF18 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				133AA8101A35DF8500B98E49 /* overlordcard.png */,
+				133AA8111A35DF8500B98E49 /* Mothershipcard.png */,
+				133AA8121A35DF8500B98E49 /* necromancercard.png */,
+				133AA8131A35DF8500B98E49 /* Froggycard.png */,
+				133AA8141A35DF8500B98E49 /* swords.png */,
+				133AA8081A35D3E400B98E49 /* hourglass.png */,
+				133AA8091A35D3E400B98E49 /* block.png */,
+				133AA80A1A35D3E400B98E49 /* range.png */,
+				133AA80B1A35D3E400B98E49 /* speed.png */,
 				069A4E311A10393400E0AEC0 /* Sounds */,
 				8B8375D61A0F496000A2CF18 /* Fonts */,
 				8B8375D21A0F44B700A2CF18 /* Images */,
@@ -550,6 +577,8 @@
 			files = (
 				233937271A0FB7F600A46160 /* shroomsprite.png in Resources */,
 				8BB1A5471A0F218A00CD2FE9 /* Main.storyboard in Resources */,
+				133AA8161A35DF8500B98E49 /* Mothershipcard.png in Resources */,
+				133AA8171A35DF8500B98E49 /* necromancercard.png in Resources */,
 				8B854E211A0F500A00E9BF5B /* uchiyama.ttf in Resources */,
 				8B854E201A0F500700E9BF5B /* Adventure.otf in Resources */,
 				8B854E311A1007AC00E9BF5B /* Lato-Black.ttf in Resources */,
@@ -567,19 +596,24 @@
 				233937231A0FB7F600A46160 /* overlord.png in Resources */,
 				233937261A0FB7F600A46160 /* rogue.png in Resources */,
 				233937131A0FB7F600A46160 /* robowolf-card.png in Resources */,
+				133AA80F1A35D3E400B98E49 /* speed.png in Resources */,
 				8B854E391A105BE700E9BF5B /* screenshot.jpg in Resources */,
+				133AA80C1A35D3E400B98E49 /* hourglass.png in Resources */,
 				233937291A0FB7F600A46160 /* volcanohead.png in Resources */,
 				2339371F1A0FB7F600A46160 /* lavaling.png in Resources */,
 				8BB1A54C1A0F218A00CD2FE9 /* LaunchScreen.xib in Resources */,
 				2339371C1A0FB7F600A46160 /* chickenbot.png in Resources */,
 				233937141A0FB7F600A46160 /* rogue-card.png in Resources */,
 				233937191A0FB7F600A46160 /* hp.png in Resources */,
+				133AA80D1A35D3E400B98E49 /* block.png in Resources */,
 				233937121A0FB7F600A46160 /* ranger-card.png in Resources */,
 				2339370D1A0FB7F600A46160 /* lavaling-card.png in Resources */,
 				233937211A0FB7F600A46160 /* mothership.png in Resources */,
 				233937201A0FB7F600A46160 /* loggoraptor.png in Resources */,
 				233937241A0FB7F600A46160 /* ranger.png in Resources */,
 				2339370F1A0FB7F600A46160 /* mothership-card.png in Resources */,
+				133AA80E1A35D3E400B98E49 /* range.png in Resources */,
+				133AA8191A35DF8500B98E49 /* swords.png in Resources */,
 				233937111A0FB7F600A46160 /* overlord-card.png in Resources */,
 				2339370A1A0FB7F600A46160 /* chickenbot-card.png in Resources */,
 				133BCCB21A0F4F630026023D /* cards.plist in Resources */,
@@ -589,6 +623,7 @@
 				8BB1A5491A0F218A00CD2FE9 /* Images.xcassets in Resources */,
 				2339372A1A0FB7F600A46160 /* space.png in Resources */,
 				233937221A0FB7F600A46160 /* necromancer.png in Resources */,
+				133AA8151A35DF8500B98E49 /* overlordcard.png in Resources */,
 				133BCCB41A0F50600026023D /* statusEffects.plist in Resources */,
 				233937161A0FB7F600A46160 /* tank-card.png in Resources */,
 				2339370B1A0FB7F600A46160 /* elvisbot-card.png in Resources */,
@@ -598,6 +633,7 @@
 				2339371E1A0FB7F600A46160 /* froggy.png in Resources */,
 				2339370C1A0FB7F600A46160 /* froggy-card.png in Resources */,
 				8B854E241A0FFB1700E9BF5B /* Default-iphone.png in Resources */,
+				133AA8181A35DF8500B98E49 /* Froggycard.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

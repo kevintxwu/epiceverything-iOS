@@ -8,7 +8,6 @@
 
 #import "UBGameView.h"
 #import "UBCardView.h"
-#import "UBSpaceView.h"
 #import "UBGameViewController.h"
 #import "UIView+UBExtensions.h"
 #define kArrowPointCount 7
@@ -19,11 +18,17 @@
 @property (nonatomic) UIImageView *background;
 @property (nonatomic) NSMutableArray *spaces;
 @property (nonatomic) NSMutableArray *allCards;
+@property (nonatomic) NSMutableArray *playedCards;
 @property (nonatomic) UIImageView *drawLayer;
 @property (nonatomic) CGPoint location;
 @property (nonatomic) UBCardView *selectedCard;
+@property (nonatomic) UBCardView *animatingCard;
+@property (nonatomic) UBCardView *dyingCard;
 @property (nonatomic) UILabel *secondsLeftLabel;
+@property (nonatomic) BOOL firstUpdate;
 
+@property (nonatomic) int playerHandSize;
+@property (nonatomic) int opponentHandSize;
 
 
 @end
@@ -37,6 +42,7 @@
         self.backgroundColor = [UIColor whiteColor];
         _game = game;
         _allCards = [NSMutableArray array];
+        _firstUpdate = YES;
         [self createSubviews];
         [self updateConstraints];
     }
@@ -81,7 +87,7 @@
     
     _playerCards = [({
         UIImageView *cards = [[UIImageView alloc] init];
-        [cards setImage:[UIImage ub_cards]];
+        [cards setImage:[UIImage imageNamed:@"hourglass"]];
         cards;
     }) ub_addToSuperview:self];
     
@@ -99,7 +105,7 @@
     
     _opponentCards = [({
         UIImageView *cards = [[UIImageView alloc] init];
-        [cards setImage:[UIImage ub_cards]];
+        [cards setImage:[UIImage imageNamed:@"hourglass"]];
         cards;
     }) ub_addToSuperview:self];
     
@@ -118,7 +124,7 @@
     _playerManaLabel = [({
         UILabel *title = [[UILabel alloc] init];
         [title setFont:[UIFont ub_blackCastle]];
-        [title setText:@"1"];
+        [title setText:@"0"];
         [title setTextColor:[UIColor whiteColor]];
         title.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
         title.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -154,7 +160,7 @@
     _opponentManaLabel = [({
         UILabel *title = [[UILabel alloc] init];
         [title setFont:[UIFont ub_blackCastle]];
-        [title setText:@"1"];
+        [title setText:@"0"];
         [title setTextColor:[UIColor whiteColor]];
         title.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
         title.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -186,7 +192,7 @@
         start;
     }) ub_addToSuperview:self];*/
     
-    _secondsLeftLabel = [({
+    /*_secondsLeftLabel = [({
         UILabel *title = [[UILabel alloc] init];
         [title setFont:[UIFont ub_endTurn]];
         [title setText:@"Next Turn: 15"];
@@ -196,7 +202,7 @@
         title.layer.shadowOpacity = 0.5;
         title.textAlignment = NSTextAlignmentCenter;
         title;
-    }) ub_addToSuperview:self];
+    }) ub_addToSuperview:self];*/
     
     
     _drawLayer = [({
@@ -214,8 +220,78 @@
     UBCardView *cardView = [[UBCardView alloc] initWithCard:card forPlayerOne:player];
     cardView.delegate = self;
     [cardView ub_addToSuperview:self];
-    [self.allCards addObject:cardView];
+    [self bringSubviewToFront:cardView];
+    [self drawCardAnimation:cardView playerOne:player];
     return cardView;
+}
+
+- (void)drawCardAnimation:(UBCardView*)card playerOne:(BOOL)player {
+
+    
+    if(player){
+        [card switchToCard];
+        [card mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.mas_right).with.offset(-10);
+            make.centerY.equalTo(self.mas_centerY).with.offset(20.0);
+            make.width.equalTo(@75);
+            make.height.equalTo(@120.6);
+        }];
+        [card layoutIfNeeded];
+        
+        
+        [card mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(@(140 + 40 * [self.game.playerOne.hand count]));
+            make.centerY.equalTo(self.mas_bottom).with.offset(-10.0);
+            make.width.equalTo(@75);
+            make.height.equalTo(@120.6);
+        }];
+        
+        
+        
+        [UIView animateWithDuration:.5 delay:0.1 options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^(void) {
+                             [card layoutIfNeeded];
+                         }
+                         completion:^(BOOL finished){
+                             [self.allCards addObject:card];
+                             [self bringSubviewToFront:card];
+                         }
+         ];
+
+        
+        
+        
+    }
+    else{
+        [card switchToCard];
+        [card mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.mas_left).with.offset(10);
+            make.centerY.equalTo(self.mas_centerY).with.offset(-10.0);
+            make.width.equalTo(@70);
+            make.height.equalTo(@108.3);
+        }];
+        [card layoutIfNeeded];
+        
+        [card mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.mas_right).with.offset(-180 - 50 * self.opponentHandSize);
+            make.centerY.equalTo(self.mas_top);
+            make.width.equalTo(@75);
+            make.height.equalTo(@120.6);
+        }];
+        
+        [UIView animateWithDuration:.5 delay:0.1 options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^(void) {
+                             [card layoutIfNeeded];
+                         }
+                         completion:^(BOOL finished){
+                             [self.allCards addObject:card];
+                             [self bringSubviewToFront:card];
+                         }
+         ];
+
+        
+        
+    }
 }
 
 
@@ -260,7 +336,7 @@
 
 
 - (void)drawAttackPath:(UBCardView *)view withTouch:(UITouch *)touch{
-    NSLog(@"Draw");
+    //NSLog(@"Draw");
     CGPoint currentLocation = [touch locationInView:self];
     UBSpaceView *spaceView = [self locationOnSpace:currentLocation];
     UBCreature *selectedCreature = (UBCreature *) view.card;
@@ -293,15 +369,15 @@
     CGPoint location = [touch locationInView:self];
     UBSpaceView *spaceView = [self locationOnSpace:location];
     UBCreature *selectedCreature = (UBCreature *) view.card;
-    if(spaceView && spaceView.space == ((UBCreature *)view.card).space){
+    /*if(spaceView && spaceView.space == ((UBCreature *)view.card).space){
         [self bringSubviewToFront:view];
         NSLog(@"Showing card");
         [view tempViewCard];
         
-    }
+    }*/
     if (spaceView && view.playerOneCard &&[selectedCreature canAttackSpace:spaceView.space]) {
-        [selectedCreature attackSpace:spaceView.space];
-        //[self shakeCardAnimation:view];
+        [self attackCardAnimation:view andTargetPosition:spaceView.space.position];
+        
         //[self updateBoard];
     } else {
         //[self updateBoard];
@@ -365,53 +441,106 @@
 
 
 
-- (void)drawCardAnimation:(UBCardView*)card{
-    CGPoint point = self.center;
-    if (!card.playerOneCard){
-        //point = ;
-    }
-    
-    
-    /*[UIView animateWithDuration:0.4f
-                          delay:0.0f
-                        options:UIViewAnimationOptionCurveEaseOut
-                     animations:^
-     {
-         card.center = point;
-     }
-                     completion:^(BOOL finished)
-    {
-        //[self updateBoard];
-    }];
-    //sleep(.5f); */
 
+- (void)attackCardAnimation:(UBCardView*)card andTargetPosition:(int)targetPosition{
+    UBSpaceView *target_space = self.spaces[targetPosition];
+    NSLog(@"TARGET: %d", targetPosition);
+    UBSpaceView *curr_space = self.spaces[((UBCreature *)card.card).space.position];
+    //double angle = atan(((double)(space.center.x - card.center.x)) / (space.center.y - card.center.y));
+    [self bringSubviewToFront:card];
+    self.animatingCard = card;
+    NSAssert(card && curr_space && target_space, @"SPACES AND CARD SHOULD EXIST");
+    [card mas_remakeConstraints:^(MASConstraintMaker *make) {
+        if(targetPosition % 2 == 0){
+            NSLog(@"ATTACKING BOTTOM");
+            make.bottom.equalTo(target_space.mas_centerY).with.offset(20);
+        }
+        else{
+            make.top.equalTo(target_space.mas_centerY).with.offset(-20);
+        }
+        if(targetPosition > curr_space.space.position){
+            make.right.equalTo(target_space.mas_centerX).with.offset(20);
+        }
+        else{
+            make.left.equalTo(target_space.mas_centerX).with.offset(-20);
+        }
+        
+        make.width.equalTo(@100);
+        make.height.equalTo(@100);
+        
+    }];
+    
+    
+    
+    [UIView animateWithDuration:.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^(void) {
+                         [card layoutIfNeeded];
+                     }
+                     completion:^(BOOL finished){
+                         UBCardView* enemy = [self getCardViewAtSpace:targetPosition];
+                         
+                         [(UBCreature*)card.card attackSpace:target_space.space];
+                         
+                         if(((UBCreature*)card.card).hitPoints <= 0){
+                             [self deathAnimation:card attacker:YES];
+                         }
+                         else{
+                             [card mas_remakeConstraints:^(MASConstraintMaker *make) {
+                                 make.left.equalTo(curr_space.mas_left);
+                                 make.right.equalTo(curr_space.mas_right);
+                                 make.top.equalTo(curr_space.mas_top);
+                                 make.bottom.equalTo(curr_space.mas_bottom);
+                                 make.width.equalTo(@100);
+                                 make.height.equalTo(@100);
+                             }];
+                             
+                             
+                             
+                             [UIView animateWithDuration:.7 animations:^{
+                                 [card layoutIfNeeded];
+                                 self.animatingCard = nil;
+                             }];
+                         }
+                         
+                         if(enemy && ((UBCreature*)enemy.card).hitPoints <= 0){
+                             self.dyingCard = enemy;
+                            [self deathAnimation:enemy attacker:NO];
+                         }
+                         
+
+                     }];
+    
+    
 }
 
-- (void)shakeCardAnimation:(UBCardView*)card{
-    CGPoint point = CGPointMake(card.center.x - 30.0f, card.center.y);
 
+- (UBCardView *)getCardViewAtSpace:(int)spacePosition{
+    for(UBCardView* card in self.playedCards){
+        if(((UBCreature *)card.card).space.position == spacePosition){
+            return card;
+        }
+    }
+    return nil;
+}
+
+- (void) deathAnimation:(UBCardView*)card attacker:(BOOL)isAttacker{
     
     
-    [UIView animateWithDuration:0.5f
-                          delay:0.0f
-                        options:UIViewAnimationOptionCurveEaseOut
-                     animations:^
-     {
-         card.center = point;
-     }
-                     completion:nil];
-    sleep(.5f);
-    point = CGPointMake(card.center.x + 30.0f, card.center.y);
-    
-    [UIView animateWithDuration:0.5f
-                          delay:0.0f
-                        options:UIViewAnimationOptionCurveEaseOut
-                     animations:^
-     {
-         card.center = point;
-     }
-                     completion:nil];
-    sleep(.5f);
+    [UIView animateWithDuration:0.5 delay:0.1 options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^(void) {
+                         [card setAlpha:0.0];
+                     }
+                     completion:^(BOOL finished){
+                         
+                         if(isAttacker){
+                            self.animatingCard = nil;
+                         }
+                         else{
+                             self.dyingCard = nil;
+                         }
+                         
+                     }];
+
 }
 
 - (UBSpaceView *)locationOnSpace:(CGPoint)location {
@@ -426,175 +555,178 @@
 
 - (void)updateConstraints {
     
-    [self.background mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.mas_top);
-        make.bottom.equalTo(self.mas_bottom);
-        make.left.equalTo(self.mas_left);
-        make.right.equalTo(self.mas_right);
-    }];
+    if (self.firstUpdate){
+        
     
-    [self.drawLayer mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.mas_top);
-        make.bottom.equalTo(self.mas_bottom);
-        make.left.equalTo(self.mas_left);
-        make.right.equalTo(self.mas_right);
-    }];
+    NSLog(@"UPDATING CONSTRAINTS");
     
-    [self.next mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.mas_centerX);
-        make.centerY.equalTo(self.mas_centerY);
-        make.width.equalTo([UIView ub_buttonWidth]);
-        make.height.equalTo([UIView ub_buttonHeight]);
-    }];
-    
-    
-    
-    for (int i = 0; i < 8; i+=2){
-        [self.spaces[i] mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.mas_centerX).with.offset(-175.0 + 50.0*i);
-            make.centerY.equalTo(self.mas_centerY).with.offset(32.0);
-            make.width.equalTo(@100);
-            make.height.equalTo(@100);
+        [self.background mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.mas_top);
+            make.bottom.equalTo(self.mas_bottom);
+            make.left.equalTo(self.mas_left);
+            make.right.equalTo(self.mas_right);
         }];
-        [self.spaces[i+1] mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.mas_centerX).with.offset(-125.0 + 50.0*i);
-            make.centerY.equalTo(self.mas_centerY).with.offset(-55.0);
-            make.width.equalTo(@100);
-            make.height.equalTo(@100);
+        
+        [self.drawLayer mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.mas_top);
+            make.bottom.equalTo(self.mas_bottom);
+            make.left.equalTo(self.mas_left);
+            make.right.equalTo(self.mas_right);
         }];
+        
+        [self.next mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.mas_centerX);
+            make.centerY.equalTo(self.mas_centerY);
+            make.width.equalTo([UIView ub_buttonWidth]);
+            make.height.equalTo([UIView ub_buttonHeight]);
+        }];
+        
+        
+        
+        for (int i = 0; i < 8; i+=2){
+            [self.spaces[i] mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.centerX.equalTo(self.mas_centerX).with.offset(-175.0 + 50.0*i);
+                make.centerY.equalTo(self.mas_centerY).with.offset(32.0);
+                make.width.equalTo(@100);
+                make.height.equalTo(@100);
+            }];
+            [self.spaces[i+1] mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.centerX.equalTo(self.mas_centerX).with.offset(-125.0 + 50.0*i);
+                make.centerY.equalTo(self.mas_centerY).with.offset(-55.0);
+                make.width.equalTo(@100);
+                make.height.equalTo(@100);
+            }];
+        }
+        
+        [self.playerHealth mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(@20);
+            make.bottom.equalTo(@-15);
+            make.width.equalTo(@50);
+            make.height.equalTo(@50);
+        }];
+        
+        [self.playerHealthLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(@20);
+            make.bottom.equalTo(@-14);
+            make.width.equalTo(@50);
+            make.height.equalTo(@50);
+        }];
+        
+        [self.playerMana mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(@70);
+            make.bottom.equalTo(@-15);
+            make.width.equalTo(@50);
+            make.height.equalTo(@50);
+        }];
+        
+        [self.playerManaLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(@70);
+            make.bottom.equalTo(@-14);
+            make.width.equalTo(@50);
+            make.height.equalTo(@50);
+        }];
+        
+        [self.playerCards mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(@120);
+            make.bottom.equalTo(@-15);
+            make.width.equalTo(@50);
+            make.height.equalTo(@50);
+        }];
+        
+        [self.playerCardsLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(@120);
+            make.bottom.equalTo(@-14);
+            make.width.equalTo(@50);
+            make.height.equalTo(@50);
+        }];
+        
+        [self.opponentHealth mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(@-108);
+            make.top.equalTo(@7);
+            make.width.equalTo(@50);
+            make.height.equalTo(@50);
+        }];
+        
+        [self.opponentHealthLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(@-108);
+            make.top.equalTo(@8);
+            make.width.equalTo(@50);
+            make.height.equalTo(@50);
+        }];
+        
+        [self.opponentMana mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(@-58);
+            make.top.equalTo(@7);
+            make.width.equalTo(@50);
+            make.height.equalTo(@50);
+        }];
+        
+        [self.opponentManaLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(@-58);
+            make.top.equalTo(@8);
+            make.width.equalTo(@50);
+            make.height.equalTo(@50);
+        }];
+        
+        [self.opponentCards mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(@-8);
+            make.top.equalTo(@7);
+            make.width.equalTo(@50);
+            make.height.equalTo(@50);
+        }];
+        
+        [self.opponentCardsLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(@-8);
+            make.top.equalTo(@8);
+            make.width.equalTo(@50);
+            make.height.equalTo(@50);
+        }];
+        
+       /* [self.secondsLeftLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.mas_right).with.offset(-20.0);
+             make.bottom.equalTo(self.mas_bottom).with.offset(-5.0);
+        }];*/
+        
+        /*[self.endTurn mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(@-12);
+            make.bottom.equalTo(@-5);
+        }];*/
+        
+        self.firstUpdate = NO;
     }
-    
-    [self.playerHealth mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(@20);
-        make.bottom.equalTo(@-15);
-        make.width.equalTo(@50);
-        make.height.equalTo(@50);
-    }];
-    
-    [self.playerHealthLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(@20);
-        make.bottom.equalTo(@-14);
-        make.width.equalTo(@50);
-        make.height.equalTo(@50);
-    }];
-    
-    [self.playerMana mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(@70);
-        make.bottom.equalTo(@-15);
-        make.width.equalTo(@50);
-        make.height.equalTo(@50);
-    }];
-    
-    [self.playerManaLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(@70);
-        make.bottom.equalTo(@-14);
-        make.width.equalTo(@50);
-        make.height.equalTo(@50);
-    }];
-    
-    [self.playerCards mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(@120);
-        make.bottom.equalTo(@-15);
-        make.width.equalTo(@50);
-        make.height.equalTo(@50);
-    }];
-    
-    [self.playerCardsLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(@120);
-        make.bottom.equalTo(@-14);
-        make.width.equalTo(@50);
-        make.height.equalTo(@50);
-    }];
-    
-    [self.opponentHealth mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(@-108);
-        make.top.equalTo(@7);
-        make.width.equalTo(@50);
-        make.height.equalTo(@50);
-    }];
-    
-    [self.opponentHealthLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(@-108);
-        make.top.equalTo(@8);
-        make.width.equalTo(@50);
-        make.height.equalTo(@50);
-    }];
-    
-    [self.opponentMana mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(@-58);
-        make.top.equalTo(@7);
-        make.width.equalTo(@50);
-        make.height.equalTo(@50);
-    }];
-    
-    [self.opponentManaLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(@-58);
-        make.top.equalTo(@8);
-        make.width.equalTo(@50);
-        make.height.equalTo(@50);
-    }];
-    
-    [self.opponentCards mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(@-8);
-        make.top.equalTo(@7);
-        make.width.equalTo(@50);
-        make.height.equalTo(@50);
-    }];
-    
-    [self.opponentCardsLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(@-8);
-        make.top.equalTo(@8);
-        make.width.equalTo(@50);
-        make.height.equalTo(@50);
-    }];
-    
-    [self.secondsLeftLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.mas_right).with.offset(-20.0);
-         make.bottom.equalTo(self.mas_bottom).with.offset(-5.0);
-    }];
-    
-    /*[self.endTurn mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(@-12);
-        make.bottom.equalTo(@-5);
-    }];*/
     [super updateConstraints];
 }
 
 - (void) updateBoard {
     NSMutableArray *myHand = [NSMutableArray array];
     NSMutableArray *opponentHand = [NSMutableArray array];
-    NSMutableArray *playedCards = [NSMutableArray array];
-    NSLog(@"CARDS ON SCREEN %lu", (unsigned long)[self.allCards count]);
+    self.playedCards = [NSMutableArray array];
+    //NSLog(@"CARDS ON SCREEN %lu", (unsigned long)[self.allCards count]);
     
     for (int i = 0; i < [self.allCards count]; i++){
         UBCardView *curr = (UBCardView*)(self.allCards[i]);
-        if (![curr isAlive]){
-            NSLog(@"DEAD");
-            //this is dumb, but removeFromSuperview was not working
-            [curr mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.right.equalTo(self.mas_right);
-                make.centerY.equalTo(self.mas_top);
-                make.width.equalTo(@0);
-                make.height.equalTo(@0);
-            }];
-            [self.allCards removeObject:curr];
-            i--;
-        }
-        else if ([curr isPlayed] ){
-            NSLog(@"PLAYED");
-            [playedCards addObject:curr];
-        }
-        else if (curr.playerOneCard){
-            [myHand addObject:curr];
-        }
-        else if (!curr.playerOneCard){
-            [opponentHand addObject:curr];
+        if(curr != self.animatingCard && curr != self.dyingCard){
+            if (![curr isAlive]){
+                [self.allCards removeObject:curr];
+                i--;
+                [curr removeFromSuperview];
+            }
+            else if ([curr isPlayed] ){
+                //NSLog(@"PLAYED");
+                [self.playedCards addObject:curr];
+            }
+            else if (curr.playerOneCard){
+                [myHand addObject:curr];
+            }
+            else if (!curr.playerOneCard){
+                [opponentHand addObject:curr];
+            }
         }
     }
     
-     NSLog(@"MY HAND %lu", (unsigned long)[myHand count]);
-     NSLog(@"OPP HAND %lu", (unsigned long)[opponentHand count]);
-    
+     //NSLog(@"MY HAND %lu", (unsigned long)[myHand count]);
+     //NSLog(@"OPP HAND %lu", (unsigned long)[opponentHand count]);
+    self.playerHandSize = [myHand count];
     
     for (int i = 0; i < [myHand count]; i++){
         if (self.selectedCard != myHand[i]){
@@ -606,6 +738,7 @@
                 make.height.equalTo(@120.6);
             }];
         }
+        //[self bringSubviewToFront:myHand[i]];
     }
     
     for (int i = [opponentHand count] - 1; i >= 0; i--){
@@ -616,32 +749,40 @@
             make.width.equalTo(@70);
             make.height.equalTo(@108.3);
         }];
+        
     }
     
-    for (int i = 0; i < [playedCards count]; i++){
-        UBCardView* cardView = (UBCardView*) playedCards[i];
+    self.opponentHandSize = [opponentHand count];
+    
+    for (int i = 0; i < [self.playedCards count]; i++){
+        UBCardView* cardView = (UBCardView*) self.playedCards[i];
         
         UBSpaceView *spaceView = self.spaces[[((UBCreature*)(cardView.card)).space getIndex]];
-        
-        [cardView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(spaceView.mas_left);
-            make.right.equalTo(spaceView.mas_right);
-            make.top.equalTo(spaceView.mas_top);
-            make.bottom.equalTo(spaceView.mas_bottom);
-        }];
+        if (self.animatingCard != self.playedCards[i]){
+            [cardView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(spaceView.mas_left);
+                make.right.equalTo(spaceView.mas_right);
+                make.top.equalTo(spaceView.mas_top);
+                make.bottom.equalTo(spaceView.mas_bottom);
+                make.centerY.equalTo(spaceView.mas_centerY);
+                make.centerX.equalTo(spaceView.mas_centerX);
+                make.width.equalTo(@100);
+                make.height.equalTo(@100);
+            }];
+        }
+
         
         [cardView switchToPiece];
     }
     
     self.playerHealthLabel.text = [NSString stringWithFormat: @"%d", self.game.playerOne.health];
     self.playerManaLabel.text = [NSString stringWithFormat: @"%d", self.game.playerOne.mana];
-    self.playerCardsLabel.text = [NSString stringWithFormat: @"%d", self.game.playerOne.cardsRemaining];
+    self.playerCardsLabel.text = [NSString stringWithFormat: @"%d", self.game.turnLength - self.secondsPassed];
     self.opponentHealthLabel.text = [NSString stringWithFormat: @"%d", self.game.playerTwo.health];
     self.opponentManaLabel.text = [NSString stringWithFormat: @"%d", self.game.playerTwo.mana];
-    self.opponentCardsLabel.text = [NSString stringWithFormat: @"%d", self.game.playerTwo.cardsRemaining];
-    
-    self.secondsLeftLabel.text = [NSString stringWithFormat: @"Next Turn: %d", self.game.turnLength - self.secondsPassed];
-    
+    self.opponentCardsLabel.text = [NSString stringWithFormat: @"%d", self.game.turnLength - self.secondsPassed];
+
+    [self bringSubviewToFront:self.drawLayer];
 
 }
 

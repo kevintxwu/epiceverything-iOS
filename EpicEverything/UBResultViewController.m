@@ -17,14 +17,29 @@
 
 @implementation UBResultViewController
 
+- (void) initWithVictory:(BOOL)win{
+    self.victory = win;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view = [[UBResultsView alloc] init];
+    if(!self.victory){
+     [self.view changeText];
+    }
+}
+
+- (void)viewDidAppear {
+    /*if(!self.victory){
+        [self.view changeText];
+    }*/
 }
 
 - (void)endButtonPressed:(id)sender {
+    NSLog(@"ENDING");
+    
     UBMenuViewController *menuVC = [[UBMenuViewController alloc] init];
-    [self presentViewController:menuVC animated:NO completion:^{
+    [self presentViewController:menuVC animated:YES completion:^{
         return;
     }];
 }

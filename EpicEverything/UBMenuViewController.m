@@ -25,12 +25,18 @@
 
 - (void)startButtonPressed:(id)sender {
     UBGameViewController *gameVC = [[UBGameViewController alloc] init];
-    [self.navigationController pushViewController:gameVC animated:YES];
+   // [self.navigationController pushViewController:gameVC animated:YES];
+    [self presentViewController:gameVC animated:YES completion:^{
+        return;
+    }];
 }
 
 - (void)creditsButtonPressed:(id)sender {
     UBCreditsViewController *creditsVC = [[UBCreditsViewController alloc] init];
-    [self.navigationController pushViewController:creditsVC animated:YES];
+    //[self.navigationController pushViewController:creditsVC animated:YES];
+    [self presentViewController:creditsVC animated:YES completion:^{
+        return;
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

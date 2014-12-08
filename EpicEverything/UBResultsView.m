@@ -11,7 +11,10 @@
 
 @interface UBResultsView ()
 
-@property (nonatomic) UIButton *end;
+@property (nonatomic) UIImageView *background;
+@property (nonatomic) UILabel *title;
+@property (nonatomic) UIButton *start;
+@property (nonatomic) UIButton *instructions;
 
 @end
 
@@ -28,28 +31,90 @@
 }
 
 - (void)createSubviews {
-    _end = [({
-        UIButton *end = [[UIButton alloc] init];
-        [end setTitle:@"End Game" forState:UIControlStateNormal];
-        end.backgroundColor = [UIColor redColor];
-        //[start.titleLabel setFont:[UIFont ub_textFont]];
-        [end addTarget:_delegate action:@selector(endButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-        end;
+    
+    _background = [({
+        UIImageView *background = [[UIImageView alloc] init];
+        [background setImage:[UIImage ub_menuBackground]];
+        background;
+    }) ub_addToBackOfSuperview:self];
+    
+    _title = [({
+        UILabel *title = [[UILabel alloc] init];
+        [title setFont:[UIFont ub_adventure]];
+        [title setText:@"Victory!"];
+        [title setTextColor:[UIColor whiteColor]];
+        title.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+        title.layer.shadowColor = [UIColor blackColor].CGColor;
+        title.layer.shadowOpacity = 0.5;
+        [title setTextAlignment:NSTextAlignmentCenter];
+        title;
+    }) ub_addToSuperview:self];
+    
+    _start = [({
+        UIButton *start = [[UIButton alloc] init];
+        [start setTitle:@"Play Again" forState:UIControlStateNormal];
+        start.backgroundColor = [UIColor clearColor];
+        [start.titleLabel setFont:[UIFont ub_uchiyama]];
+        [start.layer setBorderColor:[UIColor whiteColor].CGColor];
+        [start.layer setBorderWidth:[UIView ub_borderWidth]];
+        [start.layer setCornerRadius:[UIView ub_borderRadius]];
+        start.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+        start.layer.shadowColor = [UIColor blackColor].CGColor;
+        start.layer.shadowOpacity = 0.5;
+        [start addTarget:_delegate action:@selector(endButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        start;
+    }) ub_addToSuperview:self];
+    
+    _instructions = [({
+        UIButton *instructions = [[UIButton alloc] init];
+        [instructions setTitle:@"Credits" forState:UIControlStateNormal];
+        instructions.backgroundColor = [UIColor clearColor];
+        [instructions.titleLabel setFont:[UIFont ub_uchiyama]];
+        [instructions.layer setBorderColor:[UIColor whiteColor].CGColor];
+        [instructions.layer setBorderWidth:[UIView ub_borderWidth]];
+        [instructions.layer setCornerRadius:[UIView ub_borderRadius]];
+        instructions.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+        instructions.layer.shadowColor = [UIColor blackColor].CGColor;
+        instructions.layer.shadowOpacity = 0.5;
+        [instructions addTarget:_delegate action:@selector(creditsButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        instructions;
     }) ub_addToSuperview:self];
 }
 
 - (void)updateConstraints {
     
-    [self.end mas_updateConstraints:^(MASConstraintMaker *make) {
+    [self.background mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.mas_top);
+        make.bottom.equalTo(self.mas_bottom);
+        make.left.equalTo(self.mas_left);
+        make.right.equalTo(self.mas_right);
+    }];
+    
+    [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.start.mas_top).with.offset([[UIView ub_titlePadding] floatValue]);
         make.centerX.equalTo(self.mas_centerX);
-        make.centerY.equalTo(self.mas_centerY);
+        make.top.equalTo(self.mas_top).with.offset([[UIView ub_titlePadding] floatValue]);
+        make.width.equalTo(@300);
+    }];
+    
+    [self.start mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.mas_centerX);
+        make.centerY.equalTo(self.mas_centerY).with.offset(20);
         make.width.equalTo([UIView ub_buttonWidth]);
-        make.height.equalTo([UIView ub_buttonHeight]);
+    }];
+    
+    [self.instructions mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.start.mas_centerX);
+        make.top.equalTo(self.start.mas_bottom).with.offset([[UIView ub_padding] floatValue]);
+        make.width.equalTo([UIView ub_buttonWidth]);
     }];
     
     [super updateConstraints];
 }
 
-@end
+- (void) changeText {
+    [self.title setText:@"Defeat!"];
+}
 
+@end
 

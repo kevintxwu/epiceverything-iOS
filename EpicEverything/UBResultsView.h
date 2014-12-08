@@ -14,10 +14,13 @@
 
 @property (nonatomic, weak) id<UBResultsViewDelegate> delegate;
 
+- (void) changeText;
+
 @end
 
 @protocol UBResultsViewDelegate <NSObject>
 
 - (void)endButtonPressed:(id)sender;
+
 
 @end

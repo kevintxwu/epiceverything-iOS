@@ -10,6 +10,7 @@
 #import "UBGame.h"
 #import "UBCardView.h"
 #import "UBGameViewController.h"
+#import "UBSpaceView.h"
 
 
 @protocol UBGameViewDelegate;
@@ -33,6 +34,7 @@
 @property (nonatomic) UILabel *playerManaLabel;
 @property (nonatomic) UILabel *opponentManaLabel;
 
+
 @property (nonatomic) UIButton *endTurn;
 
 @property (nonatomic) int secondsPassed;
@@ -45,7 +47,11 @@
 
 - (UBCardView*)setUpNewCard:(UBCard*)card playerOne:(BOOL)player;
 
-- (void)drawCardAnimation:(UBCardView*)card;
+//- (void)drawCardAnimation:(UBCardView*)card;
+
+- (void)attackCardAnimation:(UBCardView*)card andTargetPosition:(int)targetPosition;
+
+- (UBCardView*)getCardViewAtSpace:(int)spacePosition;
 
 
 @end

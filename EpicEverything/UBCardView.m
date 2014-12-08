@@ -14,6 +14,8 @@
 @property (nonatomic) UILabel *damagePoints;
 @property (nonatomic) UILabel *hitPoints;
 @property (nonatomic) UILabel *secondsUntilAttack;
+@property (nonatomic) NSMutableArray *effectIcons;
+@property (nonatomic) UIImageView *swords;
 
 @end
 
@@ -66,7 +68,7 @@
     
     _secondsUntilAttack = [({
         UILabel *hitPoints = [[UILabel alloc] init];
-        [hitPoints setFont:[UIFont ub_blackCastle]];
+        [hitPoints setFont:[UIFont ub_blackCastleBigger]];
         [hitPoints setTextColor:[UIColor whiteColor]];
         hitPoints.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
         hitPoints.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -75,6 +77,39 @@
         hitPoints.hidden = NO;
         hitPoints;
     }) ub_addToSuperview:self];
+    
+    _effectIcons = [[NSMutableArray alloc] init];
+    
+    if(((UBCreature*)self.card).hasBlock){
+        UIImageView *blockIcon = [({
+            UIImageView *blockIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"block"]];
+            blockIcon;
+        }) ub_addToSuperview:self];
+        [self.effectIcons addObject:blockIcon];
+    }
+    
+    if(((UBCreature*)self.card).hasSpeed){
+        UIImageView *speedIcon = [({
+            UIImageView *speedIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"speed"]];
+            speedIcon;
+        }) ub_addToSuperview:self];
+        [self.effectIcons addObject:speedIcon];
+    }
+    
+    if(((UBCreature*)self.card).hasRange){
+        UIImageView *rangeIcon = [({
+            UIImageView *rangeIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"range"]];
+            rangeIcon;
+        }) ub_addToSuperview:self];
+        [self.effectIcons addObject:rangeIcon];
+    }
+    
+    self.swords = [({
+        UIImageView *rangeIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"swords"]];
+        rangeIcon;
+    }) ub_addToSuperview:self];
+    
+    [self.swords setHidden:YES];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -124,6 +159,19 @@
             make.centerX.equalTo(self.mas_centerX).with.offset(24);
             make.centerY.equalTo(self.mas_centerY).with.offset(32);
         }];
+        for (int i = 0; i < [self.effectIcons count]; i++){
+            [self.effectIcons[i] mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.centerX.equalTo(self.mas_left).with.offset(8.5);
+                if([self.effectIcons count] > 1){
+                    make.centerY.equalTo(self.mas_centerY).with.offset(-40 + i * 26);
+                }
+                else{
+                    make.centerY.equalTo(self.mas_centerY);
+                }
+                make.width.equalTo(@23);
+                make.height.equalTo(@23);
+            }];
+        }
         [self.delegate cardPlaced:self withTouch:[[event allTouches] anyObject]];
     }
     else {
@@ -140,10 +188,32 @@
     self.damagePoints.text = [NSString stringWithFormat:@"%d",creature.baseAttack];
     self.hitPoints.text = [NSString stringWithFormat:@"%d", creature.hitPoints];
     if (creature.secondsSinceLastAttack >= creature.cooldown){
-        self.secondsUntilAttack.text = @"0";
+        //self.secondsUntilAttack.text = @"0";
+        [self.secondsUntilAttack setHidden:YES];
+        [self.swords setHidden:NO];
     }
     else {
         self.secondsUntilAttack.text = [NSString stringWithFormat:@"%d", creature.cooldown - creature.secondsSinceLastAttack];
+        [self.secondsUntilAttack setHidden:NO];
+        [self.swords setHidden:YES];
+    }
+    for (int i = 0; i < [self.effectIcons count]; i++){
+        [self.effectIcons[i] mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.mas_left).with.offset(8.5);
+            if([self.effectIcons count] > 2){
+                make.centerY.equalTo(self.mas_centerY).with.offset(-20 + i * 20);
+            }
+            else if([self.effectIcons count] > 1){
+                make.centerY.equalTo(self.mas_centerY).with.offset(-11 + i * 22);
+            }
+            else{
+                make.centerY.equalTo(self.mas_centerY);
+            }
+            make.width.equalTo(@23);
+            make.height.equalTo(@23);
+        }];
+        
+        ((UIView*)self.effectIcons[i]).hidden = NO;
     }
    
 }
@@ -153,11 +223,33 @@
         [self.currentImageView setImage:[UIImage imageNamed: [self.card.name stringByAppendingString:@"-card.png"]]];
         self.damagePoints.hidden = YES;
         self.hitPoints.hidden = YES;
+        for (int i = 0; i < [self.effectIcons count]; i++){
+            [self.effectIcons[i] mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.centerX.equalTo(self.mas_left).with.offset(5);
+                if([self.effectIcons count] > 1){
+                    make.centerY.equalTo(self.mas_centerY).with.offset(-35 + i * 20);
+                }
+                else{
+                    make.centerY.equalTo(self.mas_centerY).with.offset(-25);
+                }
+                
+                make.width.equalTo(@20);
+                make.height.equalTo(@20);
+            }];
+            ((UIView*)self.effectIcons[i]).hidden = YES;
+        }
     }
     else {
         [self.currentImageView setImage:[UIImage ub_cardBack]];
         self.damagePoints.hidden = YES;
         self.hitPoints.hidden = YES;
+        for (int i = 0; i < [self.effectIcons count]; i++){
+            [self.effectIcons[i] mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.width.equalTo(@10);
+                make.height.equalTo(@10);
+            }];
+            ((UIView*)self.effectIcons[i]).hidden = YES;
+        }
     }
     self.inCardForm = YES;
     
@@ -188,14 +280,21 @@
     }];
     
     [self.secondsUntilAttack mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.mas_centerX).with.offset(0);
-        make.centerY.equalTo(self.mas_centerY).with.offset(-10);
+        make.centerX.equalTo(self.mas_centerX);
+        make.centerY.equalTo(self.mas_centerY);
+    }];
+    
+    [self.swords mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.mas_centerX);
+        make.centerY.equalTo(self.mas_centerY);
+        make.width.equalTo(@40);
+        make.height.equalTo(@40);
     }];
     [super updateConstraints];
 }
 
 - (BOOL)isPlayed{
-    NSLog(@"SECONDS PLAYED: %d for %@", ((UBCreature*)self.card).secondsInPlay, self.card.name);
+    //NSLog(@"SECONDS PLAYED: %d for %@", ((UBCreature*)self.card).secondsInPlay, self.card.name);
     return ((UBCreature*)self.card).secondsInPlay >= 0;
 }
 

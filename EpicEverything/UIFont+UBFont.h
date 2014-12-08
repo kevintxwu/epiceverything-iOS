@@ -13,6 +13,7 @@
 + (UIFont *)ub_adventure;
 + (UIFont *)ub_endTurn;
 + (UIFont *)ub_blackCastle;
++ (UIFont *)ub_blackCastleBigger;
 + (UIFont *)ub_uchiyama;
 
 // Credits

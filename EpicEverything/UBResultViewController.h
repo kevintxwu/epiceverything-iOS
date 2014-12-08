@@ -11,4 +11,6 @@
 
 @interface UBResultViewController : UIViewController<UBResultsViewDelegate>
 
+@property (nonatomic) BOOL victory;
+
 @end
