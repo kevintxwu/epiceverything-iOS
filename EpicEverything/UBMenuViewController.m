@@ -31,6 +31,31 @@
     }];
 }
 
+- (void)easyButtonPressed:(id)sender {
+    UBGameViewController *gameVC = [[UBGameViewController alloc] init];
+    gameVC.AIspeed = 9.0;
+    [self presentViewController:gameVC animated:YES completion:^{
+        return;
+    }];
+}
+
+- (void)mediumButtonPressed:(id)sender {
+    UBGameViewController *gameVC = [[UBGameViewController alloc] init];
+    gameVC.AIspeed = 6.0;
+    [self presentViewController:gameVC animated:YES completion:^{
+        return;
+    }];
+}
+
+- (void)hardButtonPressed:(id)sender {
+    UBGameViewController *gameVC = [[UBGameViewController alloc] init];
+    gameVC.AIspeed = 3.0;
+    // [self.navigationController pushViewController:gameVC animated:YES];
+    [self presentViewController:gameVC animated:YES completion:^{
+        return;
+    }];
+}
+
 - (void)creditsButtonPressed:(id)sender {
     UBCreditsViewController *creditsVC = [[UBCreditsViewController alloc] init];
     //[self.navigationController pushViewController:creditsVC animated:YES];

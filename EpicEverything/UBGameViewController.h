@@ -18,4 +18,6 @@
 
 - (void) startGame;
 
+@property (nonatomic) float AIspeed;
+
 @end

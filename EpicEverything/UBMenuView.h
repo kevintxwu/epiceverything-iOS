@@ -19,6 +19,9 @@
 @protocol UBMenuViewDelegate <NSObject>
 
 - (void)startButtonPressed:(id)sender;
+- (void)easyButtonPressed:(id)sender;
+- (void)mediumButtonPressed:(id)sender;
+- (void)hardButtonPressed:(id)sender;
 - (void)creditsButtonPressed:(id)sender;
 
 

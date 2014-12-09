@@ -16,6 +16,10 @@
 @property (nonatomic) UIButton *start;
 @property (nonatomic) UIButton *instructions;
 
+@property (nonatomic) UIButton *easy;
+@property (nonatomic) UIButton *medium;
+@property (nonatomic) UIButton *hard;
+
 @end
 
 @implementation UBMenuView
@@ -49,9 +53,54 @@
         title;
     }) ub_addToSuperview:self];
     
+    _easy = [({
+        UIButton *start = [[UIButton alloc] init];
+        [start setTitle:@"Easy" forState:UIControlStateNormal];
+        start.backgroundColor = [UIColor clearColor];
+        [start.titleLabel setFont:[UIFont ub_uchiyama]];
+        [start.layer setBorderColor:[UIColor whiteColor].CGColor];
+        [start.layer setBorderWidth:[UIView ub_borderWidth]];
+        [start.layer setCornerRadius:[UIView ub_borderRadius]];
+        start.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+        start.layer.shadowColor = [UIColor blackColor].CGColor;
+        start.layer.shadowOpacity = 0.5;
+        [start addTarget:_delegate action:@selector(easyButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        start;
+    }) ub_addToSuperview:self];
+    
+    _medium = [({
+        UIButton *start = [[UIButton alloc] init];
+        [start setTitle:@"Medium" forState:UIControlStateNormal];
+        start.backgroundColor = [UIColor clearColor];
+        [start.titleLabel setFont:[UIFont ub_uchiyamaMedium]];
+        [start.layer setBorderColor:[UIColor whiteColor].CGColor];
+        [start.layer setBorderWidth:[UIView ub_borderWidth]];
+        [start.layer setCornerRadius:[UIView ub_borderRadius]];
+        start.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+        start.layer.shadowColor = [UIColor blackColor].CGColor;
+        start.layer.shadowOpacity = 0.5;
+        [start addTarget:_delegate action:@selector(mediumButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        start;
+    }) ub_addToSuperview:self];
+    
+    _hard = [({
+        UIButton *start = [[UIButton alloc] init];
+        [start setTitle:@"Hard" forState:UIControlStateNormal];
+        start.backgroundColor = [UIColor clearColor];
+        [start.titleLabel setFont:[UIFont ub_uchiyama]];
+        [start.layer setBorderColor:[UIColor whiteColor].CGColor];
+        [start.layer setBorderWidth:[UIView ub_borderWidth]];
+        [start.layer setCornerRadius:[UIView ub_borderRadius]];
+        start.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+        start.layer.shadowColor = [UIColor blackColor].CGColor;
+        start.layer.shadowOpacity = 0.5;
+        [start addTarget:_delegate action:@selector(hardButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        start;
+    }) ub_addToSuperview:self];
+    
     _start = [({
         UIButton *start = [[UIButton alloc] init];
-        [start setTitle:@"Play" forState:UIControlStateNormal];
+        [start setTitle:@"Start" forState:UIControlStateNormal];
         start.backgroundColor = [UIColor clearColor];
         [start.titleLabel setFont:[UIFont ub_uchiyama]];
         [start.layer setBorderColor:[UIColor whiteColor].CGColor];
@@ -63,6 +112,7 @@
         [start addTarget:_delegate action:@selector(startButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         start;
     }) ub_addToSuperview:self];
+    
     
     _instructions = [({
         UIButton *instructions = [[UIButton alloc] init];
@@ -90,22 +140,38 @@
     }];
     
     [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.start.mas_top).with.offset([[UIView ub_titlePadding] floatValue]);
+        make.bottom.equalTo(self.medium.mas_top).with.offset([[UIView ub_titlePadding] floatValue]);
         make.centerX.equalTo(self.mas_centerX);
         make.top.equalTo(self.mas_top).with.offset([[UIView ub_titlePadding] floatValue]);
     }];
+
     
-    [self.start mas_updateConstraints:^(MASConstraintMaker *make) {
+    [self.medium mas_updateConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX);
         make.centerY.equalTo(self.mas_centerY).with.offset(20);
+        make.width.equalTo([UIView ub_shortButtonWidth]);
+    }];
+    
+
+    [self.instructions mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.medium.mas_centerX);
+        make.top.equalTo(self.medium.mas_bottom).with.offset([[UIView ub_padding] floatValue]);
         make.width.equalTo([UIView ub_buttonWidth]);
     }];
     
-    [self.instructions mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.start.mas_centerX);
-        make.top.equalTo(self.start.mas_bottom).with.offset([[UIView ub_padding] floatValue]);
-        make.width.equalTo([UIView ub_buttonWidth]);
+    [self.easy mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.instructions.mas_left);
+        make.centerY.equalTo(self.mas_centerY).with.offset(20);
+        make.width.equalTo([UIView ub_shortButtonWidth]);
     }];
+    
+    
+    [self.hard mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.instructions.mas_right);
+        make.centerY.equalTo(self.mas_centerY).with.offset(20);
+        make.width.equalTo([UIView ub_shortButtonWidth]);
+    }];
+    
     
     [super updateConstraints];
 }

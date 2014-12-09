@@ -36,12 +36,15 @@
     [super viewDidLoad];
     _game = [[UBGame alloc] initTestGame];
     self.game.turnLength = 15; //SET TURN TIME HERE
+    if (!self.AIspeed){
+        self.AIspeed = 6.0;
+    }
     self.view = [[UBGameView alloc] initWithFrame: CGRectMake(0,0,0,0) andGame: self.game];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    NSLog(@"View did appear!");
+    NSLog(@"View did appear with AIspeed = %0.2f!", self.AIspeed);
     [self performSelector:@selector(startGame) withObject:nil afterDelay:1.0f];
 }
 
@@ -105,8 +108,7 @@
                                    selector:@selector(secondPassed:)
                                    userInfo:nil
                                     repeats:YES];
-    
-    _AItimer = [NSTimer scheduledTimerWithTimeInterval:6.0
+    _AItimer = [NSTimer scheduledTimerWithTimeInterval:self.AIspeed
                                      target:self
                                    selector:@selector(computerAction:)
                                    userInfo:nil

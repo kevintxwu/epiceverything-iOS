@@ -38,7 +38,7 @@
 @protocol UBCardViewDelegate <NSObject>
 
 - (void)cardViewMoved:(UBCardView *)view withTouch:(UITouch *)touch;
-- (void)cardPlaced:(UBCardView *)view withTouch:(UITouch *)touch;
+- (BOOL)cardPlaced:(UBCardView *)view withTouch:(UITouch *)touch;
 - (void)cardAttack:(UBCardView *)view withTouch:(UITouch *)touch;
 - (void)piecePressed:(UBCardView *)view withTouch:(UITouch *)touch;
 - (void)drawAttackPath:(UBCardView *)view withTouch:(UITouch *)touch;

@@ -17,6 +17,11 @@
 
 - (instancetype)ub_addToSuperview:(UIView *)view;
 - (instancetype)ub_addToBackOfSuperview:(UIView *)view;
++ (CGFloat)ub_heightScaled:(CGFloat)height;
++ (CGFloat)ub_widthScaled:(CGFloat)width;
+
++ (CGFloat)ub_heightSpacingScaled:(CGFloat)height;
++ (CGFloat)ub_widthSpacingScaled:(CGFloat)width;
 
 #pragma mark - Menu View
 
@@ -26,8 +31,37 @@
 + (NSNumber *)ub_titlePadding;
 + (CGFloat)ub_borderWidth;
 + (CGFloat)ub_borderRadius;
++ (NSNumber *)ub_shortButtonWidth;
 
 #pragma mark - Credit View
 + (NSNumber *)ub_creditsParagraphPadding;
+
+#pragma mark - Game View
+
++ (NSNumber *)ub_cardHeight;
+
++ (NSNumber *)ub_cardWidth;
+
++ (NSNumber *)ub_spaceHeight;
+
++ (NSNumber *)ub_spaceWidth;
+
++ (NSNumber *)ub_swordsWidth;
+
++ (NSNumber *)ub_iconWidth;
+
++ (NSNumber *)ub_statusIconWidth;
+
++ (NSNumber *)ub_opponentCardWidth;
+
++ (NSNumber *)ub_opponentCardHeight;
+
++ (NSNumber *)ub_selectedCardWidth;
+
++ (NSNumber *)ub_selectedCardHeight;
+
++ (NSNumber *)ub_smallerStatusIconWidth;
+
++ (NSNumber *)ub_selectedStatusIconWidth;
 
 @end

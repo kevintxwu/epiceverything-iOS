@@ -15,6 +15,9 @@
 + (UIFont *)ub_blackCastle;
 + (UIFont *)ub_blackCastleBigger;
 + (UIFont *)ub_uchiyama;
++ (UIFont *)ub_uchiyamaMedium;
+
++ (float)ub_scaleFontSize:(float)size;
 
 // Credits
 + (UIFont *)ub_creditsTitle;

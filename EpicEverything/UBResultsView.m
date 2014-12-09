@@ -94,7 +94,7 @@
         make.bottom.equalTo(self.start.mas_top).with.offset([[UIView ub_titlePadding] floatValue]);
         make.centerX.equalTo(self.mas_centerX);
         make.top.equalTo(self.mas_top).with.offset([[UIView ub_titlePadding] floatValue]);
-        make.width.equalTo(@300);
+        make.width.equalTo(self.mas_width);
     }];
     
     [self.start mas_updateConstraints:^(MASConstraintMaker *make) {

@@ -24,11 +24,13 @@
 @property (nonatomic) UBCardView *selectedCard;
 @property (nonatomic) UBCardView *animatingCard;
 @property (nonatomic) UBCardView *dyingCard;
+@property (nonatomic) UBCardView *attackingCardView;
 @property (nonatomic) UILabel *secondsLeftLabel;
 @property (nonatomic) BOOL firstUpdate;
 
 @property (nonatomic) int playerHandSize;
 @property (nonatomic) int opponentHandSize;
+@property (nonatomic) double sizeMultiplier;
 
 
 @end
@@ -45,6 +47,12 @@
         _firstUpdate = YES;
         [self createSubviews];
         [self updateConstraints];
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            self.sizeMultiplier = 2.0;
+        }
+        else{
+            self.sizeMultiplier = 1;
+        }
     }
     return self;
 }
@@ -231,19 +239,19 @@
     if(player){
         [card switchToCard];
         [card mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.mas_right).with.offset(-10);
-            make.centerY.equalTo(self.mas_centerY).with.offset(20.0);
-            make.width.equalTo(@75);
-            make.height.equalTo(@120.6);
+            make.left.equalTo(self.mas_right).with.offset([UIView ub_widthSpacingScaled:-10.0]);
+            make.centerY.equalTo(self.mas_centerY).with.offset([UIView ub_heightScaled:20.0]);
+            make.width.equalTo([UIView ub_cardWidth]);
+            make.height.equalTo([UIView ub_cardHeight]);
         }];
         [card layoutIfNeeded];
         
         
         [card mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(@(140 + 40 * [self.game.playerOne.hand count]));
+            make.left.equalTo(self.mas_left).with.offset([UIView ub_widthScaled:(140 + 40 * [self.game.playerOne.hand count])]);
             make.centerY.equalTo(self.mas_bottom).with.offset(-10.0);
-            make.width.equalTo(@75);
-            make.height.equalTo(@120.6);
+            make.width.equalTo([UIView ub_cardWidth]);
+            make.height.equalTo([UIView ub_cardHeight]);
         }];
         
         
@@ -259,24 +267,23 @@
          ];
 
         
-        
-        
     }
+    
     else{
         [card switchToCard];
         [card mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.mas_left).with.offset(10);
-            make.centerY.equalTo(self.mas_centerY).with.offset(-10.0);
-            make.width.equalTo(@70);
-            make.height.equalTo(@108.3);
+            make.left.equalTo(self.mas_left).with.offset([UIView ub_widthSpacingScaled:10.0]);
+            make.centerY.equalTo(self.mas_centerY).with.offset([UIView ub_heightScaled:-20.0]);
+            make.width.equalTo([UIView ub_opponentCardWidth]);
+            make.height.equalTo([UIView ub_opponentCardHeight]);
         }];
         [card layoutIfNeeded];
         
         [card mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self.mas_right).with.offset(-180 - 50 * self.opponentHandSize);
+            make.right.equalTo(self.mas_right).with.offset([UIView ub_widthScaled:(-180 - 50 * self.opponentHandSize)]);
             make.centerY.equalTo(self.mas_top);
-            make.width.equalTo(@75);
-            make.height.equalTo(@120.6);
+            make.width.equalTo([UIView ub_cardWidth]);
+            make.height.equalTo([UIView ub_cardHeight]);
         }];
         
         [UIView animateWithDuration:.5 delay:0.1 options:UIViewAnimationOptionCurveEaseInOut
@@ -306,16 +313,16 @@
     self.selectedCard = view;
     if (CGRectContainsPoint(self.bounds, location)) {
         [view mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(@(location.x - 15));
-            make.top.equalTo(@(location.y - 110));
+            make.left.equalTo(@(location.x - [UIView ub_widthScaled:15]));
+            make.top.equalTo(@(location.y - [UIView ub_heightScaled:110]));
             // I h8 this
-            make.height.equalTo(@186.5);
-            make.width.equalTo(@116);
+            make.height.equalTo([UIView ub_selectedCardHeight]);
+            make.width.equalTo([UIView ub_selectedCardWidth]);
         }];
     }
 }
 
-- (void)cardPlaced:(UBCardView *)view withTouch:(UITouch *)touch {
+- (BOOL)cardPlaced:(UBCardView *)view withTouch:(UITouch *)touch {
     // Check if we are on a space
     self.selectedCard = nil;
     CGPoint location = [touch locationInView:self];
@@ -324,9 +331,20 @@
     if (spaceView && [self.game.playerOne canPlayCard:view.card atSpace:spaceView.space.position]) {
         // Play card
         [self.game.playerOne playCard:view.card atSpace:[spaceView.space getIndex]];
-        //[self updateBoard];
+        [view mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(spaceView.mas_left);
+            make.right.equalTo(spaceView.mas_right);
+            make.top.equalTo(spaceView.mas_top);
+            make.bottom.equalTo(spaceView.mas_bottom);
+            make.centerY.equalTo(spaceView.mas_centerY);
+            make.centerX.equalTo(spaceView.mas_centerX);
+            make.width.equalTo([UIView ub_spaceWidth]);
+            make.height.equalTo([UIView ub_spaceWidth]);
+        }];
+        return YES;
     } else {
         //[self updateBoard];
+        return NO;
     }
 }
 
@@ -341,7 +359,7 @@
     UBSpaceView *spaceView = [self locationOnSpace:currentLocation];
     UBCreature *selectedCreature = (UBCreature *) view.card;
     self.drawLayer.image = nil;
-    
+    self.attackingCardView = view;
     CGRect rect = CGRectMake(0.0, 0.0, self.frame.size.width, self.frame.size.height);
     CGContextRef context = UIGraphicsGetCurrentContext();
     UIGraphicsPushContext(context);
@@ -350,11 +368,11 @@
     if (spaceView && view.playerOneCard &&[selectedCreature canAttackSpace:spaceView.space]) {
         [[UIColor colorWithRed:239/255.0 green:87/255.0 blue:88/255.0 alpha:1.0] setStroke];
     }
-    UIBezierPath *bezier = [self dqd_bezierPathWithArrowFromPoint:self.location toPoint:currentLocation tailWidth:4.0f headWidth:25.0f headLength:15.0f];
+    UIBezierPath *bezier = [self dqd_bezierPathWithArrowFromPoint:self.location toPoint:currentLocation tailWidth:[UIView  ub_widthScaled:4.0f] headWidth:[UIView  ub_widthScaled:25.0f] headLength:[UIView  ub_widthScaled:15.0f]];
     
     [bezier setLineJoinStyle:kCGLineJoinMiter];
     [bezier setLineCapStyle:kCGLineCapButt];
-    [bezier setLineWidth:12.0];
+    [bezier setLineWidth:[UIView  ub_widthScaled:12.0f]];
     [bezier stroke];
 
     self.drawLayer.image = UIGraphicsGetImageFromCurrentImageContext();
@@ -365,6 +383,7 @@
 
 - (void)cardAttack:(UBCardView *)view withTouch:(UITouch *)touch {
     self.drawLayer.image = nil;
+    self.attackingCardView = nil;
     [self bringSubviewToFront:self.drawLayer];
     CGPoint location = [touch locationInView:self];
     UBSpaceView *spaceView = [self locationOnSpace:location];
@@ -447,26 +466,27 @@
     NSLog(@"TARGET: %d", targetPosition);
     UBSpaceView *curr_space = self.spaces[((UBCreature *)card.card).space.position];
     //double angle = atan(((double)(space.center.x - card.center.x)) / (space.center.y - card.center.y));
-    [self bringSubviewToFront:card];
+    //[self bringSubviewToFront:card];
     self.animatingCard = card;
-    NSAssert(card && curr_space && target_space, @"SPACES AND CARD SHOULD EXIST");
+    [self bringSubviewToFront:card];
+    //NSAssert(card && curr_space && target_space, @"SPACES AND CARD SHOULD EXIST");
     [card mas_remakeConstraints:^(MASConstraintMaker *make) {
         if(targetPosition % 2 == 0){
             NSLog(@"ATTACKING BOTTOM");
-            make.bottom.equalTo(target_space.mas_centerY).with.offset(20);
+            make.bottom.equalTo(target_space.mas_centerY).with.offset([UIView ub_heightScaled:20]);
         }
         else{
-            make.top.equalTo(target_space.mas_centerY).with.offset(-20);
+            make.top.equalTo(target_space.mas_centerY).with.offset([UIView ub_heightScaled:-20]);
         }
         if(targetPosition > curr_space.space.position){
-            make.right.equalTo(target_space.mas_centerX).with.offset(20);
+            make.right.equalTo(target_space.mas_centerX).with.offset([UIView ub_widthScaled:20]);
         }
         else{
-            make.left.equalTo(target_space.mas_centerX).with.offset(-20);
+            make.left.equalTo(target_space.mas_centerX).with.offset([UIView ub_widthScaled:-20]);
         }
         
-        make.width.equalTo(@100);
-        make.height.equalTo(@100);
+        make.width.equalTo([UIView ub_spaceWidth]);
+        make.height.equalTo([UIView ub_spaceHeight]);
         
     }];
     
@@ -490,8 +510,8 @@
                                  make.right.equalTo(curr_space.mas_right);
                                  make.top.equalTo(curr_space.mas_top);
                                  make.bottom.equalTo(curr_space.mas_bottom);
-                                 make.width.equalTo(@100);
-                                 make.height.equalTo(@100);
+                                 make.width.equalTo([UIView ub_spaceWidth]);
+                                 make.height.equalTo([UIView ub_spaceHeight]);
                              }];
                              
                              
@@ -537,6 +557,11 @@
                          }
                          else{
                              self.dyingCard = nil;
+                         }
+                         
+                         if(self.attackingCardView && card == self.attackingCardView){
+                             self.attackingCardView = nil;
+                             self.drawLayer.image = nil;
                          }
                          
                      }];
@@ -585,101 +610,101 @@
         
         for (int i = 0; i < 8; i+=2){
             [self.spaces[i] mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.centerX.equalTo(self.mas_centerX).with.offset(-175.0 + 50.0*i);
-                make.centerY.equalTo(self.mas_centerY).with.offset(32.0);
-                make.width.equalTo(@100);
-                make.height.equalTo(@100);
+                make.centerX.equalTo(self.mas_centerX).with.offset([UIView ub_widthScaled:(-175.0 + 50.0*i)]);
+                make.centerY.equalTo(self.mas_centerY).with.offset([UIView ub_heightScaled:32.0]);
+                make.width.equalTo([UIView ub_spaceWidth]);
+                make.height.equalTo([UIView ub_spaceWidth]);
             }];
             [self.spaces[i+1] mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.centerX.equalTo(self.mas_centerX).with.offset(-125.0 + 50.0*i);
-                make.centerY.equalTo(self.mas_centerY).with.offset(-55.0);
-                make.width.equalTo(@100);
-                make.height.equalTo(@100);
+                make.centerX.equalTo(self.mas_centerX).with.offset([UIView ub_widthScaled:(-125.0 + 50.0*i)]);
+                make.centerY.equalTo(self.mas_centerY).with.offset([UIView ub_heightScaled:-55.0]);
+                make.width.equalTo([UIView ub_spaceWidth]);
+                make.height.equalTo([UIView ub_spaceWidth]);
             }];
         }
         
         [self.playerHealth mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(@20);
-            make.bottom.equalTo(@-15);
-            make.width.equalTo(@50);
-            make.height.equalTo(@50);
+            make.left.equalTo(self.mas_left).with.offset([UIView ub_widthSpacingScaled:20.0]);
+            make.bottom.equalTo(self.mas_bottom).with.offset([UIView ub_heightSpacingScaled: -15]);
+            make.width.equalTo([UIView ub_iconWidth]);
+            make.height.equalTo([UIView ub_iconWidth]);
         }];
         
         [self.playerHealthLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(@20);
-            make.bottom.equalTo(@-14);
-            make.width.equalTo(@50);
-            make.height.equalTo(@50);
+            make.left.equalTo(self.mas_left).with.offset([UIView ub_widthSpacingScaled:20.0]);
+            make.bottom.equalTo(self.mas_bottom).with.offset([UIView ub_heightSpacingScaled: -14]);
+            make.width.equalTo([UIView ub_iconWidth]);
+            make.height.equalTo([UIView ub_iconWidth]);
         }];
         
         [self.playerMana mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(@70);
-            make.bottom.equalTo(@-15);
-            make.width.equalTo(@50);
-            make.height.equalTo(@50);
+            make.left.equalTo(self.mas_left).with.offset([UIView ub_widthSpacingScaled:70.0]);
+             make.bottom.equalTo(self.mas_bottom).with.offset([UIView ub_heightSpacingScaled: -15]);
+            make.width.equalTo([UIView ub_iconWidth]);
+            make.height.equalTo([UIView ub_iconWidth]);
         }];
         
         [self.playerManaLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(@70);
-            make.bottom.equalTo(@-14);
-            make.width.equalTo(@50);
-            make.height.equalTo(@50);
+            make.left.equalTo(self.mas_left).with.offset([UIView ub_widthSpacingScaled:70.0]);
+             make.bottom.equalTo(self.mas_bottom).with.offset([UIView ub_heightSpacingScaled: -14]);
+            make.width.equalTo([UIView ub_iconWidth]);
+            make.height.equalTo([UIView ub_iconWidth]);
         }];
         
         [self.playerCards mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(@120);
-            make.bottom.equalTo(@-15);
-            make.width.equalTo(@50);
-            make.height.equalTo(@50);
+            make.left.equalTo(self.mas_left).with.offset([UIView ub_widthSpacingScaled:120.0]);
+             make.bottom.equalTo(self.mas_bottom).with.offset([UIView ub_heightSpacingScaled: -15]);
+            make.width.equalTo([UIView ub_iconWidth]);
+            make.height.equalTo([UIView ub_iconWidth]);
         }];
         
         [self.playerCardsLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(@120);
-            make.bottom.equalTo(@-14);
-            make.width.equalTo(@50);
-            make.height.equalTo(@50);
+            make.left.equalTo(self.mas_left).with.offset([UIView ub_widthSpacingScaled:120.0]);
+             make.bottom.equalTo(self.mas_bottom).with.offset([UIView ub_heightSpacingScaled: -14]);
+            make.width.equalTo([UIView ub_iconWidth]);
+            make.height.equalTo([UIView ub_iconWidth]);
         }];
         
         [self.opponentHealth mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(@-108);
-            make.top.equalTo(@7);
-            make.width.equalTo(@50);
-            make.height.equalTo(@50);
+            make.right.equalTo(self.mas_right).with.offset([UIView ub_widthSpacingScaled:-108]);
+            make.top.equalTo(self.mas_top).with.offset([UIView ub_heightSpacingScaled: 7]);
+            make.width.equalTo([UIView ub_iconWidth]);
+            make.height.equalTo([UIView ub_iconWidth]);
         }];
         
         [self.opponentHealthLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(@-108);
-            make.top.equalTo(@8);
-            make.width.equalTo(@50);
-            make.height.equalTo(@50);
+            make.right.equalTo(self.mas_right).with.offset([UIView ub_widthSpacingScaled:-108]);
+            make.top.equalTo(self.mas_top).with.offset([UIView ub_heightSpacingScaled: 8]);
+            make.width.equalTo([UIView ub_iconWidth]);
+            make.height.equalTo([UIView ub_iconWidth]);
         }];
         
         [self.opponentMana mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(@-58);
-            make.top.equalTo(@7);
-            make.width.equalTo(@50);
-            make.height.equalTo(@50);
+            make.right.equalTo(self.mas_right).with.offset([UIView ub_widthSpacingScaled:-58]);
+            make.top.equalTo(self.mas_top).with.offset([UIView ub_heightSpacingScaled: 7]);
+            make.width.equalTo([UIView ub_iconWidth]);
+            make.height.equalTo([UIView ub_iconWidth]);
         }];
         
         [self.opponentManaLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(@-58);
-            make.top.equalTo(@8);
-            make.width.equalTo(@50);
-            make.height.equalTo(@50);
+            make.right.equalTo(self.mas_right).with.offset([UIView ub_widthSpacingScaled:-58]);
+            make.top.equalTo(self.mas_top).with.offset([UIView ub_heightSpacingScaled: 8]);
+            make.width.equalTo([UIView ub_iconWidth]);
+            make.height.equalTo([UIView ub_iconWidth]);
         }];
         
         [self.opponentCards mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(@-8);
-            make.top.equalTo(@7);
-            make.width.equalTo(@50);
-            make.height.equalTo(@50);
+            make.right.equalTo(self.mas_right).with.offset([UIView ub_widthSpacingScaled:-8]);
+            make.top.equalTo(self.mas_top).with.offset([UIView ub_heightSpacingScaled: 7]);
+            make.width.equalTo([UIView ub_iconWidth]);
+            make.height.equalTo([UIView ub_iconWidth]);
         }];
         
         [self.opponentCardsLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(@-8);
-            make.top.equalTo(@8);
-            make.width.equalTo(@50);
-            make.height.equalTo(@50);
+            make.right.equalTo(self.mas_right).with.offset([UIView ub_widthSpacingScaled:-8]);
+            make.top.equalTo(self.mas_top).with.offset([UIView ub_heightSpacingScaled: 8]);
+            make.width.equalTo([UIView ub_iconWidth]);
+            make.height.equalTo([UIView ub_iconWidth]);
         }];
         
        /* [self.secondsLeftLabel mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -732,10 +757,10 @@
         if (self.selectedCard != myHand[i]){
             [myHand[i] switchToCard];
             [myHand[i] mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(@(180 + 40 * i));
-                make.centerY.equalTo(self.mas_bottom).with.offset(-10.0);
-                make.width.equalTo(@75);
-                make.height.equalTo(@120.6);
+                make.left.equalTo(@([UIView ub_widthScaled:(180 + 40 * i)]));
+                make.centerY.equalTo(self.mas_bottom).with.offset([UIView ub_heightScaled:-10.0]);
+                make.width.equalTo([UIView ub_cardWidth]);
+                make.height.equalTo([UIView ub_cardHeight]);
             }];
         }
         //[self bringSubviewToFront:myHand[i]];
@@ -744,10 +769,10 @@
     for (int i = [opponentHand count] - 1; i >= 0; i--){
         [opponentHand[i] switchToCard];
         [opponentHand[i] mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(@(-180 - 50 * i));
+            make.right.equalTo(@([UIView ub_widthScaled:(-180 - 50 * i)]));
             make.centerY.equalTo(self.mas_top);
-            make.width.equalTo(@70);
-            make.height.equalTo(@108.3);
+            make.width.equalTo([UIView ub_opponentCardWidth]);
+            make.height.equalTo([UIView ub_opponentCardHeight]);
         }];
         
     }
@@ -766,8 +791,8 @@
                 make.bottom.equalTo(spaceView.mas_bottom);
                 make.centerY.equalTo(spaceView.mas_centerY);
                 make.centerX.equalTo(spaceView.mas_centerX);
-                make.width.equalTo(@100);
-                make.height.equalTo(@100);
+                make.width.equalTo([UIView ub_spaceWidth]);
+                make.height.equalTo([UIView ub_spaceWidth]);
             }];
         }
 

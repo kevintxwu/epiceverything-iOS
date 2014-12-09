@@ -130,13 +130,31 @@
     }
     if (self.inCardForm){
         [self.damagePoints mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.mas_centerX).with.offset(-46);
-            make.centerY.equalTo(self.mas_centerY).with.offset(58);
+            make.centerX.equalTo(self.mas_centerX).with.offset([UIView ub_widthScaled:-46]);
+            make.centerY.equalTo(self.mas_centerY).with.offset([UIView ub_heightScaled:58]);
         }];
         [self.hitPoints mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.mas_centerX).with.offset(46);
-            make.centerY.equalTo(self.mas_centerY).with.offset(58);
+            make.centerX.equalTo(self.mas_centerX).with.offset([UIView ub_widthScaled:-46]);
+            make.centerY.equalTo(self.mas_centerY).with.offset([UIView ub_heightScaled:58]);
         }];
+        for (int i = 0; i < [self.effectIcons count]; i++){
+            [self.effectIcons[i] mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.centerX.equalTo(self.mas_left).with.offset([UIView ub_widthScaled:5.0*1.55]);
+                if([self.effectIcons count] > 2){
+                    make.centerY.equalTo(self.mas_centerY).with.offset([UIView ub_heightScaled:(-34 + i * 14)*1.55]);
+                }
+                else if([self.effectIcons count] > 1){
+                    make.centerY.equalTo(self.mas_centerY).with.offset([UIView ub_heightScaled:(-30 + i * 20)*1.55]);
+                }
+                else{
+                    make.centerY.equalTo(self.mas_centerY).with.offset([UIView ub_heightScaled:-20*1.55]);
+                }
+                
+                make.width.equalTo([UIView ub_selectedStatusIconWidth]);
+                make.height.equalTo([UIView ub_selectedStatusIconWidth]);
+            }];
+            ((UIView*)self.effectIcons[i]).hidden = NO;
+        }
         [self.delegate cardViewMoved:self withTouch:[[event allTouches] anyObject]];
     }
     else if (((UBCreature*)self.card).canAttackNow){
@@ -150,29 +168,36 @@
         return;  //Cannot use opponent cards
     }
     if (self.inCardForm && self.playerOneCard){
-        [self.damagePoints mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.mas_centerX).with.offset(-24);
-            make.centerY.equalTo(self.mas_centerY).with.offset(32);
-        }];
-        
-        [self.hitPoints mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.mas_centerX).with.offset(24);
-            make.centerY.equalTo(self.mas_centerY).with.offset(32);
-        }];
-        for (int i = 0; i < [self.effectIcons count]; i++){
-            [self.effectIcons[i] mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.centerX.equalTo(self.mas_left).with.offset(8.5);
-                if([self.effectIcons count] > 1){
-                    make.centerY.equalTo(self.mas_centerY).with.offset(-40 + i * 26);
-                }
-                else{
-                    make.centerY.equalTo(self.mas_centerY);
-                }
-                make.width.equalTo(@23);
-                make.height.equalTo(@23);
+        if([self.delegate cardPlaced:self withTouch:[[event allTouches] anyObject]]){
+            /*[self.damagePoints mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.centerX.equalTo(self.mas_centerX).with.offset([UIView ub_widthScaled:-24]);
+                make.centerY.equalTo(self.mas_centerY).with.offset([UIView ub_heightScaled:32]);
             }];
+            
+            [self.hitPoints mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.centerX.equalTo(self.mas_centerX).with.offset([UIView ub_widthScaled:24]);
+                make.centerY.equalTo(self.mas_centerY).with.offset([UIView ub_heightScaled:32]);
+            }];
+            for (int i = 0; i < [self.effectIcons count]; i++){
+                [self.effectIcons[i] mas_remakeConstraints:^(MASConstraintMaker *make) {
+                    make.centerX.equalTo(self.mas_left).with.offset([UIView ub_widthScaled:8.5]);
+                    if([self.effectIcons count] > 2){
+                        make.centerY.equalTo(self.mas_centerY).with.offset([UIView ub_heightScaled:(-20 + i * 20)]);
+                    }
+                    else if([self.effectIcons count] > 1){
+                        make.centerY.equalTo(self.mas_centerY).with.offset([UIView ub_heightScaled:(-40 + i * 26)]);
+                    }
+                    else{
+                        make.centerY.equalTo(self.mas_centerY);
+                    }
+                    make.width.equalTo([UIView ub_statusIconWidth]);
+                    make.height.equalTo([UIView ub_statusIconWidth]);
+                }];*/
+            
+            //}
+            [self switchToPiece];
         }
-        [self.delegate cardPlaced:self withTouch:[[event allTouches] anyObject]];
+
     }
     else {
         [self.delegate cardAttack:self withTouch:[[event allTouches] anyObject]];
@@ -181,6 +206,16 @@
 
 - (void)switchToPiece{
     [self.currentImageView setImage:[UIImage imageNamed: [self.card.name stringByAppendingString:@".png"]]];
+    
+    [self.damagePoints mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.mas_centerX).with.offset([UIView ub_widthScaled:-24]);
+        make.centerY.equalTo(self.mas_centerY).with.offset([UIView ub_heightScaled:32]);
+     }];
+     
+     [self.hitPoints mas_updateConstraints:^(MASConstraintMaker *make) {
+         make.centerX.equalTo(self.mas_centerX).with.offset([UIView ub_widthScaled:24]);
+         make.centerY.equalTo(self.mas_centerY).with.offset([UIView ub_heightScaled:32]);
+     }];
     self.inCardForm = NO;
     self.damagePoints.hidden = NO;
     self.hitPoints.hidden = NO;
@@ -199,18 +234,18 @@
     }
     for (int i = 0; i < [self.effectIcons count]; i++){
         [self.effectIcons[i] mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.mas_left).with.offset(8.5);
+            make.centerX.equalTo(self.mas_left).with.offset([UIView ub_widthScaled:8.5]);
             if([self.effectIcons count] > 2){
-                make.centerY.equalTo(self.mas_centerY).with.offset(-20 + i * 20);
+                make.centerY.equalTo(self.mas_centerY).with.offset([UIView ub_heightScaled:(-20 + i * 20)]);
             }
             else if([self.effectIcons count] > 1){
-                make.centerY.equalTo(self.mas_centerY).with.offset(-11 + i * 22);
+                make.centerY.equalTo(self.mas_centerY).with.offset([UIView ub_heightScaled:(-11 + i * 22)]);
             }
             else{
                 make.centerY.equalTo(self.mas_centerY);
             }
-            make.width.equalTo(@23);
-            make.height.equalTo(@23);
+            make.width.equalTo([UIView ub_statusIconWidth]);
+            make.height.equalTo([UIView ub_statusIconWidth]);
         }];
         
         ((UIView*)self.effectIcons[i]).hidden = NO;
@@ -225,18 +260,21 @@
         self.hitPoints.hidden = YES;
         for (int i = 0; i < [self.effectIcons count]; i++){
             [self.effectIcons[i] mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.centerX.equalTo(self.mas_left).with.offset(5);
-                if([self.effectIcons count] > 1){
-                    make.centerY.equalTo(self.mas_centerY).with.offset(-35 + i * 20);
+                make.centerX.equalTo(self.mas_left).with.offset([UIView ub_widthScaled:5]);
+                if([self.effectIcons count] > 2){
+                    make.centerY.equalTo(self.mas_centerY).with.offset([UIView ub_heightScaled:(-34 + i * 14)]);
+                }
+                else if([self.effectIcons count] > 1){
+                    make.centerY.equalTo(self.mas_centerY).with.offset([UIView ub_heightScaled:(-30 + i * 20)]);
                 }
                 else{
-                    make.centerY.equalTo(self.mas_centerY).with.offset(-25);
+                    make.centerY.equalTo(self.mas_centerY).with.offset([UIView ub_heightScaled:-20]);
                 }
                 
-                make.width.equalTo(@20);
-                make.height.equalTo(@20);
+                make.width.equalTo([UIView ub_smallerStatusIconWidth]);
+                make.height.equalTo([UIView ub_smallerStatusIconWidth]);
             }];
-            ((UIView*)self.effectIcons[i]).hidden = YES;
+            ((UIView*)self.effectIcons[i]).hidden = NO;
         }
     }
     else {
@@ -270,13 +308,13 @@
     }];
     
     [self.damagePoints mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.mas_centerX).with.offset(-24);
-        make.centerY.equalTo(self.mas_centerY).with.offset(32);
+        make.centerX.equalTo(self.mas_centerX).with.offset([UIView ub_widthScaled:-24]);
+        make.centerY.equalTo(self.mas_centerY).with.offset([UIView ub_heightScaled:32]);
     }];
 
     [self.hitPoints mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.mas_centerX).with.offset(24);
-        make.centerY.equalTo(self.mas_centerY).with.offset(32);
+        make.centerX.equalTo(self.mas_centerX).with.offset([UIView ub_widthScaled:24]);
+        make.centerY.equalTo(self.mas_centerY).with.offset([UIView ub_heightScaled:32]);
     }];
     
     [self.secondsUntilAttack mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -287,8 +325,8 @@
     [self.swords mas_updateConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX);
         make.centerY.equalTo(self.mas_centerY);
-        make.width.equalTo(@40);
-        make.height.equalTo(@40);
+        make.width.equalTo([UIView ub_swordsWidth]);
+        make.height.equalTo([UIView ub_swordsWidth]);
     }];
     [super updateConstraints];
 }
