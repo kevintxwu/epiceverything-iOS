@@ -196,38 +196,62 @@
     for(int i= 0; i < 4; i++){
         targets[i] = 2*i;
     }
-    for(int i = 0; i < [player.hand count]; i++){
-        UBCard* selected = player.hand[i];
-        for(int j = 0; j < 4; j++){
-            if([player canPlayCard:selected atSpace:spaces[j]]){
-                [player playCard:selected atSpace:spaces[j]];
-                i--;
-                return;
-                //insert play animation here
-                //[self.view updateBoard];
-               // sleep(1.0);
-                break;
-            }
-        }
-    }
-    //sleep(1.0);
-    for(int i = 0; i < [player.creaturesInPlay count]; i++){
-        UBCreature* creature = player.creaturesInPlay[i];
-        for(int j = 0; j < 4; j++){
-            if([creature canAttackSpace:[self.game.board spaceAtIndex:targets[j]]]){
-                NSLog(@"Can attack!");
-                UBCardView* cardView = [self.view getCardViewAtSpace:creature.space.position];
-                if(cardView){
-                    [self.view attackCardAnimation:cardView andTargetPosition:targets[j]];
+    int rand = arc4random_uniform(1);
+    if(rand){
+        for(int i = 0; i < [player.hand count]; i++){
+            UBCard* selected = player.hand[i];
+            for(int j = 0; j < 4; j++){
+                if([player canPlayCard:selected atSpace:spaces[j]]){
+                    [player playCard:selected atSpace:spaces[j]];
+                    i--;
+                    return;
+                    //break;
                 }
-                
-                //insert attack animation here
-                //[self.view updateBoard];
-                return;
-                break;
+            }
+        }
+        for(int i = 0; i < [player.creaturesInPlay count]; i++){
+            UBCreature* creature = player.creaturesInPlay[i];
+            for(int j = 0; j < 4; j++){
+                if([creature canAttackSpace:[self.game.board spaceAtIndex:targets[j]]]){
+                    NSLog(@"Can attack!");
+                    UBCardView* cardView = [self.view getCardViewAtSpace:creature.space.position];
+                    if(cardView){
+                        [self.view attackCardAnimation:cardView andTargetPosition:targets[j]];
+                    }
+                    return;
+                    //break;
+                }
             }
         }
     }
+    else{
+        for(int i = 0; i < [player.creaturesInPlay count]; i++){
+            UBCreature* creature = player.creaturesInPlay[i];
+            for(int j = 0; j < 4; j++){
+                if([creature canAttackSpace:[self.game.board spaceAtIndex:targets[j]]]){
+                    NSLog(@"Can attack!");
+                    UBCardView* cardView = [self.view getCardViewAtSpace:creature.space.position];
+                    if(cardView){
+                        [self.view attackCardAnimation:cardView andTargetPosition:targets[j]];
+                    }
+                    return;
+                    //break;
+                }
+            }
+        }
+        for(int i = 0; i < [player.hand count]; i++){
+            UBCard* selected = player.hand[i];
+            for(int j = 0; j < 4; j++){
+                if([player canPlayCard:selected atSpace:spaces[j]]){
+                    [player playCard:selected atSpace:spaces[j]];
+                    i--;
+                    return;
+                    //break;
+                }
+            }
+        }
+    }
+
     //[self switchTurn:player];
 }
 
