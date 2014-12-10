@@ -360,7 +360,7 @@
     UBCreature *selectedCreature = (UBCreature *) view.card;
     self.drawLayer.image = nil;
     self.attackingCardView = view;
-    CGRect rect = CGRectMake(0.0, 0.0, self.frame.size.width, self.frame.size.height);
+    CGRect rect = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
     CGContextRef context = UIGraphicsGetCurrentContext();
     UIGraphicsPushContext(context);
     UIGraphicsBeginImageContext(rect.size); //now it's here.
