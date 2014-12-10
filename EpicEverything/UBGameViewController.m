@@ -114,7 +114,12 @@
                                    userInfo:nil
                                     repeats:YES];
     
-
+    /*NSTimer * otherAI = [NSTimer scheduledTimerWithTimeInterval:self.AIspeed - 1.0
+                                                         target:self
+                                                       selector:@selector(playerOneComputerAction:)
+                                                       userInfo:nil
+                                                        repeats:YES];
+     */
 }
 
 //switches turn from given player to other player
@@ -157,6 +162,10 @@
     [self computerMove:self.game.playerTwo];
 }
 
+- (void) playerOneComputerAction:(NSTimer *)timer{
+    [self computerMove:self.game.playerOne];
+}
+
 - (void) secondPassed:(NSTimer *)timer{
     self.view.secondsPassed++;
     [self.game secondPassed];
@@ -197,6 +206,12 @@
     spaces[3] = 1;
     for(int i= 0; i < 4; i++){
         targets[i] = 2*i;
+    }
+    if(player == self.game.playerOne){
+        for(int i = 0; i < 4; i++){
+            spaces[i]--;
+            targets[i]++;
+        }
     }
     int rand = arc4random_uniform(1);
     if(rand){

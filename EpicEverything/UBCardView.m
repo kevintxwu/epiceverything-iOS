@@ -141,10 +141,10 @@
             [self.effectIcons[i] mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.centerX.equalTo(self.mas_left).with.offset([UIView ub_widthScaled:5.0*1.55]);
                 if([self.effectIcons count] > 2){
-                    make.centerY.equalTo(self.mas_centerY).with.offset([UIView ub_heightScaled:(-34 + i * 14)*1.55]);
+                    make.centerY.equalTo(self.mas_centerY).with.offset([UIView ub_heightScaled:(-32 + i * 12)*1.55]);
                 }
                 else if([self.effectIcons count] > 1){
-                    make.centerY.equalTo(self.mas_centerY).with.offset([UIView ub_heightScaled:(-30 + i * 20)*1.55]);
+                    make.centerY.equalTo(self.mas_centerY).with.offset([UIView ub_heightScaled:(-28 + i * 16)*1.55]);
                 }
                 else{
                     make.centerY.equalTo(self.mas_centerY).with.offset([UIView ub_heightScaled:-20*1.55]);
@@ -262,10 +262,10 @@
             [self.effectIcons[i] mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.centerX.equalTo(self.mas_left).with.offset([UIView ub_widthScaled:5]);
                 if([self.effectIcons count] > 2){
-                    make.centerY.equalTo(self.mas_centerY).with.offset([UIView ub_heightScaled:(-34 + i * 14)]);
+                    make.centerY.equalTo(self.mas_centerY).with.offset([UIView ub_heightScaled:(-32 + i * 12)]);
                 }
                 else if([self.effectIcons count] > 1){
-                    make.centerY.equalTo(self.mas_centerY).with.offset([UIView ub_heightScaled:(-30 + i * 20)]);
+                    make.centerY.equalTo(self.mas_centerY).with.offset([UIView ub_heightScaled:(-28 + i * 16)]);
                 }
                 else{
                     make.centerY.equalTo(self.mas_centerY).with.offset([UIView ub_heightScaled:-20]);

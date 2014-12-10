@@ -74,7 +74,7 @@
 		<key>effect</key>
 		<string>When Froggy is played, no attacks can be made until the start of your next turn.</string>
 		<key>name</key>
-		<string>Froggy</string>
+		<string>froggy</string>
 		<key>attack</key>
 		<integer>1</integer>
 		<key>hitPoints</key>
