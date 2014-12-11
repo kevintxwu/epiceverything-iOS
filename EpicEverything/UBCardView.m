@@ -158,7 +158,9 @@
         [self.delegate cardViewMoved:self withTouch:[[event allTouches] anyObject]];
     }
     else if (((UBCreature*)self.card).canAttackNow){
-        [self.delegate drawAttackPath:self withTouch:[[event allTouches] anyObject]];
+        //if(UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad){
+            [self.delegate drawAttackPath:self withTouch:[[event allTouches] anyObject]];
+        //}
     }
    
 }

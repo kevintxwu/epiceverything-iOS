@@ -311,9 +311,10 @@
 - (void)cardViewMoved:(UBCardView *)view withTouch:(UITouch *)touch {
     CGPoint location = [touch locationInView:self];
     self.selectedCard = view;
+    [self bringSubviewToFront:view];
     if (CGRectContainsPoint(self.bounds, location)) {
         [view mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(@(location.x - [UIView ub_widthScaled:15]));
+            make.left.equalTo(@(location.x - [UIView ub_widthScaled:101]));
             make.top.equalTo(@(location.y - [UIView ub_heightScaled:110]));
             // I h8 this
             make.height.equalTo([UIView ub_selectedCardHeight]);
@@ -350,6 +351,10 @@
 
 - (void)piecePressed:(UBCardView *)view withTouch:(UITouch *)touch{
     self.location = [touch locationInView:self];
+    
+    /*if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
+        self.location = CGPointMake(view.center.x, view.center.y);
+    }*/
 }
 
 
@@ -368,7 +373,15 @@
     if (spaceView && view.playerOneCard &&[selectedCreature canAttackSpace:spaceView.space]) {
         [[UIColor colorWithRed:239/255.0 green:87/255.0 blue:88/255.0 alpha:1.0] setStroke];
     }
-    UIBezierPath *bezier = [self dqd_bezierPathWithArrowFromPoint:self.location toPoint:currentLocation tailWidth:[UIView  ub_widthScaled:4.0f] headWidth:[UIView  ub_widthScaled:25.0f] headLength:[UIView  ub_widthScaled:15.0f]];
+    UIBezierPath *bezier;
+    /*if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
+        currentLocation = CGPointMake(currentLocation.x - 150, currentLocation.y + 90);
+        bezier = [self dqd_bezierPathWithArrowFromPoint:self.location toPoint:currentLocation tailWidth:[UIView  ub_widthScaled:4.0f] headWidth:[UIView  ub_widthScaled:25.0f] headLength:[UIView  ub_widthScaled:15.0f]];
+    }
+    else{*/
+        bezier = [self dqd_bezierPathWithArrowFromPoint:self.location toPoint:currentLocation tailWidth:[UIView  ub_widthScaled:4.0f] headWidth:[UIView  ub_widthScaled:25.0f] headLength:[UIView  ub_widthScaled:15.0f]];
+   // }
+
     
     [bezier setLineJoinStyle:kCGLineJoinMiter];
     [bezier setLineCapStyle:kCGLineCapButt];
@@ -756,6 +769,7 @@
     for (int i = 0; i < [myHand count]; i++){
         if (self.selectedCard != myHand[i]){
             [myHand[i] switchToCard];
+            [self bringSubviewToFront:myHand[i]];
             [myHand[i] mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(@([UIView ub_widthScaled:(180 + 40 * i)]));
                 make.centerY.equalTo(self.mas_bottom).with.offset([UIView ub_heightScaled:-10.0]);

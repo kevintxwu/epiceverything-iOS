@@ -36,7 +36,10 @@
             else{
                 currCard = nil;
             }
-            [_playerOne addCardToDeck:currCard];
+            if(![currCard.name isEqualToString: @"elvisbot"]){
+                [_playerOne addCardToDeck:currCard];
+            }
+            
         }
         
         for (int i = 0; i < [allCards count]; i++){
@@ -48,7 +51,10 @@
             else{
                 currCard = nil;
             }
-            [_playerTwo addCardToDeck:currCard];
+            if(![currCard.name isEqualToString: @"elvisbot"]){
+                [_playerTwo addCardToDeck:currCard];
+            }
+            
         }
         
         [_playerOne shuffleDeck];
